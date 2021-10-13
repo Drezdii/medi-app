@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingPageFragment">
+
+    <fragment
+        android:id="@+id/landingPageFragment"
+        android:name="com.bartoszdrozd.mediapp.LandingPageFragment"
+        android:label="fragment_landing_page"
+        tools:layout="@layout/fragment_landing_page" >
+        <action
+            android:id="@+id/landingPage_to_signin"
+            app:destination="@id/nav_graph_signin" />
+        <action
+            android:id="@+id/landingPage_to_register"
+            app:destination="@id/nav_graph_register" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph_signin" />
+    <include app:graph="@navigation/nav_graph_register" />
+
+</navigation>

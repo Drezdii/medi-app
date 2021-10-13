@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Mediapp</string>
+    <string name="app_name">Medi-App</string>
+    <string name="sign_in">Sign in</string>
+    <string name="register">Register</string>
+    <string name="or_divider">or</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="remember_me_label">Remember me</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="sign_up_if_no_account">Don\'t have an account? Sign up.</string>
+    <string name="sign_with_google">Sign with Google</string>
+    <string name="sign_with_fb">Sign with Facebook</string>
 </resources>
