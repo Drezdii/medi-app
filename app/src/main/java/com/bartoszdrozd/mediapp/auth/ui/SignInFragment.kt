@@ -34,6 +34,9 @@ class SignInFragment : Fragment() {
     }
 
     private fun setListeners() {
+        binding.signUpLink.setOnClickListener {
+            navController.navigate(R.id.action_global_nav_graph_register)
+        }
     }
 
     override fun onDestroyView() {
