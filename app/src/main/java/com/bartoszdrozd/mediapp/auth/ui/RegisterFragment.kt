@@ -1,15 +1,16 @@
 package com.bartoszdrozd.mediapp.auth.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentRegisterBinding
-import com.bartoszdrozd.mediapp.databinding.FragmentSignInBinding
 
 class RegisterFragment : Fragment() {
     private lateinit var navController: NavController
@@ -31,14 +32,37 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
-        setListeners()
-    }
 
-    private fun setListeners() {
+        with(binding.multistepper) {
+            pager.adapter = RegisterFormPageAdapter(this@RegisterFragment)
+            maxStep = pager.adapter?.itemCount ?: 0
+
+            pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    // Move it to the viewmodel
+                    currentStep = position + 1
+                }
+            })
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private inner class RegisterFormPageAdapter(frag: Fragment) : FragmentStateAdapter(frag) {
+        override fun getItemCount(): Int {
+            return 2
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> Fragment(R.layout.register_form_page_1)
+                1 -> Fragment(R.layout.register_form_page_2)
+                else -> Fragment()
+            }
+        }
     }
 }

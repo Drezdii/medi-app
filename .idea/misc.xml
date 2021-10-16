@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/step_blob.xml" value="0.346875" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/form_stepper.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_landing_page.xml" value="0.3307291666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_register.xml" value="0.5541666666666667" />
-        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.33" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.5" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_test1.xml" value="0.3307291666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_test2.xml" value="0.3307291666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/register_form_page_1.xml" value="0.33" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/register_form_page_2.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -11,4 +11,12 @@
     <string name="sign_up_if_no_account">Don\'t have an account? Sign up.</string>
     <string name="sign_with_google">Sign with Google</string>
     <string name="sign_with_fb">Sign with Facebook</string>
+    <string name="sign_up">Create an account</string>
+    <string name="confirm_email">Confirm email</string>
+    <string name="register_form_page2_title">Your details</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="date_of_birth_hint">Date of birth</string>
+    <string name="phone_number_hint">Phone number</string>
+    <string name="confirm_password_hint">Confim password</string>
 </resources>

@@ -8,7 +8,7 @@
     tools:context=".auth.ui.SignInFragment">
 
     <TextView
-        android:id="@+id/sign_in_title"
+        android:id="@+id/page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in_title">
+        app:layout_constraintTop_toBottomOf="@id/page_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_text"
@@ -85,8 +85,8 @@
         android:id="@+id/sign_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:layout_marginTop="24dp"
+        android:padding="16dp"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,18 +111,25 @@
         app:layout_constraintTop_toBottomOf="@id/divider">
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/sign_with_google"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/sign_with_google"
+            app:layout_constraintEnd_toStartOf="@id/sign_with_fb"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/sign_with_fb"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/sign_with_fb"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/sign_with_google"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
