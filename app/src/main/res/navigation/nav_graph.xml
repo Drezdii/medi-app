@@ -32,16 +32,27 @@
             app:popUpTo="@id/landingPageFragment" />
     </navigation>
     <navigation android:id="@+id/nav_graph_register"
-        app:startDestination="@id/registerFragment">
-        <fragment
-            android:id="@+id/registerFragment"
-            android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFragment"
-            android:label="fragment_register"
-            tools:layout="@layout/fragment_register" />
+        app:startDestination="@id/registerFormPageOneFragment">
         <action
             android:id="@+id/action_global_nav_graph_signin"
             app:destination="@id/nav_graph_signin"
             app:popUpTo="@id/landingPageFragment" />
+        <fragment
+            android:id="@+id/registerFormPageOneFragment"
+            android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFormPageOneFragment"
+            android:label="RegisterFormPageOneFragment" >
+            <action
+                android:id="@+id/action_registerPageOneToPageTwo"
+                app:destination="@id/registerFormPageTwoFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+        </fragment>
+        <fragment
+            android:id="@+id/registerFormPageTwoFragment"
+            android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFormPageTwoFragment"
+            android:label="RegisterFormPageTwoFragment" />
     </navigation>
 
 </navigation>

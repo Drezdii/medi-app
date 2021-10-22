@@ -18,5 +18,12 @@
     <string name="last_name_hint">Last name</string>
     <string name="date_of_birth_hint">Date of birth</string>
     <string name="phone_number_hint">Phone number</string>
-    <string name="confirm_password_hint">Confim password</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="password_too_short">Password must be at least 6 characters.</string>
+    <string name="generic_auth_error">Incorrect email or password</string>
+    <string name="next">Next</string>
+    <string name="email_exists">Email already in use.</string>
+    <string name="passwords_not_equal">Passwords must match.</string>
+    <string name="email_required">Email is required.</string>
+    <string name="emails_not_equal">Emails must match.</string>
 </resources>

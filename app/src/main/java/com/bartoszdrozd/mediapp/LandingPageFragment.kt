@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.databinding.FragmentLandingPageBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class LandingPageFragment : Fragment() {
     private lateinit var navController: NavController
     private var _binding: FragmentLandingPageBinding? = null
