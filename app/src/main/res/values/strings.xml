@@ -26,4 +26,13 @@
     <string name="passwords_not_equal">Passwords must match.</string>
     <string name="email_required">Email is required.</string>
     <string name="emails_not_equal">Emails must match.</string>
+    <string name="required_field">This field is required.</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+    <string-array name="genders">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
 </resources>

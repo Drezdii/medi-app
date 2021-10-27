@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -13,9 +14,11 @@ import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
 import com.bartoszdrozd.mediapp.auth.viewmodels.RegisterViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentRegisterFormPageOneBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFormPageOneFragment : Fragment() {
-    private val viewModel: RegisterViewModel by navGraphViewModels(R.id.nav_graph_register)
+    private val viewModel: RegisterViewModel by hiltNavGraphViewModels(R.id.nav_graph_register)
     private lateinit var navController: NavController
     private var _binding: FragmentRegisterFormPageOneBinding? = null
     private val binding get() = _binding!!
@@ -34,28 +37,56 @@ class RegisterFormPageOneFragment : Fragment() {
         setListeners()
     }
 
+    private fun clearErrors(errorList: List<AuthErrorCode>) {
+        if (!errorList.any { it == AuthErrorCode.EMAIL_NOT_SET || it == AuthErrorCode.EMAIL_IN_USE }) {
+            binding.email.error = ""
+        }
+        if (!errorList.any { it == AuthErrorCode.EMAILS_NOT_EQUAL || it == AuthErrorCode.CONFIRM_EMAIL_NOT_SET }) {
+            binding.confirmEmail.error = ""
+        }
+        if (!errorList.contains(AuthErrorCode.PASSWORD_TOO_SHORT)) {
+            binding.password.error = ""
+        }
+        if (!errorList.any { it == AuthErrorCode.PASSWORDS_NOT_EQUAL || it == AuthErrorCode.CONFIRM_PASSWORD_NOT_SET }) {
+            binding.confirmPassword.error = ""
+        }
+    }
+
     private fun setListeners() {
-        viewModel.validationErrorsPageOne.observe(viewLifecycleOwner, { errorList ->
-            clearErrors()
-            errorList.forEach { code ->
-                when (code) {
+        viewModel.validationErrors.observe(viewLifecycleOwner, { errorList ->
+            for (error in errorList) {
+                when (error) {
                     AuthErrorCode.EMAIL_IN_USE -> binding.email.error =
                         resources.getString(R.string.email_exists)
                     AuthErrorCode.PASSWORDS_NOT_EQUAL -> binding.confirmPassword.error =
                         resources.getString(R.string.passwords_not_equal)
                     AuthErrorCode.EMAIL_NOT_SET -> binding.email.error =
-                        resources.getString(R.string.email_required)
+                        resources.getString(R.string.required_field)
                     AuthErrorCode.EMAILS_NOT_EQUAL -> binding.confirmEmail.error =
                         resources.getString(R.string.emails_not_equal)
                     AuthErrorCode.PASSWORD_TOO_SHORT -> binding.password.error =
                         resources.getString(R.string.password_too_short)
+                    AuthErrorCode.CONFIRM_PASSWORD_NOT_SET -> binding.confirmPassword.error =
+                        resources.getString(R.string.required_field)
+                    AuthErrorCode.CONFIRM_EMAIL_NOT_SET -> binding.confirmEmail.error =
+                        resources.getString(R.string.required_field)
+                    else -> {
+                    }
                 }
             }
+            clearErrors(errorList)
         })
 
         with(binding) {
             buttonNext.setOnClickListener {
-                if (viewModel.validationErrorsPageOne.value!!.isEmpty()) {
+                //triggerPageValidation()
+                viewModel.clearServerSideErrors()
+                if (viewModel.validationErrors.value!!.isEmpty()) {
+                    val email = emailText.text.toString().trim()
+                    val password = passwordText.text.toString().trim()
+
+                    viewModel.storeAccountDetails(email, password)
+
                     navController.navigate(R.id.action_registerPageOneToPageTwo)
                 }
             }
@@ -83,7 +114,6 @@ class RegisterFormPageOneFragment : Fragment() {
                 }
             }
 
-
             confirmPasswordText.doAfterTextChanged { confirmPassword ->
                 val password = passwordText.text.toString().trim()
                 viewModel.validateConfirmPassword(password, confirmPassword.toString().trim())
@@ -91,12 +121,16 @@ class RegisterFormPageOneFragment : Fragment() {
         }
     }
 
-    private fun clearErrors() {
+    private fun validateEmail(email: String) {
+
+    }
+
+    private fun triggerPageValidation() {
         with(binding) {
-            email.error = ""
-            confirmEmail.error = ""
-            password.error = ""
-            confirmPassword.error = ""
+            emailText.text = emailText.text
+            confirmEmailText.text = confirmEmailText.text
+            passwordText.text = passwordText.text
+            confirmPasswordText.text = confirmPasswordText.text
         }
     }
 

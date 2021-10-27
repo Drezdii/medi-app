@@ -6,14 +6,17 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.shapes.Shape
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEachIndexed
+import androidx.recyclerview.widget.RecyclerView
 import com.bartoszdrozd.mediapp.databinding.MultiStepperBinding
 
+@Suppress("SetterBackingFieldAssignment")
 class MultiStepper @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -21,12 +24,17 @@ class MultiStepper @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
     private val binding = MultiStepperBinding.inflate(LayoutInflater.from(context), this)
 
-    val pager
-        get() = binding.pager
+    val pager = binding.pager
+    
+    init {
+        binding.pager.isUserInputEnabled = false
+    }
 
     var currentStep: Int = 1
         set(value) {
-            markSteps(value)
+            pager.currentItem = value
+            // Current step starts at 0 so we must add 1 to properly mark the blobs
+            markSteps(value + 1)
             invalidate()
             requestLayout()
         }
@@ -40,15 +48,13 @@ class MultiStepper @JvmOverloads constructor(
             requestLayout()
         }
 
-
     private fun markSteps(step: Int) {
-        binding.counterTest.forEachIndexed { index, blob ->
-            with(blob as ImageView) {
-                if (index < step) {
-                    (blob.background as GradientDrawable).setColor(Color.WHITE)
-                } else {
-                    (blob.background as GradientDrawable).setColor(Color.TRANSPARENT)
-                }
+        binding.blobContainer.forEachIndexed { index, blob ->
+            if (index < step) {
+                // Mark the step as finished
+                (blob.background as GradientDrawable).setColor(Color.WHITE)
+            } else {
+                (blob.background as GradientDrawable).setColor(Color.TRANSPARENT)
             }
         }
     }
@@ -66,7 +72,7 @@ class MultiStepper @JvmOverloads constructor(
             params.setMargins(16, 0, 0, 0)
             blob.layoutParams = params
 
-            binding.counterTest.addView(blob)
+            binding.blobContainer.addView(blob)
         }
     }
 
