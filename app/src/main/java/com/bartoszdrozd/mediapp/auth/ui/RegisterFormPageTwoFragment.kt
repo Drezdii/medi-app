@@ -10,8 +10,11 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.navigation.navGraphViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
+import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
 import com.bartoszdrozd.mediapp.auth.viewmodels.RegisterViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentRegisterFormPageTwoBinding
@@ -19,6 +22,8 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -26,8 +31,10 @@ import java.time.format.DateTimeFormatter
 @AndroidEntryPoint
 class RegisterFormPageTwoFragment : Fragment() {
     private val viewModel: RegisterViewModel by hiltNavGraphViewModels(R.id.nav_graph_register)
+    private lateinit var navController: NavController
     private var _binding: FragmentRegisterFormPageTwoBinding? = null
     private val binding get() = _binding!!
+    private lateinit var datePicker: MaterialDatePicker<Long>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,22 +46,28 @@ class RegisterFormPageTwoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
+        buildDatePicker()
         setListeners()
     }
 
-    private fun clearErrors(errorList: List<AuthErrorCode>) {
-        if (!errorList.contains(AuthErrorCode.FIRST_NAME_NOT_SET)) {
-            binding.firstName.error = ""
+    private fun getErrorString(error: AuthErrorCode?): String? {
+        return if (error != null) {
+            resources.getString(error.messageResId)
+        } else {
+            null
         }
-        if (!errorList.contains(AuthErrorCode.LAST_NAME_NOT_SET)) {
-            binding.lastName.error = ""
-        }
-        if (!errorList.contains(AuthErrorCode.DOB_NOT_SET)) {
-            binding.dateOfBirth.error = ""
-        }
-        if (!errorList.contains(AuthErrorCode.GENDER_NOT_SET)) {
-            binding.gender.error = ""
-        }
+    }
+
+    private fun buildDatePicker() {
+        // Make only dates from today and backwards selectable.
+        val datesTodayAndBackwardsConstraint = CalendarConstraints.Builder()
+            .setValidator(DateValidatorPointBackward.before(MaterialDatePicker.todayInUtcMilliseconds()))
+            .build()
+
+        datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select date")
+            .setCalendarConstraints(datesTodayAndBackwardsConstraint)
+            .build()
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -62,15 +75,6 @@ class RegisterFormPageTwoFragment : Fragment() {
         val items = resources.getStringArray(R.array.genders)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
         binding.genderDropdown.setAdapter(adapter)
-
-        // Make only dates from today and backwards selectable.
-        val datesTodayAndBackwardsConstraint = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointBackward.before(MaterialDatePicker.todayInUtcMilliseconds()))
-            .build()
-
-        val datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Select date")
-            .setCalendarConstraints(datesTodayAndBackwardsConstraint)
-            .build()
 
         binding.dateOfBirthText.setOnTouchListener { _, motionEvent ->
             // Use ACTION_UP so it does not trigger when scrolling
@@ -98,27 +102,30 @@ class RegisterFormPageTwoFragment : Fragment() {
                 val dateText = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
 
                 binding.dateOfBirthText.setText(dateText)
-                viewModel.validateDoB(selection)
             }
         }
 
-        viewModel.validationErrors.observe(viewLifecycleOwner, { errorList ->
-            for (error in errorList) {
-                when (error) {
-                    AuthErrorCode.FIRST_NAME_NOT_SET -> binding.firstName.error =
-                        resources.getString(R.string.required_field)
-                    AuthErrorCode.LAST_NAME_NOT_SET -> binding.lastName.error =
-                        resources.getString(R.string.required_field)
-                    AuthErrorCode.DOB_NOT_SET -> binding.dateOfBirth.error =
-                        resources.getString(R.string.required_field)
-                    AuthErrorCode.GENDER_NOT_SET -> binding.gender.error =
-                        resources.getString(R.string.required_field)
-                    else -> {
-                    }
-                }
-            }
-            clearErrors(errorList)
-        })
+        with(viewModel) {
+            firstNameError.observe(viewLifecycleOwner, { error ->
+                binding.firstName.error = getErrorString(error)
+            })
+
+            lastNameError.observe(viewLifecycleOwner, { error ->
+                binding.lastName.error = getErrorString(error)
+            })
+
+            genderError.observe(viewLifecycleOwner, { error ->
+                binding.gender.error = getErrorString(error)
+            })
+
+            dateOfBirthError.observe(viewLifecycleOwner, { error ->
+                binding.dateOfBirth.error = getErrorString(error)
+            })
+
+            genericError.observe(viewLifecycleOwner, { error ->
+                binding.errorBox.text = getErrorString(error)
+            })
+        }
 
         with(binding) {
             firstNameText.doAfterTextChanged { firstName ->
@@ -137,34 +144,35 @@ class RegisterFormPageTwoFragment : Fragment() {
             }
 
             buttonFinish.setOnClickListener {
-                viewModel.validateDoB(datePicker.selection)
+                val firstName = firstNameText.text.toString().trim()
+                val lastName = lastNameText.text.toString().trim()
+                val dateOfBirth = datePicker.selection
+                val phoneNumber = phoneNumberText.text.toString().trim()
+
+                viewModel.validateFirstName(firstName)
+                viewModel.validateLastName(lastName)
                 viewModel.validateGender(selectedGender)
-                triggerPageValidation()
-                if (viewModel.validationErrors.value!!.isEmpty()) {
-                    val firstName = firstNameText.text.toString().trim()
-                    val lastName = lastNameText.text.toString().trim()
-                    val dateOfBirth = datePicker.selection
-                    val phoneNumber = phoneNumberText.text.toString().trim()
+                viewModel.validateDateOfBirth(dateOfBirth)
 
-                    viewModel.storePersonalData(
-                        firstName,
-                        lastName,
-                        selectedGender,
-                        dateOfBirth,
-                        phoneNumber
+                if (viewModel.isPersonalDetailsPageValid) {
+                    viewModel.savePersonalDetails(
+                        RegisterUserDTO(
+                            firstName = firstName,
+                            lastName = lastName,
+                            dateOfBirth = dateOfBirth,
+                            phoneNumber = phoneNumber
+                        )
                     )
-
-                    // Navigate and register
                     viewModel.registerUser()
                 }
             }
-        }
-    }
 
-    private fun triggerPageValidation() {
-        with(binding) {
-            firstNameText.text = firstNameText.text
-            lastNameText.text = lastNameText.text
+            viewModel.registerSuccessEvent.onEach {
+                // Navigate if registering succeeded
+                if (it == 1) {
+                    navController.navigate(R.id.action_global_register_to_dashboard)
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
     }
 

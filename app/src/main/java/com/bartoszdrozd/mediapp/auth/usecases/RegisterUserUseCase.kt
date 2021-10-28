@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class RegisterUserUseCase @Inject constructor(private val repository: IUsersRepository) :
     IRegisterUserUseCase {
-    override suspend fun execute(userData: RegisterUserDTO): Result<User, AuthErrorCode> {
+    override suspend fun execute(userData: RegisterUserDTO): Result<Unit, AuthErrorCode> {
         return repository.register(userData)
     }
 }

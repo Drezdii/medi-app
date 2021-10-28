@@ -20,8 +20,9 @@
     <string name="phone_number_hint">Phone number</string>
     <string name="confirm_password_hint">Confirm password</string>
     <string name="password_too_short">Password must be at least 6 characters.</string>
-    <string name="generic_auth_error">Incorrect email or password</string>
+    <string name="incorrect_email_or_password">Incorrect email or password</string>
     <string name="next">Next</string>
+    <string name="generic_error">Something went wrong.</string>
     <string name="email_exists">Email already in use.</string>
     <string name="passwords_not_equal">Passwords must match.</string>
     <string name="email_required">Email is required.</string>
@@ -30,6 +31,7 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="invalid_email">Invalid email.</string>
 
     <string-array name="genders">
         <item>@string/male</item>

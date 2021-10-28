@@ -6,7 +6,7 @@ import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
 import com.bartoszdrozd.mediapp.utils.Result
 
 interface IUsersRepository {
-    suspend fun signIn(email: String, password: String): Result<User, List<AuthErrorCode>>
-    suspend fun register(userData: RegisterUserDTO): Result<User, AuthErrorCode>
+    suspend fun signIn(email: String, password: String): Result<Unit, AuthErrorCode>
+    suspend fun register(userData: RegisterUserDTO): Result<Unit, AuthErrorCode>
 //    fun getCurrentUser(): Flow<User?>
 }

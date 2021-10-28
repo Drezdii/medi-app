@@ -30,6 +30,9 @@
             android:id="@+id/action_global_nav_graph_register"
             app:destination="@id/nav_graph_register"
             app:popUpTo="@id/landingPageFragment" />
+        <action
+            android:id="@+id/action_global_signin_to_dashboard"
+            app:destination="@id/dashboardFragment" />
     </navigation>
     <navigation android:id="@+id/nav_graph_register"
         app:startDestination="@id/registerFormPageOneFragment">
@@ -53,6 +56,14 @@
             android:id="@+id/registerFormPageTwoFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFormPageTwoFragment"
             android:label="RegisterFormPageTwoFragment" />
+        <action
+            android:id="@+id/action_global_register_to_dashboard"
+            app:destination="@id/dashboardFragment" />
     </navigation>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.bartoszdrozd.mediapp.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 
 </navigation>
