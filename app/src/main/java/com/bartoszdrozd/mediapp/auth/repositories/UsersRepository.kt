@@ -45,7 +45,7 @@ class UsersRepository : IUsersRepository {
             } catch (e: FirebaseFirestoreException) {
                 // Handle exceptions when saving user's personal data
             }
-            
+
             Success(Unit)
         } catch (e: FirebaseAuthException) {
             return when (e.errorCode) {
@@ -55,6 +55,19 @@ class UsersRepository : IUsersRepository {
             }
         } catch (e: Exception) {
             return Error(AuthErrorCode.GENERIC_REGISTER_ERROR)
+        }
+    }
+
+    override suspend fun resetPassword(email: String): Result<Unit, AuthErrorCode> {
+        return try {
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email).await()
+            Success(Unit)
+        } catch (e: FirebaseAuthException) {
+            val error = when (e.errorCode) {
+                "ERROR_INVALID_EMAIL" -> AuthErrorCode.INVALID_EMAIL
+                else -> AuthErrorCode.GENERIC_RESET_ERROR
+            }
+            Error(error)
         }
     }
 }

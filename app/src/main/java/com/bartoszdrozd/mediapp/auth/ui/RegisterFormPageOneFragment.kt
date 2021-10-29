@@ -67,7 +67,7 @@ class RegisterFormPageOneFragment : Fragment() {
 
         with(binding) {
             buttonNext.setOnClickListener {
-//                validatePage()
+                validatePage()
                 if (viewModel.isAccountPageValid) {
                     val email = binding.emailText.text.toString().trim()
                     val password = binding.passwordText.text.toString().trim()

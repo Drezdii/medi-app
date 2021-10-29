@@ -8,5 +8,6 @@ import com.bartoszdrozd.mediapp.utils.Result
 interface IUsersRepository {
     suspend fun signIn(email: String, password: String): Result<Unit, AuthErrorCode>
     suspend fun register(userData: RegisterUserDTO): Result<Unit, AuthErrorCode>
+    suspend fun resetPassword(email: String): Result<Unit, AuthErrorCode>
 //    fun getCurrentUser(): Flow<User?>
 }

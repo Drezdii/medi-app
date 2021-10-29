@@ -1,10 +1,7 @@
 package com.bartoszdrozd.mediapp.di
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
-import com.bartoszdrozd.mediapp.auth.usecases.IRegisterUserUseCase
-import com.bartoszdrozd.mediapp.auth.usecases.ISignInUseCase
-import com.bartoszdrozd.mediapp.auth.usecases.RegisterUserUseCase
-import com.bartoszdrozd.mediapp.auth.usecases.SignInUseCase
+import com.bartoszdrozd.mediapp.auth.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,4 +19,9 @@ class UseCaseModule {
     @Singleton
     fun providesRegisterUseCase(repo: IUsersRepository): IRegisterUserUseCase =
         RegisterUserUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun providesResetPasswordUseCase(repo: IUsersRepository): IResetPasswordUseCase =
+        ResetPasswordUseCase(repo)
 }

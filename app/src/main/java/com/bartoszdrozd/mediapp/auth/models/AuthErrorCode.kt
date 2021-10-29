@@ -10,5 +10,6 @@ enum class AuthErrorCode(val messageResId: Int) {
     PASSWORDS_NOT_EQUAL(R.string.passwords_not_equal),
     GENERIC_REGISTER_ERROR(R.string.generic_error),
     REQUIRED_FIELD(R.string.required_field),
-    INVALID_EMAIL(R.string.invalid_email)
+    INVALID_EMAIL(R.string.invalid_email),
+    GENERIC_RESET_ERROR(R.string.generic_error)
 }

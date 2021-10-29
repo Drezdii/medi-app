@@ -32,6 +32,12 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="invalid_email">Invalid email.</string>
+    <string name="reset_password">Reset password</string>
+    <string name="finish">Finish</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="diabetes">Diabetes</string>
+    <string name="heart">Heart</string>
+    <string name="alzheimers">Alzheimer\'s</string>
 
     <string-array name="genders">
         <item>@string/male</item>

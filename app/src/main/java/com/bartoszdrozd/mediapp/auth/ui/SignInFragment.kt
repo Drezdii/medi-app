@@ -39,14 +39,20 @@ class SignInFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.signUpLink.setOnClickListener {
-            navController.navigate(R.id.action_global_nav_graph_register)
-        }
+        with(binding) {
+            signUpLink.setOnClickListener {
+                navController.navigate(R.id.action_global_nav_graph_register)
+            }
 
-        binding.signInButton.setOnClickListener {
-            val email = binding.loginText.text.toString()
-            val password = binding.passwordText.text.toString()
-            viewmodel.signIn(email, password)
+            signInButton.setOnClickListener {
+                val email = binding.loginText.text.toString()
+                val password = binding.passwordText.text.toString()
+                viewmodel.signIn(email, password)
+            }
+
+            forgotPasswordLink.setOnClickListener {
+                navController.navigate(R.id.action_signin_to_resetPassword)
+            }
         }
 
         viewmodel.validationError.observe(viewLifecycleOwner, { error ->
