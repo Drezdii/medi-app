@@ -1,8 +1,10 @@
 package com.bartoszdrozd.mediapp.auth.repositories
 
+import android.util.Log
 import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.User
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
+import com.bartoszdrozd.mediapp.auth.models.UserDetails
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
@@ -10,6 +12,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.trySendBlocking
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class UsersRepository : IUsersRepository {
@@ -31,11 +39,11 @@ class UsersRepository : IUsersRepository {
                 .createUserWithEmailAndPassword(userData.email, userData.password).await()
 
             val userProfile = hashMapOf(
-                "first_name" to userData.firstName,
-                "last_name" to userData.lastName,
-                "gender" to userData.gender,
-                "date_of_birth" to userData.dateOfBirth,
-                "phone_number" to userData.phoneNumber
+                "firstName" to userData.firstName,
+                "lastName" to userData.lastName,
+                "sex" to userData.sex,
+                "dateOfBirth" to userData.dateOfBirth,
+                "phoneNumber" to userData.phoneNumber
             )
 
             try {
@@ -68,6 +76,63 @@ class UsersRepository : IUsersRepository {
                 else -> AuthErrorCode.GENERIC_RESET_ERROR
             }
             Error(error)
+        }
+    }
+
+    private suspend fun getUserDetails(uid: String): UserDetails? {
+        try {
+            val document =
+                FirebaseFirestore.getInstance().collection("users").document(uid).get().await()
+            if (document.exists()) {
+                return document.toObject<UserDetails>()
+            }
+        } catch (e: FirebaseFirestoreException) {
+            // Handle the exception
+        }
+        return null
+    }
+
+//    @ExperimentalCoroutinesApi
+//    override suspend fun getCurrentUser(): Flow<User?> {
+//        return callbackFlow {
+//            val callback = FirebaseAuth.AuthStateListener {
+//                if (it.currentUser == null) {
+//                    trySend(null)
+//                } else {
+//                    launch {
+//                        val details = getUserDetails(it.uid!!)
+//                        val user = User(it.uid!!, it.currentUser!!.email!!, details!!)
+//                        trySendBlocking(user)
+//                    }
+//                }
+//            }
+//            FirebaseAuth.getInstance().addAuthStateListener(callback)
+//            awaitClose { FirebaseAuth.getInstance().removeAuthStateListener(callback) }
+//        }
+//    }
+
+    @ExperimentalCoroutinesApi
+    override suspend fun isLogged(): Flow<Boolean> {
+        return callbackFlow {
+            val callback = FirebaseAuth.AuthStateListener {
+                if (it.currentUser == null) {
+                    trySend(false)
+                } else {
+                    trySendBlocking(true)
+                }
+            }
+            FirebaseAuth.getInstance().addAuthStateListener(callback)
+            awaitClose { FirebaseAuth.getInstance().removeAuthStateListener(callback) }
+        }
+    }
+
+    override suspend fun getCurrentUser(): User? {
+        return coroutineScope {
+            val user = FirebaseAuth.getInstance().currentUser
+            user?.let {
+                val userDetails = getUserDetails(user.uid)
+                User(user.uid, user.email!!, userDetails!!)
+            }
         }
     }
 }

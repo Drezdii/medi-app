@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.onEach
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class RegisterFormPageTwoFragment : Fragment() {
@@ -73,9 +74,9 @@ class RegisterFormPageTwoFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
-        val items = resources.getStringArray(R.array.genders)
+        val items = resources.getStringArray(R.array.sexes)
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
-        binding.genderDropdown.setAdapter(adapter)
+        binding.sexDropdown.setAdapter(adapter)
 
         binding.dateOfBirthText.setOnTouchListener { _, motionEvent ->
             // Use ACTION_UP so it does not trigger when scrolling
@@ -115,8 +116,8 @@ class RegisterFormPageTwoFragment : Fragment() {
                 binding.lastName.error = getErrorString(error)
             })
 
-            genderError.observe(viewLifecycleOwner, { error ->
-                binding.gender.error = getErrorString(error)
+            sexError.observe(viewLifecycleOwner, { error ->
+                binding.sex.error = getErrorString(error)
             })
 
             dateOfBirthError.observe(viewLifecycleOwner, { error ->
@@ -137,11 +138,11 @@ class RegisterFormPageTwoFragment : Fragment() {
                 viewModel.validateLastName(lastName.toString().trim())
             }
 
-            // Listen to gender dropdown changes
-            var selectedGender = -1
-            genderDropdown.setOnItemClickListener { _, _, index, _ ->
-                selectedGender = index
-                viewModel.validateGender(selectedGender)
+            // Listen to sex dropdown changes
+            var selectedSex = -1
+            sexDropdown.setOnItemClickListener { _, _, index, _ ->
+                selectedSex = index
+                viewModel.validateSex(selectedSex)
             }
 
             buttonFinish.setOnClickListener {
@@ -152,7 +153,7 @@ class RegisterFormPageTwoFragment : Fragment() {
 
                 viewModel.validateFirstName(firstName)
                 viewModel.validateLastName(lastName)
-                viewModel.validateGender(selectedGender)
+                viewModel.validateSex(selectedSex)
                 viewModel.validateDateOfBirth(dateOfBirth)
 
                 if (viewModel.isPersonalDetailsPageValid) {
@@ -160,8 +161,9 @@ class RegisterFormPageTwoFragment : Fragment() {
                         RegisterUserDTO(
                             firstName = firstName,
                             lastName = lastName,
-                            dateOfBirth = dateOfBirth,
-                            gender = selectedGender,
+                            // Save the date as seconds (DatePicker returns milliseconds)
+                            dateOfBirth = TimeUnit.MILLISECONDS.toSeconds(dateOfBirth!!),
+                            sex = selectedSex,
                             phoneNumber = phoneNumber
                         )
                     )

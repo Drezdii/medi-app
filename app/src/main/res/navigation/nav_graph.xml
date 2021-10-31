@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/landingPageFragment">
+    app:startDestination="@id/dashboardFragment">
 
     <fragment
         android:id="@+id/landingPageFragment"
         android:name="com.bartoszdrozd.mediapp.LandingPageFragment"
         android:label="fragment_landing_page"
-        tools:layout="@layout/fragment_landing_page" >
+        tools:layout="@layout/fragment_landing_page">
         <action
             android:id="@+id/landingPage_to_signin"
             app:destination="@id/nav_graph_signin"
@@ -18,14 +18,18 @@
             android:id="@+id/landingPage_to_register"
             app:destination="@id/nav_graph_register"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_landingPageFragment_to_dashboardFragment2"
+            app:destination="@id/dashboardFragment" />
     </fragment>
-    <navigation android:id="@+id/nav_graph_signin"
+    <navigation
+        android:id="@+id/nav_graph_signin"
         app:startDestination="@id/signInFragment">
         <fragment
             android:id="@+id/signInFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.SignInFragment"
             android:label="fragment_sign_in"
-            tools:layout="@layout/fragment_sign_in" >
+            tools:layout="@layout/fragment_sign_in">
             <action
                 android:id="@+id/action_signin_to_resetPassword"
                 app:destination="@id/resetPasswordFragment" />
@@ -43,7 +47,8 @@
             android:label="fragment_reset_password"
             tools:layout="@layout/fragment_reset_password" />
     </navigation>
-    <navigation android:id="@+id/nav_graph_register"
+    <navigation
+        android:id="@+id/nav_graph_register"
         app:startDestination="@id/registerFormPageOneFragment">
         <action
             android:id="@+id/action_global_nav_graph_signin"
@@ -52,7 +57,7 @@
         <fragment
             android:id="@+id/registerFormPageOneFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFormPageOneFragment"
-            android:label="RegisterFormPageOneFragment" >
+            android:label="RegisterFormPageOneFragment">
             <action
                 android:id="@+id/action_registerPageOneToPageTwo"
                 app:destination="@id/registerFormPageTwoFragment"
@@ -71,8 +76,40 @@
     </navigation>
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.bartoszdrozd.mediapp.dashboard.DashboardFragment"
+        android:name="com.bartoszdrozd.mediapp.dashboard.ui.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_diabetesForm"
+            app:destination="@id/diabetesFormFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_heartForm"
+            app:destination="@id/heartFormFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_alzheimersForm"
+            app:destination="@id/alzheimersFormFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_landingPage"
+            app:destination="@id/landingPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diabetesFormFragment"
+        android:name="com.bartoszdrozd.mediapp.forms.ui.DiabetesFormFragment"
+        android:label="fragment_diabetes_form"
+        tools:layout="@layout/fragment_diabetes_form" />
+    <fragment
+        android:id="@+id/heartFormFragment"
+        android:name="com.bartoszdrozd.mediapp.forms.ui.HeartFormFragment"
+        android:label="fragment_heart_form"
+        tools:layout="@layout/fragment_heart_form" />
+    <fragment
+        android:id="@+id/alzheimersFormFragment"
+        android:name="com.bartoszdrozd.mediapp.forms.ui.AlzheimersFormFragment"
+        android:label="fragment_alzheimers_form"
+        tools:layout="@layout/fragment_alzheimers_form" />
+
+    <action
+        android:id="@+id/action_to_landingPage"
+        app:destination="@id/landingPageFragment" />
 
 </navigation>

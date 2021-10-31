@@ -28,7 +28,7 @@
     <string name="email_required">Email is required.</string>
     <string name="emails_not_equal">Emails must match.</string>
     <string name="required_field">This field is required.</string>
-    <string name="gender">Gender</string>
+    <string name="sex">Sex</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="invalid_email">Invalid email.</string>
@@ -38,8 +38,17 @@
     <string name="diabetes">Diabetes</string>
     <string name="heart">Heart</string>
     <string name="alzheimers">Alzheimer\'s</string>
+    <string name="logout">Logout</string>
+    <string name="welcome_message">Welcome, %s</string>
+    <string name="pregnancies_hint">Number of pregnancies</string>
+    <string name="glucose_hint">Glucose levels</string>
+    <string name="blood_pressure_hint">Blood pressure levels</string>
+    <string name="skin_thickness_hint">Skin thickness</string>
+    <string name="bmi_hint">BMI (Body Mass Index)</string>
+    <string name="insulin_hint">Insulin levels</string>
+    <string name="save">Save</string>
 
-    <string-array name="genders">
+    <string-array name="sexes">
         <item>@string/male</item>
         <item>@string/female</item>
     </string-array>

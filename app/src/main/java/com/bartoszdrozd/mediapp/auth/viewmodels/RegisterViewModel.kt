@@ -31,7 +31,7 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
     // Page two errors
     private val _firstNameError = MutableLiveData<AuthErrorCode?>()
     private val _lastNameError = MutableLiveData<AuthErrorCode?>()
-    private val _genderError = MutableLiveData<AuthErrorCode?>()
+    private val _sexError = MutableLiveData<AuthErrorCode?>()
     private val _dateOfBirthError = MutableLiveData<AuthErrorCode?>()
     private val _genericError = MutableLiveData<AuthErrorCode?>()
 
@@ -44,7 +44,7 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
     // Page two errors public getters
     val firstNameError: LiveData<AuthErrorCode?> = _firstNameError
     val lastNameError: LiveData<AuthErrorCode?> = _lastNameError
-    val genderError: LiveData<AuthErrorCode?> = _genderError
+    val sexError: LiveData<AuthErrorCode?> = _sexError
     val dateOfBirthError: LiveData<AuthErrorCode?> = _dateOfBirthError
     val genericError: LiveData<AuthErrorCode?> = _genericError
 
@@ -55,7 +55,7 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
 
     val isPersonalDetailsPageValid: Boolean
         get() {
-            return _firstNameError.value == null || _lastNameError.value == null || _genderError.value == null || _dateOfBirthError.value == null
+            return _firstNameError.value == null || _lastNameError.value == null || _sexError.value == null || _dateOfBirthError.value == null
         }
 
     fun saveAccountDetails(userData: RegisterUserDTO) {
@@ -69,7 +69,7 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
         userDetails.apply {
             firstName = userData.firstName
             lastName = userData.lastName
-            gender = userData.gender
+            sex = userData.sex
             dateOfBirth = userData.dateOfBirth
         }
     }
@@ -122,8 +122,8 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
         _lastNameError.value = if (lName.isBlank()) AuthErrorCode.REQUIRED_FIELD else null
     }
 
-    fun validateGender(selection: Int) {
-        _genderError.value = if (selection == -1) AuthErrorCode.REQUIRED_FIELD else null
+    fun validateSex(selection: Int) {
+        _sexError.value = if (selection == -1) AuthErrorCode.REQUIRED_FIELD else null
     }
 
     fun validateDateOfBirth(date: Long?) {

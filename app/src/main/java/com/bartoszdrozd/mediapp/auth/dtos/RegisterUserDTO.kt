@@ -5,7 +5,7 @@ data class RegisterUserDTO(
     var password: String = "",
     var firstName: String = "",
     var lastName: String = "",
-    var gender: Int = 0,
+    var sex: Int = 0,
     var dateOfBirth: Long? = null,
     var phoneNumber: String? = null
 )
