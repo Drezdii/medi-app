@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.forms.ui
+package com.bartoszdrozd.mediapp.forms.ui.health
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.bartoszdrozd.mediapp.R
 
-class HeartFormFragment : Fragment() {
+class AlzheimersFormFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_heart_form, container, false)
+        return inflater.inflate(R.layout.fragment_alzheimers_form, container, false)
     }
 }

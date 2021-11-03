@@ -2,7 +2,7 @@ package com.bartoszdrozd.mediapp.forms.usecases
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.forms.dtos.DiabetesFormDTO
-import com.bartoszdrozd.mediapp.forms.models.FormErrorCode
+import com.bartoszdrozd.mediapp.forms.models.health.FormErrorCode
 import com.bartoszdrozd.mediapp.forms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.utils.Result
 import java.time.Instant
@@ -23,7 +23,8 @@ class SaveDiabetesFormUseCase @Inject constructor(
         val age = ChronoUnit.YEARS.between(
             Instant.ofEpochSecond(dateOfBirth).atZone(
                 ZoneId.systemDefault()
-            ).toLocalDate(), LocalDate.now()
+            ).toLocalDate(),
+            LocalDate.now()
         ).toInt()
 
         // Add user's age to the form data

@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.forms.models
+package com.bartoszdrozd.mediapp.forms.models.health
 
 enum class DiabetesFormField {
     PREGNANCIES,

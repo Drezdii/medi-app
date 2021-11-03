@@ -130,8 +130,8 @@ class UsersRepository : IUsersRepository {
         return coroutineScope {
             val user = FirebaseAuth.getInstance().currentUser
             user?.let {
-                val userDetails = getUserDetails(user.uid)
-                User(user.uid, user.email!!, userDetails!!)
+                val userDetails = getUserDetails(it.uid)
+                User(it.uid, it.email!!, userDetails!!)
             }
         }
     }

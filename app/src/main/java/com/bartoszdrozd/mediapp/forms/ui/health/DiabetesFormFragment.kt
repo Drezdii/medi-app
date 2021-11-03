@@ -1,7 +1,6 @@
-package com.bartoszdrozd.mediapp.forms.ui
+package com.bartoszdrozd.mediapp.forms.ui.health
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -10,10 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bartoszdrozd.mediapp.databinding.FragmentDiabetesFormBinding
-import com.bartoszdrozd.mediapp.forms.DiabetesFormViewModel
+import com.bartoszdrozd.mediapp.forms.viewmodels.DiabetesFormViewModel
 import com.bartoszdrozd.mediapp.forms.dtos.DiabetesFormDTO
-import com.bartoszdrozd.mediapp.forms.models.DiabetesFormField.*
-import com.bartoszdrozd.mediapp.forms.models.FormErrorCode
+import com.bartoszdrozd.mediapp.forms.models.health.DiabetesFormField.*
+import com.bartoszdrozd.mediapp.forms.models.health.FormErrorCode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,15 +1,14 @@
-package com.bartoszdrozd.mediapp.forms
+package com.bartoszdrozd.mediapp.forms.viewmodels
 
-import android.location.GnssMeasurement
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.forms.dtos.DiabetesFormDTO
-import com.bartoszdrozd.mediapp.forms.models.DiabetesFormField
-import com.bartoszdrozd.mediapp.forms.models.FormError
-import com.bartoszdrozd.mediapp.forms.models.FormErrorCode
+import com.bartoszdrozd.mediapp.forms.models.health.DiabetesFormField
+import com.bartoszdrozd.mediapp.forms.models.health.FormError
+import com.bartoszdrozd.mediapp.forms.models.health.FormErrorCode
 import com.bartoszdrozd.mediapp.forms.usecases.ISaveDiabetesFormUseCase
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Success
