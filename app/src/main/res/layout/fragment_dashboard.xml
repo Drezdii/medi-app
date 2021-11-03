@@ -13,7 +13,7 @@
         android:layout_marginBottom="64dp"
         android:text="@string/welcome_message"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/diabetes_button"
+        app:layout_constraintBottom_toTopOf="@id/gp_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@id/heart_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/page_title" />
+        app:layout_constraintTop_toBottomOf="@id/gp_button" />
 
     <Button
         android:id="@+id/heart_button"
@@ -40,12 +40,22 @@
         app:layout_constraintTop_toBottomOf="@id/diabetes_button" />
 
     <Button
+        android:id="@+id/gp_button"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="GP"
+        app:layout_constraintBottom_toTopOf="@id/diabetes_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/page_title" />
+
+    <Button
         android:id="@+id/alzheimers_button"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
         android:text="@string/alzheimers"
         app:layout_constraintBottom_toTopOf="@id/logout_button"
-        android:layout_marginBottom="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/heart_button" />

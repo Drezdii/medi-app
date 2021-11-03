@@ -2,7 +2,6 @@ package com.bartoszdrozd.mediapp.auth.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -75,7 +74,7 @@ class RegisterFormPageTwoFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
         val items = resources.getStringArray(R.array.sexes)
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+        val adapter = ArrayAdapter(requireContext(), R.layout.sex_list_item, items)
         binding.sexDropdown.setAdapter(adapter)
 
         binding.dateOfBirthText.setOnTouchListener { _, motionEvent ->

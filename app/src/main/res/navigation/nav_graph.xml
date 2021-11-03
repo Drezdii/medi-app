@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_dashboard_to_landingPage"
             app:destination="@id/landingPageFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_gpPicker"
+            app:destination="@id/gpPickerFragment" />
     </fragment>
     <fragment
         android:id="@+id/diabetesFormFragment"
@@ -111,5 +114,10 @@
     <action
         android:id="@+id/action_to_landingPage"
         app:destination="@id/landingPageFragment" />
+    <fragment
+        android:id="@+id/gpPickerFragment"
+        android:name="com.bartoszdrozd.mediapp.forms.ui.gp.GpPickerFragment"
+        android:label="fragment_gp_picker"
+        tools:layout="@layout/fragment_gp_picker" />
 
 </navigation>
