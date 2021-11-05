@@ -19,7 +19,7 @@ class DashboardViewModel @Inject constructor(private val repo: IUsersRepository)
     init {
         viewModelScope.launch {
             val user = repo.getCurrentUser()
-            _name.value = user?.details?.firstName + " " + user?.details?.lastName
+            _name.value = user.details.firstName + " " + user.details.lastName
         }
     }
 }

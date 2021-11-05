@@ -15,6 +15,7 @@ class HealthFormsRepository : IHealthFormsRepository {
         return try {
             val diabetesData = hashMapOf(
                 "uid" to FirebaseAuth.getInstance().currentUser!!.uid,
+                "age" to form.age,
                 "pregnancies" to (form.pregnancies ?: 0),
                 "glucoseLevel" to form.glucoseLevel,
                 "insulinLevel" to form.insulinLevel,
