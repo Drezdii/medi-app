@@ -120,12 +120,13 @@ class UsersRepository : IUsersRepository {
         }
     }
 
-    override suspend fun getCurrentUser(): User {
+    override suspend fun getCurrentUser(): User? {
         return coroutineScope {
-            val user = FirebaseAuth.getInstance().currentUser!!
-
-            val userDetails = getUserDetails(user.uid)
-            User(user.uid, user.email!!, userDetails!!)
+            val user = FirebaseAuth.getInstance().currentUser
+            user?.let {
+                val userDetails = getUserDetails(it.uid)
+                User(it.uid, it.email!!, userDetails!!)
+            }
         }
     }
 }

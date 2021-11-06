@@ -14,5 +14,5 @@ interface IUsersRepository {
 
     @ExperimentalCoroutinesApi
     suspend fun isLogged(): Flow<Boolean>
-    suspend fun getCurrentUser(): User
+    suspend fun getCurrentUser(): User?
 }

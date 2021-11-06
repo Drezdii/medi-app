@@ -17,10 +17,10 @@ class SaveDiabetesFormUseCase @Inject constructor(
 ) :
     ISaveDiabetesFormUseCase {
     override suspend fun execute(form: DiabetesFormDTO): Result<Unit, FormErrorCode> {
-        val details = userRepo.getCurrentUser().details
-        
+        val details = userRepo.getCurrentUser()?.details
+
         // Add user's age to the form data
-        form.age = details.age
+        form.age = details!!.age
 
         return formsRepo.saveDiabetes(form)
     }
