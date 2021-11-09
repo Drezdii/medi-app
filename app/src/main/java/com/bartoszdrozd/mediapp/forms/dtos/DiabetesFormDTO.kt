@@ -7,5 +7,7 @@ data class DiabetesFormDTO(
     val bloodPressureLevel: Int?,
     val skinThickness: Int?,
     val bmi: Int?,
-    var age: Int = 0
+    var age: Int = 0,
+    var date: Long = 0,
+    var uid: String = ""
 )

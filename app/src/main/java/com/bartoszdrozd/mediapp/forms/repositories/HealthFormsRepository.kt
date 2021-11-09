@@ -14,8 +14,9 @@ class HealthFormsRepository : IHealthFormsRepository {
     override suspend fun saveDiabetes(form: DiabetesFormDTO): Result<Unit, FormErrorCode> {
         return try {
             val diabetesData = hashMapOf(
-                "uid" to FirebaseAuth.getInstance().currentUser!!.uid,
+                "uid" to form.uid,
                 "age" to form.age,
+                "date" to form.date,
                 "pregnancies" to (form.pregnancies ?: 0),
                 "glucoseLevel" to form.glucoseLevel,
                 "insulinLevel" to form.insulinLevel,

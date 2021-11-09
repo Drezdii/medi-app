@@ -1,6 +1,5 @@
 package com.bartoszdrozd.mediapp.auth.repositories
 
-import android.util.Log
 import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.User
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
