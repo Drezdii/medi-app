@@ -74,7 +74,7 @@ class RegisterFormPageTwoFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setListeners() {
         val items = resources.getStringArray(R.array.sexes)
-        val adapter = ArrayAdapter(requireContext(), R.layout.sex_list_item, items)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
         binding.sexDropdown.setAdapter(adapter)
 
         binding.dateOfBirthText.setOnTouchListener { _, motionEvent ->
