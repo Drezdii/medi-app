@@ -48,13 +48,13 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="4dp"
         android:text="@string/dominant_hand_hint"
-        app:layout_constraintBottom_toTopOf="@id/hand_container"
+        app:layout_constraintBottom_toTopOf="@id/dominant_hand_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/education" />
 
 
     <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/hand_container"
+        android:id="@+id/dominant_hand_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:checkedButton="@id/right_hand_button"
@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@id/socioeconomic"
         app:layout_constraintEnd_toStartOf="@id/clinical_dementia"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hand_container">
+        app:layout_constraintTop_toBottomOf="@id/dominant_hand_container">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/mini_mental_text"
@@ -110,7 +110,7 @@
         app:layout_constraintBottom_toTopOf="@id/socioeconomic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/mini_mental"
-        app:layout_constraintTop_toBottomOf="@id/hand_container">
+        app:layout_constraintTop_toBottomOf="@id/dominant_hand_container">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/clinical_dementia_text"

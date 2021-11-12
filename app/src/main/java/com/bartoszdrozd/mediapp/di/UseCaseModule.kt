@@ -3,7 +3,9 @@ package com.bartoszdrozd.mediapp.di
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.auth.usecases.*
 import com.bartoszdrozd.mediapp.forms.repositories.IHealthFormsRepository
+import com.bartoszdrozd.mediapp.forms.usecases.ISaveAlzheimersFormUseCase
 import com.bartoszdrozd.mediapp.forms.usecases.ISaveDiabetesFormUseCase
+import com.bartoszdrozd.mediapp.forms.usecases.SaveAlzheimersFormUseCase
 import com.bartoszdrozd.mediapp.forms.usecases.SaveDiabetesFormUseCase
 import dagger.Module
 import dagger.Provides
@@ -35,4 +37,11 @@ class UseCaseModule {
         formsRepo: IHealthFormsRepository
     ): ISaveDiabetesFormUseCase =
         SaveDiabetesFormUseCase(repo, formsRepo)
+
+    @Provides
+    @Singleton
+    fun providesSaveAlzheimersFormUse(
+        repo: IUsersRepository,
+        formsRepo: IHealthFormsRepository
+    ): ISaveAlzheimersFormUseCase = SaveAlzheimersFormUseCase(repo, formsRepo)
 }

@@ -24,7 +24,6 @@ class DiabetesFormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentDiabetesFormBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,25 +46,7 @@ class DiabetesFormFragment : Fragment() {
             isPregnanciesFieldVisible.observe(viewLifecycleOwner, { isVisible ->
                 binding.pregnancies.visibility = if (isVisible) VISIBLE else GONE
             })
-            binding.buttonSave.setOnClickListener {
-                val pregnancies = binding.pregnanciesText.text.toString().trim()
-                val glucose = binding.glucoseText.text.toString().trim()
-                val insulin = binding.insulinText.text.toString().trim()
-                val bloodPressure = binding.bloodPressureText.text.toString().trim()
-                val skinThickness = binding.skinThicknessText.text.toString().trim()
-                val bmi = binding.bmiText.text.toString().trim()
 
-                viewModel.saveForm(
-                    DiabetesFormDTO(
-                        pregnancies.toIntOrNull(),
-                        glucose.toIntOrNull(),
-                        insulin.toIntOrNull(),
-                        bloodPressure.toIntOrNull(),
-                        skinThickness.toIntOrNull(),
-                        bmi.toIntOrNull()
-                    )
-                )
-            }
             pregnanciesError.observe(viewLifecycleOwner, { error ->
                 binding.pregnancies.error = getErrorString(error)
             })
@@ -94,7 +75,20 @@ class DiabetesFormFragment : Fragment() {
                 binding.errorBox.text = getErrorString(error)
             })
 
-
+            with(binding) {
+                binding.buttonSave.setOnClickListener {
+                    viewModel.saveForm(
+                        DiabetesFormDTO(
+                            pregnanciesText.text.toString().trim().toIntOrNull(),
+                            glucoseText.text.toString().trim().toIntOrNull(),
+                            insulinText.text.toString().trim().toIntOrNull(),
+                            bloodPressureText.text.toString().trim().toIntOrNull(),
+                            skinThicknessText.text.toString().trim().toIntOrNull(),
+                            bmiText.text.toString().trim().toIntOrNull()
+                        )
+                    )
+                }
+            }
         }
 
     }

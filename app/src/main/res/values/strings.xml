@@ -56,9 +56,34 @@
     <string name="est_total_intra_volume_hint">Estimated Total Intracranial Volume</string>
     <string name="normalize_whole_brain_hint">Normalize Whole Brain</string>
     <string name="dominant_hand_hint">Dominant hand</string>
+    <string name="edu_less_than_hs">Below high school</string>
+    <string name="edu_hs_grad">High school graduate</string>
+    <string name="edu_some_college">Went to college</string>
+    <string name="edu_college_grad">College graduate</string>
+    <string name="edu_beyond_college">Post-graduate education</string>
+    <string name="socio_status_1">Socioeconomic status 1</string>
+    <string name="socio_status_2">Socioeconomic status 2</string>
+    <string name="socio_status_3">Socioeconomic status 3</string>
+    <string name="socio_status_4">Socioeconomic status 4</string>
+    <string name="serum_chol_hint">Serum Cholesterol</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
         <item>@string/female</item>
+    </string-array>
+
+    <string-array name="education_items">
+        <item>@string/edu_less_than_hs</item>
+        <item>@string/edu_hs_grad</item>
+        <item>@string/edu_some_college</item>
+        <item>@string/edu_college_grad</item>
+        <item>@string/edu_beyond_college</item>
+    </string-array>
+
+    <string-array name="socioeconomic_items">
+        <item>@string/socio_status_1</item>
+        <item>@string/socio_status_2</item>
+        <item>@string/socio_status_3</item>
+        <item>@string/socio_status_4</item>
     </string-array>
 </resources>

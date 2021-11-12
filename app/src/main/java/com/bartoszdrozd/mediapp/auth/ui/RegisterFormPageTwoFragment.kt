@@ -141,7 +141,6 @@ class RegisterFormPageTwoFragment : Fragment() {
             var selectedSex = -1
             sexDropdown.setOnItemClickListener { _, _, index, _ ->
                 selectedSex = index
-                viewModel.validateSex(selectedSex)
             }
 
             buttonFinish.setOnClickListener {
