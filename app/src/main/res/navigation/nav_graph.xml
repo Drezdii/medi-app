@@ -102,9 +102,9 @@
         tools:layout="@layout/fragment_diabetes_form" />
     <fragment
         android:id="@+id/heartFormFragment"
-        android:name="com.bartoszdrozd.mediapp.forms.ui.health.HeartFormFragment"
+        android:name="com.bartoszdrozd.mediapp.forms.ui.health.HeartFormPageOneFragment"
         android:label="fragment_heart_form"
-        tools:layout="@layout/fragment_heart_form" />
+        tools:layout="@layout/fragment_heart_form_page_one" />
     <fragment
         android:id="@+id/alzheimersFormFragment"
         android:name="com.bartoszdrozd.mediapp.forms.ui.health.AlzheimersFormFragment"

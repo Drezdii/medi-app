@@ -66,6 +66,17 @@
     <string name="socio_status_3">Socioeconomic status 3</string>
     <string name="socio_status_4">Socioeconomic status 4</string>
     <string name="serum_chol_hint">Serum Cholesterol</string>
+    <string name="resting_bp_hint">Resting Blood Pressure</string>
+    <string name="max_hr_hint">Maximum Heart Rate</string>
+    <string name="yes_hint">Yes</string>
+    <string name="no_hint">No</string>
+    <string name="exercise_angina_hint">Exercise induced angina</string>
+    <string name="resting_ecg_hint">Resting ECG</string>
+    <string name="fasting_bs_hint">Fasting Blood Sugar</string>
+    <string name="ecg_normal">Normal</string>
+    <string name="ecg_stt_abnormal">ST-T wave abnormality</string>
+    <string name="ecg_left_vent_hypertrophy">Left ventricular hypertrophy</string>
+    <string name="st_depression_hint">ST depression - Exercise to rest ratio</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
@@ -85,5 +96,11 @@
         <item>@string/socio_status_2</item>
         <item>@string/socio_status_3</item>
         <item>@string/socio_status_4</item>
+    </string-array>
+
+    <string-array name="resting_ecg_items">
+        <item>@string/ecg_normal</item>
+        <item>@string/ecg_stt_abnormal</item>
+        <item>@string/ecg_left_vent_hypertrophy</item>
     </string-array>
 </resources>
