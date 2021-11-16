@@ -1,6 +1,5 @@
 package com.bartoszdrozd.mediapp.auth.repositories
 
-import android.util.Log
 import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.User
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
@@ -19,6 +18,10 @@ import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 
 class UsersRepository : IUsersRepository {
     override suspend fun signIn(
@@ -84,32 +87,22 @@ class UsersRepository : IUsersRepository {
             val document =
                 FirebaseFirestore.getInstance().collection("users").document(uid).get().await()
             if (document.exists()) {
-                return document.toObject<UserDetails>()
+                val details = document.toObject<UserDetails>()!!
+
+                details.age = ChronoUnit.YEARS.between(
+                    Instant.ofEpochSecond(details.dateOfBirth).atZone(
+                        ZoneId.systemDefault()
+                    ).toLocalDate(),
+                    LocalDate.now()
+                ).toInt()
+
+                return details
             }
         } catch (e: FirebaseFirestoreException) {
             // Handle the exception
         }
         return null
     }
-
-//    @ExperimentalCoroutinesApi
-//    override suspend fun getCurrentUser(): Flow<User?> {
-//        return callbackFlow {
-//            val callback = FirebaseAuth.AuthStateListener {
-//                if (it.currentUser == null) {
-//                    trySend(null)
-//                } else {
-//                    launch {
-//                        val details = getUserDetails(it.uid!!)
-//                        val user = User(it.uid!!, it.currentUser!!.email!!, details!!)
-//                        trySendBlocking(user)
-//                    }
-//                }
-//            }
-//            FirebaseAuth.getInstance().addAuthStateListener(callback)
-//            awaitClose { FirebaseAuth.getInstance().removeAuthStateListener(callback) }
-//        }
-//    }
 
     @ExperimentalCoroutinesApi
     override suspend fun isLogged(): Flow<Boolean> {

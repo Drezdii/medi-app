@@ -50,12 +50,12 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
 
     val isAccountPageValid: Boolean
         get() {
-            return _emailError.value == null || _confirmEmailError.value == null || _passwordError.value == null || _confirmPasswordError.value == null
+            return _emailError.value == null && _confirmEmailError.value == null && _passwordError.value == null && _confirmPasswordError.value == null
         }
 
     val isPersonalDetailsPageValid: Boolean
         get() {
-            return _firstNameError.value == null || _lastNameError.value == null || _sexError.value == null || _dateOfBirthError.value == null
+            return _firstNameError.value == null && _lastNameError.value == null && _sexError.value == null && _dateOfBirthError.value == null
         }
 
     fun saveAccountDetails(userData: RegisterUserDTO) {

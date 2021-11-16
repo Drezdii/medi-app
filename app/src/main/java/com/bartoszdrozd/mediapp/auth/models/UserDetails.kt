@@ -5,5 +5,6 @@ data class UserDetails(
     val lastName: String = "",
     val sex: Int = -1,
     val dateOfBirth: Long = 0,
+    var age: Int = -1,
     val phoneNumber: String? = null
 )

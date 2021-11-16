@@ -47,9 +47,74 @@
     <string name="bmi_hint">BMI (Body Mass Index)</string>
     <string name="insulin_hint">Insulin levels</string>
     <string name="save">Save</string>
+    <string name="left_hand_hint">Left</string>
+    <string name="right_hand_hint">Right</string>
+    <string name="education_level_hint">Education</string>
+    <string name="socio_status_hint">Socioeconomic status</string>
+    <string name="mini_mental_hint">Mini Mental State Examination</string>
+    <string name="dementia_hint">Clinical Dementia Rating</string>
+    <string name="est_total_intra_volume_hint">Estimated Total Intracranial Volume</string>
+    <string name="normalize_whole_brain_hint">Normalize Whole Brain</string>
+    <string name="dominant_hand_hint">Dominant hand</string>
+    <string name="edu_less_than_hs">Below high school</string>
+    <string name="edu_hs_grad">High school graduate</string>
+    <string name="edu_some_college">Went to college</string>
+    <string name="edu_college_grad">College graduate</string>
+    <string name="edu_beyond_college">Post-graduate education</string>
+    <string name="socio_status_1">Socioeconomic status 1</string>
+    <string name="socio_status_2">Socioeconomic status 2</string>
+    <string name="socio_status_3">Socioeconomic status 3</string>
+    <string name="socio_status_4">Socioeconomic status 4</string>
+    <string name="serum_chol_hint">Serum Cholesterol</string>
+    <string name="resting_bp_hint">Resting Blood Pressure</string>
+    <string name="max_hr_hint">Maximum Heart Rate</string>
+    <string name="yes_hint">Yes</string>
+    <string name="no_hint">No</string>
+    <string name="exercise_angina_hint">Exercise induced angina</string>
+    <string name="resting_ecg_hint">Resting ECG</string>
+    <string name="fasting_bs_hint">Fasting Blood Sugar</string>
+    <string name="ecg_normal">Normal</string>
+    <string name="ecg_stt_abnormal">ST-T wave abnormality</string>
+    <string name="ecg_left_vent_hypertrophy">Left ventricular hypertrophy</string>
+    <string name="st_depression_hint">ST depression - Exercise to rest ratio</string>
+    <string name="chest_pain_hint">Chest pain type</string>
+    <string name="peak_st_segment_hint">Peak exercise ST segment</string>
+    <string name="upsloping_st_hint">Upsloping</string>
+    <string name="flat_st_hint">Flat</string>
+    <string name="downsloping_st_hint">Downsloping</string>
+    <string name="major_vessels_hint">Major vessels colored by flouroscopy</string>
+    <string name="thalassemia_hint">Thalassemia</string>
+    <string name="thalassemia_normal_hint">Normal</string>
+    <string name="thalassemia_fixed_hint">Fixed defect</string>
+    <string name="thalassemia_reversible_hint">Reversible</string>
+    <string name="chest_pain_typical_hint">Typical</string>
+    <string name="chest_pain_atypical_hint">Atypical</string>
+    <string name="chest_pain_nonanginal">Other</string>
+    <string name="chest_pain_asymptotic_hint">Asymptotic</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
         <item>@string/female</item>
+    </string-array>
+
+    <string-array name="education_items">
+        <item>@string/edu_less_than_hs</item>
+        <item>@string/edu_hs_grad</item>
+        <item>@string/edu_some_college</item>
+        <item>@string/edu_college_grad</item>
+        <item>@string/edu_beyond_college</item>
+    </string-array>
+
+    <string-array name="socioeconomic_items">
+        <item>@string/socio_status_1</item>
+        <item>@string/socio_status_2</item>
+        <item>@string/socio_status_3</item>
+        <item>@string/socio_status_4</item>
+    </string-array>
+
+    <string-array name="resting_ecg_items">
+        <item>@string/ecg_normal</item>
+        <item>@string/ecg_stt_abnormal</item>
+        <item>@string/ecg_left_vent_hypertrophy</item>
     </string-array>
 </resources>

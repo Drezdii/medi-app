@@ -2,7 +2,6 @@ package com.bartoszdrozd.mediapp.auth.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -142,7 +141,6 @@ class RegisterFormPageTwoFragment : Fragment() {
             var selectedSex = -1
             sexDropdown.setOnItemClickListener { _, _, index, _ ->
                 selectedSex = index
-                viewModel.validateSex(selectedSex)
             }
 
             buttonFinish.setOnClickListener {

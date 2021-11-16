@@ -84,32 +84,52 @@
             app:destination="@id/diabetesFormFragment" />
         <action
             android:id="@+id/action_dashboard_to_heartForm"
-            app:destination="@id/heartFormFragment" />
+            app:destination="@id/nav_graph_heart_form" />
         <action
             android:id="@+id/action_dashboard_to_alzheimersForm"
             app:destination="@id/alzheimersFormFragment" />
         <action
             android:id="@+id/action_dashboard_to_landingPage"
             app:destination="@id/landingPageFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_gpPicker"
+            app:destination="@id/gpPickerFragment" />
     </fragment>
     <fragment
         android:id="@+id/diabetesFormFragment"
-        android:name="com.bartoszdrozd.mediapp.forms.ui.health.DiabetesFormFragment"
+        android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.DiabetesFormFragment"
         android:label="fragment_diabetes_form"
         tools:layout="@layout/fragment_diabetes_form" />
     <fragment
-        android:id="@+id/heartFormFragment"
-        android:name="com.bartoszdrozd.mediapp.forms.ui.health.HeartFormFragment"
-        android:label="fragment_heart_form"
-        tools:layout="@layout/fragment_heart_form" />
-    <fragment
         android:id="@+id/alzheimersFormFragment"
-        android:name="com.bartoszdrozd.mediapp.forms.ui.health.AlzheimersFormFragment"
+        android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.AlzheimersFormFragment"
         android:label="fragment_alzheimers_form"
         tools:layout="@layout/fragment_alzheimers_form" />
 
     <action
         android:id="@+id/action_to_landingPage"
         app:destination="@id/landingPageFragment" />
+    <fragment
+        android:id="@+id/gpPickerFragment"
+        android:name="com.bartoszdrozd.mediapp.healthforms.ui.gp.GpPickerFragment"
+        android:label="fragment_gp_picker"
+        tools:layout="@layout/fragment_gp_picker" />
+    <navigation android:id="@+id/nav_graph_heart_form"
+        app:startDestination="@id/heartFormPageOneFragment">
+        <fragment
+            android:id="@+id/heartFormPageOneFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.HeartFormPageOneFragment"
+            android:label="fragment_heart_form_page_one"
+            tools:layout="@layout/fragment_heart_form_page_one">
+            <action
+                android:id="@+id/action_heartFormPageOneFragment_to_heartFormPageTwoFragment"
+                app:destination="@id/heartFormPageTwoFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/heartFormPageTwoFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.HeartFormPageTwoFragment"
+            android:label="fragment_heart_form_page_two"
+            tools:layout="@layout/fragment_heart_form_page_two" />
+    </navigation>
 
 </navigation>

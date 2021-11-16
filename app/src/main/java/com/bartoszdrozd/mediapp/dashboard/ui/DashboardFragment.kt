@@ -55,6 +55,10 @@ class DashboardFragment : Fragment() {
                 // Temporary
                 FirebaseAuth.getInstance().signOut()
             }
+
+            gpButton.setOnClickListener {
+                navController.navigate(R.id.action_dashboard_to_gpPicker)
+            }
         }
 
         viewModel.name.observe(viewLifecycleOwner, { name ->
