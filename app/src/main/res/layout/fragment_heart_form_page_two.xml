@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/global_padding"
-    tools:context=".healthforms.ui.health.HeartFormPageTwoFragment">
+    tools:context=".healthforms.ui.HeartFormPageTwoFragment">
 
 
     <TextView

@@ -1,7 +1,7 @@
 package com.bartoszdrozd.mediapp.healthforms.usecases
 
 import com.bartoszdrozd.mediapp.healthforms.dtos.AlzheimersFormDTO
-import com.bartoszdrozd.mediapp.healthforms.models.health.FormErrorCode
+import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
 import com.bartoszdrozd.mediapp.utils.Result
 
 interface ISaveAlzheimersFormUseCase {

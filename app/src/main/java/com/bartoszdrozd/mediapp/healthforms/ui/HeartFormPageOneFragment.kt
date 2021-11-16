@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.healthforms.ui.health
+package com.bartoszdrozd.mediapp.healthforms.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentHeartFormPageOneBinding
 import com.bartoszdrozd.mediapp.healthforms.dtos.HeartFormDTO
-import com.bartoszdrozd.mediapp.healthforms.models.health.HeartFormField.*
+import com.bartoszdrozd.mediapp.healthforms.models.HeartFormField.*
 import com.bartoszdrozd.mediapp.healthforms.viewmodels.HeartFormPageOneViewModel
 import com.bartoszdrozd.mediapp.healthforms.viewmodels.HeartFormViewModel
 import com.bartoszdrozd.mediapp.utils.FormFragment

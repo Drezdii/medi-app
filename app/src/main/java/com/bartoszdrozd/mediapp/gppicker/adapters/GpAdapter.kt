@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.healthforms.adapters
+package com.bartoszdrozd.mediapp.gppicker.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bartoszdrozd.mediapp.databinding.GpItemBinding
-import com.bartoszdrozd.mediapp.healthforms.models.gp.GeneralPractitioner
+import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
 
 class GpAdapter :
     ListAdapter<GeneralPractitioner, GpAdapter.GpViewHolder>(GpDiffCallback) {

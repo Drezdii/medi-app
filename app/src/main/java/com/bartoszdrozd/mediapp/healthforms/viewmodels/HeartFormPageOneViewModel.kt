@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bartoszdrozd.mediapp.healthforms.dtos.HeartFormDTO
-import com.bartoszdrozd.mediapp.healthforms.models.health.FormErrorCode
-import com.bartoszdrozd.mediapp.healthforms.models.health.HeartFormField
+import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
+import com.bartoszdrozd.mediapp.healthforms.models.HeartFormField
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

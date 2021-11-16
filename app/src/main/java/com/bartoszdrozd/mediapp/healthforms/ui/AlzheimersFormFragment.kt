@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.healthforms.ui.health
+package com.bartoszdrozd.mediapp.healthforms.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentAlzheimersFormBinding
 import com.bartoszdrozd.mediapp.healthforms.dtos.AlzheimersFormDTO
-import com.bartoszdrozd.mediapp.healthforms.models.health.AlzheimersFormField.*
+import com.bartoszdrozd.mediapp.healthforms.models.AlzheimersFormField.*
 import com.bartoszdrozd.mediapp.healthforms.viewmodels.AlzheimersFormViewModel
 import com.bartoszdrozd.mediapp.utils.FormFragment
 import dagger.hilt.android.AndroidEntryPoint

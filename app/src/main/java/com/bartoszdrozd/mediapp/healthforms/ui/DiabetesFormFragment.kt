@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.healthforms.ui.health
+package com.bartoszdrozd.mediapp.healthforms.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

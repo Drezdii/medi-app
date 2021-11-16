@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.healthforms.dtos.AlzheimersFormDTO
-import com.bartoszdrozd.mediapp.healthforms.models.health.AlzheimersFormField
-import com.bartoszdrozd.mediapp.healthforms.models.health.FormErrorCode
+import com.bartoszdrozd.mediapp.healthforms.models.AlzheimersFormField
+import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
 import com.bartoszdrozd.mediapp.healthforms.usecases.ISaveAlzheimersFormUseCase
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Success

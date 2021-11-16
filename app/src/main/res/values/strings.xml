@@ -91,6 +91,7 @@
     <string name="chest_pain_atypical_hint">Atypical</string>
     <string name="chest_pain_nonanginal">Other</string>
     <string name="chest_pain_asymptotic_hint">Asymptotic</string>
+    <string name="gp_avatar_desc">General practitioner Picture</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

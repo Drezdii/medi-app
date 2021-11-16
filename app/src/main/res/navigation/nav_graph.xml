@@ -97,12 +97,12 @@
     </fragment>
     <fragment
         android:id="@+id/diabetesFormFragment"
-        android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.DiabetesFormFragment"
+        android:name="com.bartoszdrozd.mediapp.healthforms.ui.DiabetesFormFragment"
         android:label="fragment_diabetes_form"
         tools:layout="@layout/fragment_diabetes_form" />
     <fragment
         android:id="@+id/alzheimersFormFragment"
-        android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.AlzheimersFormFragment"
+        android:name="com.bartoszdrozd.mediapp.healthforms.ui.AlzheimersFormFragment"
         android:label="fragment_alzheimers_form"
         tools:layout="@layout/fragment_alzheimers_form" />
 
@@ -111,14 +111,14 @@
         app:destination="@id/landingPageFragment" />
     <fragment
         android:id="@+id/gpPickerFragment"
-        android:name="com.bartoszdrozd.mediapp.healthforms.ui.gp.GpPickerFragment"
+        android:name="com.bartoszdrozd.mediapp.gppicker.ui.GpPickerFragment"
         android:label="fragment_gp_picker"
         tools:layout="@layout/fragment_gp_picker" />
     <navigation android:id="@+id/nav_graph_heart_form"
         app:startDestination="@id/heartFormPageOneFragment">
         <fragment
             android:id="@+id/heartFormPageOneFragment"
-            android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.HeartFormPageOneFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageOneFragment"
             android:label="fragment_heart_form_page_one"
             tools:layout="@layout/fragment_heart_form_page_one">
             <action
@@ -127,7 +127,7 @@
         </fragment>
         <fragment
             android:id="@+id/heartFormPageTwoFragment"
-            android:name="com.bartoszdrozd.mediapp.healthforms.ui.health.HeartFormPageTwoFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageTwoFragment"
             android:label="fragment_heart_form_page_two"
             tools:layout="@layout/fragment_heart_form_page_two" />
     </navigation>

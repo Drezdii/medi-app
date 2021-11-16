@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.healthforms.models.health
+package com.bartoszdrozd.mediapp.healthforms.models
 
 enum class AlzheimersFormField {
     EDUCATION,

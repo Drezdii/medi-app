@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.healthforms.models.health
+package com.bartoszdrozd.mediapp.healthforms.models
 
 import com.bartoszdrozd.mediapp.R
 

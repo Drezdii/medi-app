@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.healthforms.dtos.DiabetesFormDTO
-import com.bartoszdrozd.mediapp.healthforms.models.health.FormErrorCode
+import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
 import com.bartoszdrozd.mediapp.healthforms.usecases.ISaveDiabetesFormUseCase
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Success
