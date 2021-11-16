@@ -77,6 +77,20 @@
     <string name="ecg_stt_abnormal">ST-T wave abnormality</string>
     <string name="ecg_left_vent_hypertrophy">Left ventricular hypertrophy</string>
     <string name="st_depression_hint">ST depression - Exercise to rest ratio</string>
+    <string name="chest_pain_hint">Chest pain type</string>
+    <string name="peak_st_segment_hint">Peak exercise ST segment</string>
+    <string name="upsloping_st_hint">Upsloping</string>
+    <string name="flat_st_hint">Flat</string>
+    <string name="downsloping_st_hint">Downsloping</string>
+    <string name="major_vessels_hint">Major vessels colored by flouroscopy</string>
+    <string name="thalassemia_hint">Thalassemia</string>
+    <string name="thalassemia_normal_hint">Normal</string>
+    <string name="thalassemia_fixed_hint">Fixed defect</string>
+    <string name="thalassemia_reversible_hint">Reversible</string>
+    <string name="chest_pain_typical_hint">Typical</string>
+    <string name="chest_pain_atypical_hint">Atypical</string>
+    <string name="chest_pain_nonanginal">Other</string>
+    <string name="chest_pain_asymptotic_hint">Asymptotic</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
