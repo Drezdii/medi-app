@@ -2,12 +2,16 @@ package com.bartoszdrozd.mediapp.di
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.auth.usecases.*
+import com.bartoszdrozd.mediapp.gppicker.repositories.IGPRepository
+import com.bartoszdrozd.mediapp.gppicker.usecases.ILoadGPsUseCase
+import com.bartoszdrozd.mediapp.gppicker.usecases.LoadGPsUseCase
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.healthforms.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Singleton
 
 @Module
@@ -48,4 +52,9 @@ class UseCaseModule {
         repo: IUsersRepository,
         formsRepo: IHealthFormsRepository
     ): ISaveHeartFormUseCase = SaveHeartFormUseCase(repo, formsRepo)
+
+    @Provides
+    @Singleton
+    @ExperimentalCoroutinesApi
+    fun providesLoadGPsUseCase(repo: IGPRepository): ILoadGPsUseCase = LoadGPsUseCase(repo)
 }

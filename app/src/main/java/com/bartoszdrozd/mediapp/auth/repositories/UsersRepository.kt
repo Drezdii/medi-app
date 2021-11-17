@@ -111,7 +111,7 @@ class UsersRepository : IUsersRepository {
                 if (it.currentUser == null) {
                     trySend(false)
                 } else {
-                    trySendBlocking(true)
+                    trySend(true)
                 }
             }
             FirebaseAuth.getInstance().addAuthStateListener(callback)

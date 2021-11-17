@@ -14,7 +14,7 @@
         android:padding="@dimen/global_padding">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/avatar"
+            android:id="@+id/avatar_container"
             android:layout_width="53dp"
             android:layout_height="53dp"
             app:cardBackgroundColor="@color/teal_200"
@@ -30,6 +30,7 @@
                 app:cardCornerRadius="25dp">
 
                 <ImageView
+                    android:id="@+id/avatar_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:contentDescription="@string/gp_avatar_desc"
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/global_padding"
             android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintStart_toEndOf="@id/avatar_container"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -53,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@id/avatar"
+                app:layout_constraintStart_toEndOf="@id/avatar_container"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Lewis Hamilton" />
 
@@ -61,8 +62,8 @@
                 android:id="@+id/medical_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="test medical center"
-                app:layout_constraintStart_toEndOf="@id/avatar"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/avatar_container"
                 app:layout_constraintTop_toBottomOf="@id/name"
                 tools:text="Test medical center" />
         </LinearLayout>

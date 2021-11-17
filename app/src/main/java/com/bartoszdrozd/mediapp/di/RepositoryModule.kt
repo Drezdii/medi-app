@@ -2,6 +2,8 @@ package com.bartoszdrozd.mediapp.di
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.auth.repositories.UsersRepository
+import com.bartoszdrozd.mediapp.gppicker.repositories.GPRepository
+import com.bartoszdrozd.mediapp.gppicker.repositories.IGPRepository
 import com.bartoszdrozd.mediapp.healthforms.repositories.HealthFormsRepository
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import dagger.Module
@@ -21,4 +23,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun providesHealthFormsRepository(): IHealthFormsRepository = HealthFormsRepository()
+
+    @Provides
+    @Singleton
+    fun providesGPRepository(): IGPRepository = GPRepository()
 }

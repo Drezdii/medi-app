@@ -1,15 +1,23 @@
 package com.bartoszdrozd.mediapp.gppicker.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.bartoszdrozd.mediapp.databinding.FragmentGpPickerBinding
 import com.bartoszdrozd.mediapp.gppicker.adapters.GpAdapter
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
+import com.bartoszdrozd.mediapp.gppicker.viewmodels.GpPickerViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class GpPickerFragment : Fragment() {
+    private val viewModel: GpPickerViewModel by viewModels()
     private var _binding: FragmentGpPickerBinding? = null
     private val binding get() = _binding!!
 
@@ -25,28 +33,16 @@ class GpPickerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TEST
+        viewModel.loadGPs()
+
+        // TEST
         val gpAdapter = GpAdapter()
-
-        val testList = mutableListOf(
-            GeneralPractitioner("Test0", "1", 123),
-            GeneralPractitioner("Test1", "2", 456),
-            GeneralPractitioner("Test2", "1", 789),
-            GeneralPractitioner("Test3", "1", 789),
-            GeneralPractitioner("Test4", "1", 789),
-            GeneralPractitioner("Test5", "1", 789),
-            GeneralPractitioner("Test6", "1", 789),
-            GeneralPractitioner("Test7", "1", 789),
-            GeneralPractitioner("Test8", "1", 789),
-            GeneralPractitioner("Test9", "1", 789),
-            GeneralPractitioner("Test10", "1", 789),
-            GeneralPractitioner("Test11", "1", 789),
-            GeneralPractitioner("Test12", "1", 789),
-            GeneralPractitioner("Test13", "1", 789),
-            GeneralPractitioner("Test14", "1", 789),
-        )
-
         binding.recyclerView.adapter = gpAdapter
-        gpAdapter.submitList(testList)
+
+        viewModel.generalPractitioners.observe(viewLifecycleOwner, { gps ->
+            gpAdapter.submitList(gps)
+        })
     }
 
     override fun onDestroy() {

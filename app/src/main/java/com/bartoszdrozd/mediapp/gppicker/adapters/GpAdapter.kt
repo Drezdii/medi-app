@@ -1,12 +1,16 @@
 package com.bartoszdrozd.mediapp.gppicker.adapters
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.GpItemBinding
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
+import java.util.*
 
 class GpAdapter :
     ListAdapter<GeneralPractitioner, GpAdapter.GpViewHolder>(GpDiffCallback) {
@@ -17,15 +21,30 @@ class GpAdapter :
     }
 
     override fun onBindViewHolder(holder: GpViewHolder, position: Int) {
-        // TEST
         val gp = getItem(position)
-        holder.binding.name.text = gp.firstName + gp.lastName
-        holder.binding.councilNum.text = gp.medCouncilNum.toString()
+
+        with(holder.binding) {
+            name.text = root.resources.getString(R.string.gp_name_string, gp.firstName, gp.lastName)
+            councilNum.text = gp.mcn.toString()
+            medicalCenter.text = gp.medicalCenter
+
+            if (!gp.picture.isNullOrBlank()) {
+                val imageBytes = Base64.getDecoder().decode(gp.picture)
+                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                avatarImage.setImageBitmap(decodedImage)
+            } else {
+                avatarImage.setImageDrawable(
+                    ResourcesCompat.getDrawable(
+                        root.resources,
+                        R.drawable.default_gp_photo,
+                        null
+                    )
+                )
+            }
+        }
     }
 
-    inner class GpViewHolder(val binding: GpItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    inner class GpViewHolder(val binding: GpItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
 object GpDiffCallback : DiffUtil.ItemCallback<GeneralPractitioner>() {
@@ -37,5 +56,5 @@ object GpDiffCallback : DiffUtil.ItemCallback<GeneralPractitioner>() {
     override fun areContentsTheSame(
         oldItem: GeneralPractitioner,
         newItem: GeneralPractitioner
-    ): Boolean = oldItem.medCouncilNum == newItem.medCouncilNum
+    ): Boolean = oldItem.mcn == newItem.mcn
 }
