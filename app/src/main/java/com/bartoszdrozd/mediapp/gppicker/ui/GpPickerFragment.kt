@@ -1,5 +1,6 @@
 package com.bartoszdrozd.mediapp.gppicker.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -30,6 +31,7 @@ class GpPickerFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,6 +40,14 @@ class GpPickerFragment : Fragment() {
 
         // TEST
         val gpAdapter = GpAdapter()
+        gpAdapter.setOnItemClickListener {
+            viewModel.selectGP(it)
+        }
+
+        viewModel.selectedGP.observe(viewLifecycleOwner, {
+            gpAdapter.selectedGP = it
+            gpAdapter.notifyDataSetChanged()
+        })
         binding.recyclerView.adapter = gpAdapter
 
         viewModel.generalPractitioners.observe(viewLifecycleOwner, { gps ->

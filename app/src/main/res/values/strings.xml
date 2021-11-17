@@ -93,6 +93,7 @@
     <string name="chest_pain_asymptotic_hint">Asymptotic</string>
     <string name="gp_avatar_desc">General practitioner Picture</string>
     <string name="gp_name_string">%s %s</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
