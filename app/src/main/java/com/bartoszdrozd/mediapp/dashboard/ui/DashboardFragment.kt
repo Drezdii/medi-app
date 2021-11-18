@@ -39,18 +39,6 @@ class DashboardFragment : Fragment() {
 
     private fun setListeners() {
         with(binding) {
-            heartButton.setOnClickListener {
-                navController.navigate(R.id.action_dashboard_to_heartForm)
-            }
-
-            diabetesButton.setOnClickListener {
-                navController.navigate(R.id.action_dashboard_to_diabetesForm)
-            }
-
-            alzheimersButton.setOnClickListener {
-                navController.navigate(R.id.action_dashboard_to_alzheimersForm)
-            }
-
             logoutButton.setOnClickListener {
                 // Temporary
                 FirebaseAuth.getInstance().signOut()

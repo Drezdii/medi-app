@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+
+        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        bottomNavView.setupWithNavController(navController)
 
         lifecycleScope.launchWhenResumed {
             repository.isLogged().collect { isLogged ->

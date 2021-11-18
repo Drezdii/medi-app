@@ -80,15 +80,6 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
-            android:id="@+id/action_dashboard_to_diabetesForm"
-            app:destination="@id/diabetesFormFragment" />
-        <action
-            android:id="@+id/action_dashboard_to_heartForm"
-            app:destination="@id/nav_graph_heart_form" />
-        <action
-            android:id="@+id/action_dashboard_to_alzheimersForm"
-            app:destination="@id/alzheimersFormFragment" />
-        <action
             android:id="@+id/action_dashboard_to_landingPage"
             app:destination="@id/landingPageFragment" />
         <action
@@ -131,5 +122,20 @@
             android:label="fragment_heart_form_page_two"
             tools:layout="@layout/fragment_heart_form_page_two" />
     </navigation>
+    <fragment
+        android:id="@+id/healthFormsFragment"
+        android:name="com.bartoszdrozd.mediapp.healthforms.ui.HealthFormsFragment"
+        android:label="fragment_health_forms"
+        tools:layout="@layout/fragment_health_forms" >
+        <action
+            android:id="@+id/action_healthFormsFragment_to_diabetesFormFragment"
+            app:destination="@id/diabetesFormFragment" />
+        <action
+            android:id="@+id/action_healthFormsFragment_to_alzheimersFormFragment"
+            app:destination="@id/alzheimersFormFragment" />
+        <action
+            android:id="@+id/action_healthFormsFragment_to_nav_graph_heart_form"
+            app:destination="@id/nav_graph_heart_form" />
+    </fragment>
 
 </navigation>

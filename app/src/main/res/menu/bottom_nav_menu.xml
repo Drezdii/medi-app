@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboardFragment"
+        android:enabled="true"
+        android:icon="@drawable/dashboard"
+        android:title="@string/dashboard" />
+    <item
+        android:id="@+id/healthFormsFragment"
+        android:enabled="true"
+        android:icon="@drawable/forms"
+        android:title="@string/forms" />
+
+    <item
+        android:id="@+id/predictions_page"
+        android:enabled="true"
+        android:icon="@drawable/predictions"
+        android:title="@string/predictions" />
+
+    <item
+        android:id="@+id/profile_page"
+        android:enabled="true"
+        android:icon="@drawable/profile"
+        android:title="@string/profile" />
+</menu>

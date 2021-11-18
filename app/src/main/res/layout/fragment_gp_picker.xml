@@ -15,7 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/cancel_button"
@@ -23,14 +24,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:backgroundTint="?attr/colorAccent"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/save_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/save" />
+            android:text="@string/save"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
 </RelativeLayout>

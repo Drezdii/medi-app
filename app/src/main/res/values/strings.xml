@@ -82,7 +82,7 @@
     <string name="upsloping_st_hint">Upsloping</string>
     <string name="flat_st_hint">Flat</string>
     <string name="downsloping_st_hint">Downsloping</string>
-    <string name="major_vessels_hint">Major vessels colored by flouroscopy</string>
+    <string name="major_vessels_hint">Major vessels colored by fluoroscopy</string>
     <string name="thalassemia_hint">Thalassemia</string>
     <string name="thalassemia_normal_hint">Normal</string>
     <string name="thalassemia_fixed_hint">Fixed defect</string>
@@ -92,8 +92,11 @@
     <string name="chest_pain_nonanginal">Other</string>
     <string name="chest_pain_asymptotic_hint">Asymptotic</string>
     <string name="gp_avatar_desc">General practitioner Picture</string>
-    <string name="gp_name_string">%s %s</string>
+    <string name="gp_name_string">%1$s %2$s</string>
     <string name="cancel">Cancel</string>
+    <string name="forms">Forms</string>
+    <string name="profile">Profile</string>
+    <string name="predictions">Predictions</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
