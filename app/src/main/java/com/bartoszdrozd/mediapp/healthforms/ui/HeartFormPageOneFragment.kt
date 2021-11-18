@@ -104,4 +104,9 @@ class HeartFormPageOneFragment : FormFragment() {
             stDepression.error = null
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

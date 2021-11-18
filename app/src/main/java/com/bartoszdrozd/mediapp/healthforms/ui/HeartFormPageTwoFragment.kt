@@ -39,7 +39,6 @@ class HeartFormPageTwoFragment : FormFragment() {
 
     private fun setListeners() {
         with(binding) {
-
             formViewModel.generalError.observe(viewLifecycleOwner, { error ->
                 errorBox.text = getErrorString(error)
             })
@@ -92,5 +91,10 @@ class HeartFormPageTwoFragment : FormFragment() {
                 )
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

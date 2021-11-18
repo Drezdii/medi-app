@@ -99,4 +99,9 @@ class AlzheimersFormFragment : FormFragment() {
             normalizeWholeBrain.error = null
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
