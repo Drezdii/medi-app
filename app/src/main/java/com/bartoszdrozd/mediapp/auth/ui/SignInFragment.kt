@@ -1,7 +1,6 @@
 package com.bartoszdrozd.mediapp.auth.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +40,7 @@ class SignInFragment : Fragment() {
     private fun setListeners() {
         with(binding) {
             signUpLink.setOnClickListener {
-                navController.navigate(R.id.action_global_nav_graph_register)
+                navController.navigate(R.id.action_nav_graph_register)
             }
 
             signInButton.setOnClickListener {
@@ -65,7 +64,7 @@ class SignInFragment : Fragment() {
 
         viewmodel.signInSuccessEvent.onEach {
             if (it == 1) {
-                navController.navigate(R.id.action_global_signin_to_dashboard)
+                navController.navigate(R.id.action_signin_to_dashboard)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

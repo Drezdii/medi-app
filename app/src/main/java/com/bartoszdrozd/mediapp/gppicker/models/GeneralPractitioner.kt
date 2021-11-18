@@ -8,5 +8,6 @@ data class GeneralPractitioner(
     val medicalCenter: String = "",
     // Medical council number
     val mcn: Int = 0,
-    val picture: String? = ""
+    val picture: String? = "",
+    val uid: String = ""
 )

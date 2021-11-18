@@ -1,29 +1,36 @@
 package com.bartoszdrozd.mediapp.gppicker.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
+import com.bartoszdrozd.mediapp.gppicker.usecases.IChooseGPUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.ILoadGPsUseCase
+import com.bartoszdrozd.mediapp.utils.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.internal.GeneratedEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @HiltViewModel
-class GpPickerViewModel @Inject constructor(private val loadGPsUseCase: ILoadGPsUseCase) : ViewModel() {
+class GpPickerViewModel @Inject constructor(
+    private val loadGPsUseCase: ILoadGPsUseCase,
+    private val chooseGPUseCase: IChooseGPUseCase
+) : ViewModel() {
+    private val successChannel = Channel<Int>(Channel.BUFFERED)
     private val _gps: MutableLiveData<List<GeneralPractitioner>> = MutableLiveData()
     private val _selectedGP: MutableLiveData<GeneralPractitioner> = MutableLiveData()
 
     val generalPractitioners: LiveData<List<GeneralPractitioner>> = _gps
     val selectedGP: LiveData<GeneralPractitioner> = _selectedGP
+    val savingCompletedEvent = successChannel.receiveAsFlow()
 
-    fun loadGPs() {
+    init {
         viewModelScope.launch {
             loadGPsUseCase.execute().collect { allGps ->
                 _gps.value = allGps
@@ -31,7 +38,20 @@ class GpPickerViewModel @Inject constructor(private val loadGPsUseCase: ILoadGPs
         }
     }
 
-    fun selectGP(gp: GeneralPractitioner) {
+    fun selectGP(gp: GeneralPractitioner?) {
         _selectedGP.value = gp
+    }
+
+    fun saveSelection() {
+        viewModelScope.launch {
+            _selectedGP.value?.let {
+                val res = chooseGPUseCase.execute(it)
+                if (res is Success) {
+                    successChannel.trySend(1)
+                } else {
+                    successChannel.trySend(0)
+                }
+            }
+        }
     }
 }

@@ -35,11 +35,11 @@
                 app:destination="@id/resetPasswordFragment" />
         </fragment>
         <action
-            android:id="@+id/action_global_nav_graph_register"
+            android:id="@+id/action_nav_graph_register"
             app:destination="@id/nav_graph_register"
             app:popUpTo="@id/landingPageFragment" />
         <action
-            android:id="@+id/action_global_signin_to_dashboard"
+            android:id="@+id/action_signin_to_dashboard"
             app:destination="@id/dashboardFragment" />
         <fragment
             android:id="@+id/resetPasswordFragment"
@@ -86,16 +86,6 @@
             android:id="@+id/action_dashboard_to_gpPicker"
             app:destination="@id/gpPickerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/diabetesFormFragment"
-        android:name="com.bartoszdrozd.mediapp.healthforms.ui.DiabetesFormFragment"
-        android:label="fragment_diabetes_form"
-        tools:layout="@layout/fragment_diabetes_form" />
-    <fragment
-        android:id="@+id/alzheimersFormFragment"
-        android:name="com.bartoszdrozd.mediapp.healthforms.ui.AlzheimersFormFragment"
-        android:label="fragment_alzheimers_form"
-        tools:layout="@layout/fragment_alzheimers_form" />
 
     <action
         android:id="@+id/action_to_landingPage"
@@ -105,37 +95,52 @@
         android:name="com.bartoszdrozd.mediapp.gppicker.ui.GpPickerFragment"
         android:label="fragment_gp_picker"
         tools:layout="@layout/fragment_gp_picker" />
-    <navigation android:id="@+id/nav_graph_heart_form"
-        app:startDestination="@id/heartFormPageOneFragment">
+    <action android:id="@+id/action_global_dashboardFragment" app:destination="@id/dashboardFragment" />
+    <navigation android:id="@+id/nav_graph_healthforms"
+        app:startDestination="@id/healthFormsFragment">
         <fragment
-            android:id="@+id/heartFormPageOneFragment"
-            android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageOneFragment"
-            android:label="fragment_heart_form_page_one"
-            tools:layout="@layout/fragment_heart_form_page_one">
+            android:id="@+id/alzheimersFormFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.AlzheimersFormFragment"
+            android:label="fragment_alzheimers_form"
+            tools:layout="@layout/fragment_alzheimers_form" />
+        <fragment
+            android:id="@+id/diabetesFormFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.DiabetesFormFragment"
+            android:label="fragment_diabetes_form"
+            tools:layout="@layout/fragment_diabetes_form" />
+        <fragment
+            android:id="@+id/healthFormsFragment"
+            android:name="com.bartoszdrozd.mediapp.healthforms.ui.HealthFormsFragment"
+            android:label="fragment_health_forms"
+            tools:layout="@layout/fragment_health_forms">
             <action
-                android:id="@+id/action_heartFormPageOneFragment_to_heartFormPageTwoFragment"
-                app:destination="@id/heartFormPageTwoFragment" />
+                android:id="@+id/action_healthFormsFragment_to_diabetesFormFragment"
+                app:destination="@id/diabetesFormFragment" />
+            <action
+                android:id="@+id/action_healthFormsFragment_to_alzheimersFormFragment"
+                app:destination="@id/alzheimersFormFragment" />
+            <action
+                android:id="@+id/action_healthFormsFragment_to_nav_graph_heart_form"
+                app:destination="@id/nav_graph_heart_form" />
         </fragment>
-        <fragment
-            android:id="@+id/heartFormPageTwoFragment"
-            android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageTwoFragment"
-            android:label="fragment_heart_form_page_two"
-            tools:layout="@layout/fragment_heart_form_page_two" />
+        <navigation
+            android:id="@+id/nav_graph_heart_form"
+            app:startDestination="@id/heartFormPageOneFragment">
+            <fragment
+                android:id="@+id/heartFormPageOneFragment"
+                android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageOneFragment"
+                android:label="fragment_heart_form_page_one"
+                tools:layout="@layout/fragment_heart_form_page_one">
+                <action
+                    android:id="@+id/action_heartFormPageOneFragment_to_heartFormPageTwoFragment"
+                    app:destination="@id/heartFormPageTwoFragment" />
+            </fragment>
+            <fragment
+                android:id="@+id/heartFormPageTwoFragment"
+                android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageTwoFragment"
+                android:label="fragment_heart_form_page_two"
+                tools:layout="@layout/fragment_heart_form_page_two" />
+        </navigation>
     </navigation>
-    <fragment
-        android:id="@+id/healthFormsFragment"
-        android:name="com.bartoszdrozd.mediapp.healthforms.ui.HealthFormsFragment"
-        android:label="fragment_health_forms"
-        tools:layout="@layout/fragment_health_forms" >
-        <action
-            android:id="@+id/action_healthFormsFragment_to_diabetesFormFragment"
-            app:destination="@id/diabetesFormFragment" />
-        <action
-            android:id="@+id/action_healthFormsFragment_to_alzheimersFormFragment"
-            app:destination="@id/alzheimersFormFragment" />
-        <action
-            android:id="@+id/action_healthFormsFragment_to_nav_graph_heart_form"
-            app:destination="@id/nav_graph_heart_form" />
-    </fragment>
 
 </navigation>

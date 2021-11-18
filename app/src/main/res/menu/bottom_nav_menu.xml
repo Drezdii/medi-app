@@ -6,7 +6,7 @@
         android:icon="@drawable/dashboard"
         android:title="@string/dashboard" />
     <item
-        android:id="@+id/healthFormsFragment"
+        android:id="@+id/nav_graph_healthforms"
         android:enabled="true"
         android:icon="@drawable/forms"
         android:title="@string/forms" />

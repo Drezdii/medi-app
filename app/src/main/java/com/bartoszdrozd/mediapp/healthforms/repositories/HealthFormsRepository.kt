@@ -59,7 +59,6 @@ class HealthFormsRepository : IHealthFormsRepository {
 
     override suspend fun saveHeart(form: HeartFormDTO): Result<Unit, FormErrorCode> {
         return try {
-            Log.d("TEST", form.majorVessels.toString() + "XD")
             val data = hashMapOf(
                 "uid" to form.uid,
                 "age" to form.age,

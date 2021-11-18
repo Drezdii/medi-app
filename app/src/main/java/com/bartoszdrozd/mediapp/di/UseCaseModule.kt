@@ -3,6 +3,8 @@ package com.bartoszdrozd.mediapp.di
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.auth.usecases.*
 import com.bartoszdrozd.mediapp.gppicker.repositories.IGPRepository
+import com.bartoszdrozd.mediapp.gppicker.usecases.ChooseGPUseCase
+import com.bartoszdrozd.mediapp.gppicker.usecases.IChooseGPUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.ILoadGPsUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.LoadGPsUseCase
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
@@ -57,4 +59,8 @@ class UseCaseModule {
     @Singleton
     @ExperimentalCoroutinesApi
     fun providesLoadGPsUseCase(repo: IGPRepository): ILoadGPsUseCase = LoadGPsUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun providesChooseGPUseCase(repo: IUsersRepository): IChooseGPUseCase = ChooseGPUseCase(repo)
 }

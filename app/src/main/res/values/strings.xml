@@ -97,6 +97,7 @@
     <string name="forms">Forms</string>
     <string name="profile">Profile</string>
     <string name="predictions">Predictions</string>
+    <string name="saved_success">Saved!</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
