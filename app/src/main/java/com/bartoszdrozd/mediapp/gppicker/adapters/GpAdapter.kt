@@ -4,7 +4,6 @@ import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +55,7 @@ class GpAdapter :
                     )
                 }
 
-                gpCard.isChecked = selectedGP == gp
+                gpCard.isChecked = selectedGP?.mcn == gp.mcn
 
                 gpCard.setOnClickListener {
                     _itemListener?.invoke(gp)

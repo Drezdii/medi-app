@@ -47,6 +47,10 @@ class DashboardFragment : Fragment() {
             gpButton.setOnClickListener {
                 navController.navigate(R.id.action_dashboard_to_gpPicker)
             }
+
+            insuranceButton.setOnClickListener {
+                navController.navigate(R.id.action_dashboard_to_insurancePicker)
+            }
         }
 
         viewModel.name.observe(viewLifecycleOwner, { name ->

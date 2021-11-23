@@ -51,7 +51,10 @@ class GpPickerFragment : Fragment() {
 
         viewModel.selectedGP.observe(viewLifecycleOwner, {
             gpAdapter.selectedGP = it
+            val allGps = viewModel.generalPractitioners.value
+            val pos = allGps?.indexOf(it)
             gpAdapter.notifyDataSetChanged()
+
             binding.saveCancelContainer.visibility = if (it == null) GONE else VISIBLE
         })
 

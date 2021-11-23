@@ -85,6 +85,9 @@
         <action
             android:id="@+id/action_dashboard_to_gpPicker"
             app:destination="@id/gpPickerFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_insurancePicker"
+            app:destination="@id/insurancePickerFragment" />
     </fragment>
 
     <action
@@ -142,5 +145,10 @@
                 tools:layout="@layout/fragment_heart_form_page_two" />
         </navigation>
     </navigation>
+    <fragment
+        android:id="@+id/insurancePickerFragment"
+        android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsurancePickerFragment"
+        android:label="fragment_insurance_picker"
+        tools:layout="@layout/fragment_insurance_picker" />
 
 </navigation>

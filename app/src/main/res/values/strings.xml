@@ -98,6 +98,7 @@
     <string name="profile">Profile</string>
     <string name="predictions">Predictions</string>
     <string name="saved_success">Saved!</string>
+    <string name="insurance_company_logo">Insurance company logo</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
