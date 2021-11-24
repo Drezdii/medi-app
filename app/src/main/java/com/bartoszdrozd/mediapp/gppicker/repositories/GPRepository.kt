@@ -1,12 +1,10 @@
 package com.bartoszdrozd.mediapp.gppicker.repositories
 
-import android.util.Log
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
@@ -15,6 +13,9 @@ class GPRepository : IGPRepository {
     override suspend fun getAll(): Flow<List<GeneralPractitioner>> = callbackFlow {
         val collection = FirebaseFirestore.getInstance().collection("professionals")
         val listener = collection.addSnapshotListener { snapshot, ex ->
+            if (ex != null) {
+                throw ex
+            }
             val gpDocuments = snapshot!!.documents
 
             val allGps = mutableListOf<GeneralPractitioner>()

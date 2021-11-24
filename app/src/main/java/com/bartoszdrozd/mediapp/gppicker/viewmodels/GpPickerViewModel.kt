@@ -44,14 +44,13 @@ class GpPickerViewModel @Inject constructor(
 
     fun saveSelection() {
         viewModelScope.launch {
-            _selectedGP.value?.let {
-                val res = chooseGPUseCase.execute(it)
-                if (res is Success) {
-                    successChannel.trySend(1)
-                } else {
-                    successChannel.trySend(0)
-                }
+            val res = _selectedGP.value?.let { chooseGPUseCase.execute(it) }
+            if (res is Success) {
+                successChannel.trySend(1)
+            } else {
+                successChannel.trySend(0)
             }
+
         }
     }
 }

@@ -147,7 +147,7 @@
     </navigation>
     <fragment
         android:id="@+id/insurancePickerFragment"
-        android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsurancePickerFragment"
+        android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsuranceCompanyPickerFragment"
         android:label="fragment_insurance_picker"
         tools:layout="@layout/fragment_insurance_picker" />
 

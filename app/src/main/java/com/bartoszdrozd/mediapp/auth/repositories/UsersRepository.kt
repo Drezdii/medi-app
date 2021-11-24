@@ -5,6 +5,7 @@ import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
 import com.bartoszdrozd.mediapp.auth.models.User
 import com.bartoszdrozd.mediapp.auth.models.UserDetails
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
+import com.bartoszdrozd.mediapp.insurancepicker.models.InsuranceCompany
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
@@ -130,20 +131,40 @@ class UsersRepository : IUsersRepository {
         }
     }
 
-    override suspend fun setGeneralPractitioner(gp: GeneralPractitioner): Result<Unit, Unit> {
+    override suspend fun setGeneralPractitioner(gp: GeneralPractitioner?): Result<Unit, Unit> {
         val uid = getCurrentUser()?.uuid
         return if (uid != null) {
             try {
                 val db = FirebaseFirestore.getInstance()
 
                 val userRef = db.collection("users").document(uid)
-                val gpRef = db.collection("professionals").document(gp.uid)
+                val gpRef = gp?.let { db.collection("professionals").document(it.uid) }
 
-                userRef.update("gp_ref", gpRef).await()
+                userRef.update("gp", gpRef).await()
                 Success(Unit)
             } catch (e: FirebaseFirestoreException) {
                 Error(Unit)
             }
+        } else {
+            Error(Unit)
+        }
+    }
+
+    override suspend fun setInsuranceCompany(company: InsuranceCompany?): Result<Unit, Unit> {
+        val uid = getCurrentUser()?.uuid
+        return if (uid != null) {
+            try {
+                val db = FirebaseFirestore.getInstance()
+
+                val userRef = db.collection("users").document(uid)
+                val companyRef = company?.let { db.collection("insurance_companies").document(it.uid) }
+
+                userRef.update("insurance_company", companyRef).await()
+                Success(Unit)
+            } catch (e: FirebaseFirestoreException) {
+                Error(Unit)
+            }
+
         } else {
             Error(Unit)
         }

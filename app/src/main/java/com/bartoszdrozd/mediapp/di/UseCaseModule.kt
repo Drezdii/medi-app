@@ -9,6 +9,11 @@ import com.bartoszdrozd.mediapp.gppicker.usecases.ILoadGPsUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.LoadGPsUseCase
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.healthforms.usecases.*
+import com.bartoszdrozd.mediapp.insurancepicker.repositories.IInsuranceCompaniesRepository
+import com.bartoszdrozd.mediapp.insurancepicker.usecases.ChooseInsuranceCompanyUseCase
+import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
+import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
+import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,4 +68,15 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun providesChooseGPUseCase(repo: IUsersRepository): IChooseGPUseCase = ChooseGPUseCase(repo)
+
+    @ExperimentalCoroutinesApi
+    @Provides
+    @Singleton
+    fun providesLoadInsuranceCompaniesUseCase(repo: IInsuranceCompaniesRepository): ILoadInsuranceCompaniesUseCase =
+        LoadInsuranceCompaniesUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun providesChooseInsuranceCompanyUseCase(repo: IUsersRepository): IChooseInsuranceCompanyUseCase =
+        ChooseInsuranceCompanyUseCase(repo)
 }
