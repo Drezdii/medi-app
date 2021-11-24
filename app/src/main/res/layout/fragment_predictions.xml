@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".healthforms.ui.HealthFormsFragment">
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/heart_form_button"
+        android:id="@+id/heart_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -20,13 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/heart"
+            android:text="@string/predict_heart_disease"
             android:textAlignment="center"
             android:textSize="36sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/alzheimers_form_button"
+        android:id="@+id/alzheimers_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
@@ -40,13 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/alzheimers"
+            android:text="@string/predict_alzheimers"
             android:textAlignment="center"
             android:textSize="36sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/diabetes_form_button"
+        android:id="@+id/diabetes_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -59,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/diabetes"
+            android:text="@string/predict_diabetes"
             android:textAlignment="center"
             android:textSize="36sp" />
     </com.google.android.material.card.MaterialCardView>

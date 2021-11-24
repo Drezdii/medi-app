@@ -99,6 +99,9 @@
     <string name="predictions">Predictions</string>
     <string name="saved_success">Saved!</string>
     <string name="insurance_company_logo">Insurance company logo</string>
+    <string name="predict_heart_disease">Predict heart disease</string>
+    <string name="predict_alzheimers">Predict Alzheimer\'s</string>
+    <string name="predict_diabetes">Predict diabetes</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
