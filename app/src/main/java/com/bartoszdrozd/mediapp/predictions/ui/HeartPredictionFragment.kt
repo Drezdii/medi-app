@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bartoszdrozd.mediapp.databinding.FragmentPredictionsBinding
+import com.bartoszdrozd.mediapp.databinding.FragmentHeartPredictionBinding
 
-class PredictionsFragment : Fragment() {
-    private var _binding: FragmentPredictionsBinding? = null
+class HeartPredictionFragment : Fragment() {
+    private var _binding: FragmentHeartPredictionBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -16,14 +16,10 @@ class PredictionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentPredictionsBinding.inflate(inflater, container, false)
+        _binding = FragmentHeartPredictionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

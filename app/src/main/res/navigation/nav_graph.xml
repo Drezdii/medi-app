@@ -151,8 +151,17 @@
         android:label="fragment_insurance_picker"
         tools:layout="@layout/fragment_insurance_picker" />
     <fragment
-        android:id="@+id/predictionsFragment"
-        android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionsFragment"
-        android:label="fragment_predictions" />
+        android:id="@+id/predictionsPageFragment"
+        android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionsPageFragment"
+        android:label="PredictionsPageFragment" >
+        <action
+            android:id="@+id/action_predictionsPageFragment_to_heartPredictionFragment"
+            app:destination="@id/heartPredictionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/heartPredictionFragment"
+        android:name="com.bartoszdrozd.mediapp.predictions.ui.HeartPredictionFragment"
+        android:label="fragment_heart_prediction"
+        tools:layout="@layout/fragment_heart_prediction" />
 
 </navigation>

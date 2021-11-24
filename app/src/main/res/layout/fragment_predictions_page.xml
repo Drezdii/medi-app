@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:text="@string/predict_heart_disease"
             android:textAlignment="center"
-            android:textSize="36sp" />
+            android:textSize="32sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="@string/predict_alzheimers"
             android:textAlignment="center"
-            android:textSize="36sp" />
+            android:textSize="32sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -58,6 +58,6 @@
             android:gravity="center"
             android:text="@string/predict_diabetes"
             android:textAlignment="center"
-            android:textSize="36sp" />
+            android:textSize="32sp" />
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
