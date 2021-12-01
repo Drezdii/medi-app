@@ -14,6 +14,9 @@ import com.bartoszdrozd.mediapp.insurancepicker.usecases.ChooseInsuranceCompanyU
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
+import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
+import com.bartoszdrozd.mediapp.predictions.usecases.GetHeartDiseasePredictionUseCase
+import com.bartoszdrozd.mediapp.predictions.usecases.IGetHeartDiseasePredictionUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -79,4 +82,12 @@ class UseCaseModule {
     @Singleton
     fun providesChooseInsuranceCompanyUseCase(repo: IUsersRepository): IChooseInsuranceCompanyUseCase =
         ChooseInsuranceCompanyUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun providesGetHeartDiseasePredictionUseCase(
+        modelRepo: IPredictionModelsRepository,
+        formsRepo: IHealthFormsRepository
+    ): IGetHeartDiseasePredictionUseCase =
+        GetHeartDiseasePredictionUseCase(modelRepo, formsRepo)
 }

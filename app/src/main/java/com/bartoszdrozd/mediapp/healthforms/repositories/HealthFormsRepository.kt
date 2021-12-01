@@ -10,6 +10,8 @@ import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 
 class HealthFormsRepository : IHealthFormsRepository {
@@ -50,7 +52,6 @@ class HealthFormsRepository : IHealthFormsRepository {
             )
 
             FirebaseFirestore.getInstance().collection("alzheimers").add(data).await()
-
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
@@ -80,6 +81,27 @@ class HealthFormsRepository : IHealthFormsRepository {
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
+        }
+    }
+
+    override suspend fun getLatestHeartForm(uid: String): Result<HeartFormDTO?, Unit> {
+        return try {
+            val document =
+                FirebaseFirestore.getInstance().collection("heart")
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .limit(1)
+                    .whereEqualTo("uid", uid).get()
+                    .await()
+
+            val result = if (document.isEmpty) {
+                null
+            } else {
+                document.documents[0].toObject<HeartFormDTO>()
+            }
+            Success(result)
+        } catch (e: FirebaseFirestoreException) {
+            Log.d("TEST", e.toString())
+            Error(Unit)
         }
     }
 }

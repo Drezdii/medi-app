@@ -102,6 +102,10 @@
     <string name="predict_heart_disease">Predict heart disease</string>
     <string name="predict_alzheimers">Predict Alzheimer\'s</string>
     <string name="predict_diabetes">Predict diabetes</string>
+    <string name="get_prediction">Tap to get a prediction</string>
+    <string name="prediction_healthy">Healthy</string>
+    <string name="prediction_warning">Warning</string>
+    <string name="prediction_serious">Serious problem</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

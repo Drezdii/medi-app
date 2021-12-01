@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentPredictionsPageBinding
+import com.bartoszdrozd.mediapp.predictions.models.PredictionType
 
 class PredictionsPageFragment : Fragment() {
     private var _binding: FragmentPredictionsPageBinding? = null
@@ -30,13 +30,18 @@ class PredictionsPageFragment : Fragment() {
 
         with(binding) {
             heartButton.setOnClickListener {
-                navController.navigate(R.id.action_predictionsPageFragment_to_heartPredictionFragment)
+                val action = PredictionsPageFragmentDirections.predictionAction(PredictionType.HEART)
+                navController.navigate(action)
             }
 
             diabetesButton.setOnClickListener {
+                val action = PredictionsPageFragmentDirections.predictionAction(PredictionType.DIABETES)
+                navController.navigate(action)
             }
 
             alzheimersButton.setOnClickListener {
+                val action = PredictionsPageFragmentDirections.predictionAction(PredictionType.ALZHEIMERS)
+                navController.navigate(action)
             }
         }
     }

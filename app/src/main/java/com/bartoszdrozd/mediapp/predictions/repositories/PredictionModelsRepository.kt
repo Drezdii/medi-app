@@ -11,17 +11,17 @@ class PredictionModelsRepository : IPredictionModelsRepository {
         .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
         .build()
 
-    override suspend fun getHeart(): Result<CustomModel?, Unit> {
+    override suspend fun getHeart(): Result<CustomModel, Unit> {
         return try {
             val model = FirebaseModelDownloader.getInstance()
                 .getModel("heart-v1", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions).await()
             Success(model)
-        } catch (e: FirebaseMlException) {
+        } catch (ex: FirebaseMlException) {
             Error(Unit)
         }
     }
 
-    override suspend fun getAlzheimers(): Result<CustomModel?, Unit> {
+    override suspend fun getAlzheimers(): Result<CustomModel, Unit> {
         return try {
             val model = FirebaseModelDownloader.getInstance()
                 .getModel("alzheimers-v1", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions).await()
@@ -31,7 +31,7 @@ class PredictionModelsRepository : IPredictionModelsRepository {
         }
     }
 
-    override suspend fun getDiabetes(): Result<CustomModel?, Unit> {
+    override suspend fun getDiabetes(): Result<CustomModel, Unit> {
         return try {
             val model = FirebaseModelDownloader.getInstance()
                 .getModel("diabetes-v1", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions).await()

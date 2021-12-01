@@ -11,5 +11,5 @@ data class UserDetails(
     var age: Int = -1,
     val phoneNumber: String? = null,
     val gp: DocumentReference? = null,
-    val insuranceCompany: InsuranceCompany? = null
+    val insuranceCompany: InsuranceCompany? = null,
 )

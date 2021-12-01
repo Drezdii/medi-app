@@ -155,13 +155,17 @@
         android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionsPageFragment"
         android:label="PredictionsPageFragment" >
         <action
-            android:id="@+id/action_predictionsPageFragment_to_heartPredictionFragment"
-            app:destination="@id/heartPredictionFragment" />
+            android:id="@+id/predictionAction"
+            app:destination="@id/predictionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/heartPredictionFragment"
-        android:name="com.bartoszdrozd.mediapp.predictions.ui.HeartPredictionFragment"
-        android:label="fragment_heart_prediction"
-        tools:layout="@layout/fragment_heart_prediction" />
+        android:id="@+id/predictionFragment"
+        android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionFragment"
+        android:label="fragment_prediction"
+        tools:layout="@layout/fragment_prediction" >
+        <argument
+            android:name="predictionType"
+            app:argType="com.bartoszdrozd.mediapp.predictions.models.PredictionType" />
+    </fragment>
 
 </navigation>

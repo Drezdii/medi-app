@@ -4,7 +4,7 @@ data class HeartFormDTO(
     var restingBloodPressure: Int? = -1,
     var serumCholesterol: Int? = -1,
     var fastingBloodSugar: Int? = -1,
-    var restingECG: Int? = -1,
+    var restingECG: Int = -1,
     var maxHR: Int? = -1,
     var stDepression: Int? = -1,
     var chestPainType: Int = 0,
