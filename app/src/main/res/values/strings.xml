@@ -106,6 +106,8 @@
     <string name="prediction_healthy">Healthy</string>
     <string name="prediction_warning">Warning</string>
     <string name="prediction_serious">Serious problem</string>
+    <string name="prediction_history">Predictions history</string>
+    <string name="prediction_last_form_info">Predicting using your latest health data</string>
 
     <string-array name="sexes">
         <item>@string/male</item>
