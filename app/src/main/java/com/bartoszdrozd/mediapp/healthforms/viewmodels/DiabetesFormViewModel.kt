@@ -31,9 +31,9 @@ class DiabetesFormViewModel @Inject constructor(
 
     private val isFormValid: Boolean
         get() {
-            return _pregnanciesError.value == null || _glucoseError.value == null ||
-                    insulinError.value == null || _bloodPressureError.value == null ||
-                    _skinThicknessError.value == null || _bmiError.value == null
+            return _pregnanciesError.value == null || _glucoseError.value == null &&
+                    insulinError.value == null && _bloodPressureError.value == null &&
+                    _skinThicknessError.value == null && _bmiError.value == null
         }
 
     val isPregnanciesFieldVisible: LiveData<Boolean> = _isPregnanciesFieldVisible
@@ -75,7 +75,7 @@ class DiabetesFormViewModel @Inject constructor(
 
     private fun validatePregnancies(count: Int?) {
         _pregnanciesError.value =
-            if (count == null && isPregnanciesFieldVisible.value!!) FormErrorCode.REQUIRED_FIELD else null
+            if (count == null && isPregnanciesFieldVisible.value == true) FormErrorCode.REQUIRED_FIELD else null
     }
 
     private fun validateGlucose(level: Int?) {

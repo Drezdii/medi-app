@@ -11,9 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentPredictionBinding
-import com.bartoszdrozd.mediapp.databinding.PredictionButtonBinding
-import com.bartoszdrozd.mediapp.predictions.adapters.PredictionHistoryAdapter
-import com.bartoszdrozd.mediapp.predictions.models.Prediction
 import com.bartoszdrozd.mediapp.predictions.models.PredictionType.*
 import com.bartoszdrozd.mediapp.predictions.viewmodels.PredictionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,9 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PredictionFragment : Fragment() {
     private val viewModel: PredictionViewModel by viewModels()
     private var _binding: FragmentPredictionBinding? = null
-    private var _predButtonBinding: PredictionButtonBinding? = null
     private val binding get() = _binding!!
-    private val predButtonBinding get() = _predButtonBinding!!
     private val args: PredictionFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -33,28 +28,11 @@ class PredictionFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPredictionBinding.inflate(inflater, container, false)
-        _predButtonBinding = PredictionButtonBinding.bind(binding.root)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val test = listOf(
-            Prediction("11", 0.35f, HEART, 1638378837),
-            Prediction("12", 0.55f, HEART, 1638318837),
-            Prediction("13", 0.10f, HEART, 1638218837),
-            Prediction("14", 0.05f, HEART, 1638118837),
-            Prediction("15", 0.99f, HEART, 1638418837),
-            Prediction("16", 0.65f, HEART, 1638316837),
-            Prediction("17", 0.73f, HEART, 1638312837)
-        )
-
-        val adapter = PredictionHistoryAdapter()
-
-        binding.predictionsRecyclerview.adapter = adapter
-
-        adapter.submitList(test)
 
         val icon = when (args.predictionType) {
             HEART -> R.drawable.ic_heart_icon
@@ -63,19 +41,19 @@ class PredictionFragment : Fragment() {
         }
 
         // Set the drawable for the prediction button
-        predButtonBinding.predictButton.setImageDrawable(
+        binding.predictButton.setImageDrawable(
             ContextCompat.getDrawable(requireContext(), icon)
         )
 
         // ImageView was saving the tint as restoring it when navigating back to this destination
         // So we reset the tint here
         DrawableCompat.setTint(
-            predButtonBinding.predictButton.drawable,
+            binding.predictButton.drawable,
             ContextCompat.getColor(requireContext(), R.color.neutral_grey)
         )
 
-        predButtonBinding.predictButton.setOnClickListener {
-            viewModel.predict()
+        binding.predictButton.setOnClickListener {
+            viewModel.predict(args.predictionType)
         }
 
         viewModel.prediction.observe(viewLifecycleOwner, { prediction ->
@@ -88,7 +66,7 @@ class PredictionFragment : Fragment() {
             }
 
             DrawableCompat.setTint(
-                predButtonBinding.predictButton.drawable,
+                binding.predictButton.drawable,
                 ContextCompat.getColor(requireContext(), color)
             )
         })

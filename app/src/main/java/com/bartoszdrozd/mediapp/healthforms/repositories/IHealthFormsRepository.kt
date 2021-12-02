@@ -13,4 +13,6 @@ interface IHealthFormsRepository {
 
     // Latest heart data for the user with the given uid
     suspend fun getLatestHeartForm(uid: String): Result<HeartFormDTO?, Unit>
+    suspend fun getLatestDiabetes(uid: String): Result<DiabetesFormDTO?, Unit>
+    suspend fun getLatestAlzheimers(uid: String): Result<AlzheimersFormDTO?, Unit>
 }

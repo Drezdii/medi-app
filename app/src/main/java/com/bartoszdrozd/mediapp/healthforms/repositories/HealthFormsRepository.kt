@@ -24,7 +24,7 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "pregnancies" to (form.pregnancies ?: 0),
                 "glucoseLevel" to form.glucoseLevel,
                 "insulinLevel" to form.insulinLevel,
-                "bloodPressure" to form.bloodPressureLevel,
+                "bloodPressureLevel" to form.bloodPressureLevel,
                 "skinThickness" to form.skinThickness,
                 "bmi" to form.bmi
             )
@@ -97,6 +97,48 @@ class HealthFormsRepository : IHealthFormsRepository {
                 null
             } else {
                 document.documents[0].toObject<HeartFormDTO>()
+            }
+            Success(result)
+        } catch (e: FirebaseFirestoreException) {
+            Log.d("TEST", e.toString())
+            Error(Unit)
+        }
+    }
+
+    override suspend fun getLatestAlzheimers(uid: String): Result<AlzheimersFormDTO?, Unit> {
+        return try {
+            val document =
+                FirebaseFirestore.getInstance().collection("alzheimers")
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .limit(1)
+                    .whereEqualTo("uid", uid).get()
+                    .await()
+
+            val result = if (document.isEmpty) {
+                null
+            } else {
+                document.documents[0].toObject<AlzheimersFormDTO>()
+            }
+            Success(result)
+        } catch (e: FirebaseFirestoreException) {
+            Log.d("TEST", e.toString())
+            Error(Unit)
+        }
+    }
+
+    override suspend fun getLatestDiabetes(uid: String): Result<DiabetesFormDTO?, Unit> {
+        return try {
+            val document =
+                FirebaseFirestore.getInstance().collection("diabetes")
+                    .orderBy("date", Query.Direction.DESCENDING)
+                    .limit(1)
+                    .whereEqualTo("uid", uid).get()
+                    .await()
+
+            val result = if (document.isEmpty) {
+                null
+            } else {
+                document.documents[0].toObject<DiabetesFormDTO>()
             }
             Success(result)
         } catch (e: FirebaseFirestoreException) {

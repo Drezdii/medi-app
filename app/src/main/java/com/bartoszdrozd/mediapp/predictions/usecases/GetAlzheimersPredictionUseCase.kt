@@ -1,6 +1,6 @@
 package com.bartoszdrozd.mediapp.predictions.usecases
 
-import com.bartoszdrozd.mediapp.healthforms.dtos.HeartFormDTO
+import com.bartoszdrozd.mediapp.healthforms.dtos.AlzheimersFormDTO
 import com.bartoszdrozd.mediapp.predictions.models.Prediction
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.utils.Error
@@ -11,12 +11,11 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import javax.inject.Inject
 
-class GetHeartDiseasePredictionUseCase @Inject constructor(
+class GetAlzheimersPredictionUseCase @Inject constructor(
     private val modelRepo: IPredictionModelsRepository
-) :
-    IGetHeartDiseasePredictionUseCase {
-    override suspend fun execute(form: HeartFormDTO): Result<Prediction, Unit> {
-        val modelResult = modelRepo.getHeart()
+) : IGetAlzheimersPredictionUseCase {
+    override suspend fun execute(form: AlzheimersFormDTO): Result<Prediction, Unit> {
+        val modelResult = modelRepo.getAlzheimers()
 
         val modelFile = if (modelResult is Success) {
             modelResult.value?.file
@@ -38,25 +37,20 @@ class GetHeartDiseasePredictionUseCase @Inject constructor(
         }
     }
 
-    private fun predict(interpreter: Interpreter, data: HeartFormDTO): Float {
+    private fun predict(interpreter: Interpreter, data: AlzheimersFormDTO): Float {
         val bufferSize = 1 * java.lang.Float.SIZE / java.lang.Byte.SIZE
 
         val input =
-            ByteBuffer.allocateDirect(13 * java.lang.Float.SIZE / java.lang.Byte.SIZE).order(ByteOrder.nativeOrder())
+            ByteBuffer.allocateDirect(8 * java.lang.Float.SIZE / java.lang.Byte.SIZE).order(ByteOrder.nativeOrder())
 
         input.putFloat(data.age.toFloat())
         input.putFloat(data.gender.toFloat())
-        input.putFloat(data.chestPainType.toFloat())
-        input.putFloat(data.restingBloodPressure!!.toFloat())
-        input.putFloat(data.serumCholesterol!!.toFloat())
-        input.putFloat(data.fastingBloodSugar!!.toFloat())
-        input.putFloat(data.restingECG.toFloat())
-        input.putFloat(data.maxHR!!.toFloat())
-        input.putFloat(data.exerciseInducedAngina.toFloat())
-        input.putFloat(data.stDepression!!.toFloat())
-        input.putFloat(data.peakSTSegment.toFloat())
-        input.putFloat(data.majorVessels.toFloat())
-        input.putFloat(data.thalassemia.toFloat())
+        input.putFloat(data.educationLevel!!.toFloat())
+        input.putFloat(data.socioEconomicStatus!!.toFloat())
+        input.putFloat(data.miniMentalState!!.toFloat())
+        input.putFloat(data.clinicalDementiaRating!!.toFloat())
+        input.putFloat(data.estTotalIntracranial!!.toFloat())
+        input.putFloat(data.normalizeWholeBrain!!.toFloat())
 
         val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
 
