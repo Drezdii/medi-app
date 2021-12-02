@@ -15,6 +15,7 @@ import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompany
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
+import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
 import dagger.Module
 import dagger.Provides
@@ -101,18 +102,25 @@ class UseCaseModule {
 
     @Provides
     @Singleton
+    fun providesSavePredictionUseCase(predRepo: IPredictionsRepository): ISavePredictionUseCase =
+        SavePredictionUseCase(predRepo)
+
+    @Provides
+    @Singleton
     fun providesGetPredictionUseCase(
         userRepo: IUsersRepository,
         healthFormsRepo: IHealthFormsRepository,
         heartPredictionUseCase: IGetHeartDiseasePredictionUseCase,
         diabetesPredictionUseCase: IGetDiabetesPredictionUseCase,
-        alzheimersPredictionUseCase: IGetAlzheimersPredictionUseCase
+        alzheimersPredictionUseCase: IGetAlzheimersPredictionUseCase,
+        savePredictionUseCase: ISavePredictionUseCase
     ): IGetPredictionUseCase =
         GetPredictionUseCase(
             userRepo,
             healthFormsRepo,
             heartPredictionUseCase,
             diabetesPredictionUseCase,
-            alzheimersPredictionUseCase
+            alzheimersPredictionUseCase,
+            savePredictionUseCase
         )
 }

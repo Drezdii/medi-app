@@ -9,7 +9,9 @@ import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.insurancepicker.repositories.IInsuranceCompaniesRepository
 import com.bartoszdrozd.mediapp.insurancepicker.repositories.InsuranceCompaniesRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
+import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.PredictionModelsRepository
+import com.bartoszdrozd.mediapp.predictions.repositories.PredictionsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +40,9 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun providesPredictionsRepository(): IPredictionModelsRepository = PredictionModelsRepository()
+    fun providesPredictionModelsRepository(): IPredictionModelsRepository = PredictionModelsRepository()
+
+    @Provides
+    @Singleton
+    fun providesPredictionsRepository(): IPredictionsRepository = PredictionsRepository()
 }

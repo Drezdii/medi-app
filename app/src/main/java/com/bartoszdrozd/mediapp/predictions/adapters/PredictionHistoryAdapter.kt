@@ -9,10 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.PredictionItemBinding
 import com.bartoszdrozd.mediapp.predictions.models.Prediction
-import java.time.Instant
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 class PredictionHistoryAdapter : ListAdapter<Prediction, PredictionHistoryAdapter.ViewHolder>(PredictionDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,12 +22,12 @@ class PredictionHistoryAdapter : ListAdapter<Prediction, PredictionHistoryAdapte
 
     inner class ViewHolder(val binding: PredictionItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(prediction: Prediction) {
-            binding.date.text =
-                Instant
-                    .ofEpochSecond(prediction.date)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDateTime()
-                    .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withZone(ZoneId.systemDefault()))
+//            binding.date.text =
+//                Instant
+//                    .ofEpochSecond(prediction.date)
+//                    .atZone(ZoneId.systemDefault())
+//                    .toLocalDateTime()
+//                    .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withZone(ZoneId.systemDefault()))
 
             val predictionText: Int
             val color: Int
@@ -57,5 +53,6 @@ object PredictionDiffCallback : DiffUtil.ItemCallback<Prediction>() {
     override fun areItemsTheSame(oldItem: Prediction, newItem: Prediction): Boolean = oldItem == newItem
 
     override fun areContentsTheSame(oldItem: Prediction, newItem: Prediction): Boolean =
-        oldItem.uid == newItem.uid
+        // FIX THIS
+        oldItem.value == newItem.value
 }

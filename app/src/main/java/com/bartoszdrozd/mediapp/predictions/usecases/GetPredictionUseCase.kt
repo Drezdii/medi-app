@@ -2,6 +2,7 @@ package com.bartoszdrozd.mediapp.predictions.usecases
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
+import com.bartoszdrozd.mediapp.predictions.dtos.PredictionDTO
 import com.bartoszdrozd.mediapp.predictions.models.Prediction
 import com.bartoszdrozd.mediapp.predictions.models.PredictionType
 import com.bartoszdrozd.mediapp.predictions.models.PredictionType.*
@@ -15,7 +16,8 @@ class GetPredictionUseCase @Inject constructor(
     private val healthFormRepo: IHealthFormsRepository,
     private val heartPredictionUseCase: IGetHeartDiseasePredictionUseCase,
     private val diabetesPredictionUseCase: IGetDiabetesPredictionUseCase,
-    private val alzheimersPredictionUseCase: IGetAlzheimersPredictionUseCase
+    private val alzheimersPredictionUseCase: IGetAlzheimersPredictionUseCase,
+    private val savePredictionUseCase: ISavePredictionUseCase
 ) :
     IGetPredictionUseCase {
     override suspend fun execute(type: PredictionType): Result<Prediction, Unit> {
@@ -33,7 +35,16 @@ class GetPredictionUseCase @Inject constructor(
                 }
 
                 return if (form != null) {
-                    heartPredictionUseCase.execute(form)
+                    val predictionResult = heartPredictionUseCase.execute(form)
+                    // Couldn't get a prediction
+                    if (predictionResult is Error) {
+                        return Error(Unit)
+                    }
+
+                    val prediction = predictionResult as Success
+                    val dto = PredictionDTO(prediction.value.value, form.id)
+                    savePredictionUseCase.execute(uuid, dto)
+                    predictionResult
                 } else {
                     // Inform user that no form was available to make a prediction
                     Error(Unit)
@@ -50,7 +61,16 @@ class GetPredictionUseCase @Inject constructor(
                 }
 
                 return if (form != null) {
-                    alzheimersPredictionUseCase.execute(form)
+                    val predictionResult = alzheimersPredictionUseCase.execute(form)
+                    // Couldn't get a prediction
+                    if (predictionResult is Error) {
+                        return Error(Unit)
+                    }
+
+                    val prediction = predictionResult as Success
+                    val dto = PredictionDTO(prediction.value.value, form.id)
+                    savePredictionUseCase.execute(uuid, dto)
+                    predictionResult
                 } else {
                     // Inform user that no form was available to make a prediction
                     Error(Unit)
@@ -67,7 +87,16 @@ class GetPredictionUseCase @Inject constructor(
                 }
 
                 return if (form != null) {
-                    diabetesPredictionUseCase.execute(form)
+                    val predictionResult = diabetesPredictionUseCase.execute(form)
+                    // Couldn't get a prediction
+                    if (predictionResult is Error) {
+                        return Error(Unit)
+                    }
+
+                    val prediction = predictionResult as Success
+                    val dto = PredictionDTO(prediction.value.value, form.id)
+                    savePredictionUseCase.execute(uuid, dto)
+                    predictionResult
                 } else {
                     // Inform user that no form was available to make a prediction
                     Error(Unit)

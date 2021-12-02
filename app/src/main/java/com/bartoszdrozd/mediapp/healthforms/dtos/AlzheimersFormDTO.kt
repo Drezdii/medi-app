@@ -14,5 +14,6 @@ data class AlzheimersFormDTO(
     val normalizeWholeBrain: Float? = 1f,
     var date: Long = LocalDateTime.now(ZoneOffset.UTC).atZone(ZoneOffset.UTC).toEpochSecond(),
     var age: Int = 0,
-    var uid: String = ""
+    var uid: String = "",
+    val id: String = ""
 )

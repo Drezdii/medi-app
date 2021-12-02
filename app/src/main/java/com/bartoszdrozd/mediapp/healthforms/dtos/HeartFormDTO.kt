@@ -15,5 +15,6 @@ data class HeartFormDTO(
     var gender: Int = 0,
     var age: Int = 0,
     var date: Long = 0,
-    var uid: String = ""
+    var uid: String = "",
+    var id: String = ""
 )

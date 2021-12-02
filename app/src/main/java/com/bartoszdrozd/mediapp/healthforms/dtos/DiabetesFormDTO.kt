@@ -12,5 +12,6 @@ data class DiabetesFormDTO(
     val bmi: Int? = -1,
     var age: Int = -1,
     var date: Long = LocalDateTime.now(ZoneOffset.UTC).atZone(ZoneOffset.UTC).toEpochSecond(),
-    var uid: String = ""
+    var uid: String = "",
+    var id: String = ""
 )

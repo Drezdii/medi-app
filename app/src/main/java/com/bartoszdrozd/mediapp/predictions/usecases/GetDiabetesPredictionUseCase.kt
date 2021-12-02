@@ -30,7 +30,7 @@ class GetDiabetesPredictionUseCase @Inject constructor(
             // Run the prediction
             val predictedValue = predict(interpreter, form)
 
-            val prediction = Prediction(value = predictedValue)
+            val prediction = Prediction(predictedValue)
             Success(prediction)
         } else {
             // When there is no form for this user, but there were no errors

@@ -17,6 +17,7 @@ import kotlinx.coroutines.tasks.await
 class HealthFormsRepository : IHealthFormsRepository {
     override suspend fun saveDiabetes(form: DiabetesFormDTO): Result<Unit, FormErrorCode> {
         return try {
+            val docId = FirebaseFirestore.getInstance().collection("diabetes").document().id
             val diabetesData = hashMapOf(
                 "uid" to form.uid,
                 "age" to form.age,
@@ -26,10 +27,11 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "insulinLevel" to form.insulinLevel,
                 "bloodPressureLevel" to form.bloodPressureLevel,
                 "skinThickness" to form.skinThickness,
-                "bmi" to form.bmi
+                "bmi" to form.bmi,
+                "id" to docId
             )
 
-            FirebaseFirestore.getInstance().collection("diabetes").add(diabetesData).await()
+            FirebaseFirestore.getInstance().collection("diabetes").document(docId).set(diabetesData).await()
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
@@ -38,6 +40,7 @@ class HealthFormsRepository : IHealthFormsRepository {
 
     override suspend fun saveAlzheimers(form: AlzheimersFormDTO): Result<Unit, FormErrorCode> {
         return try {
+            val docId = FirebaseFirestore.getInstance().collection("alzheimers").document().id
             val data = hashMapOf(
                 "uid" to form.uid,
                 "age" to form.age,
@@ -48,10 +51,11 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "clinicalDementiaRating" to form.clinicalDementiaRating,
                 "socioEconomicStatus" to form.socioEconomicStatus,
                 "estTotalIntracranial" to form.estTotalIntracranial,
-                "normalizeWholeBrain" to form.normalizeWholeBrain
+                "normalizeWholeBrain" to form.normalizeWholeBrain,
+                "id" to docId
             )
 
-            FirebaseFirestore.getInstance().collection("alzheimers").add(data).await()
+            FirebaseFirestore.getInstance().collection("alzheimers").document(docId).set(data).await()
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
@@ -60,6 +64,7 @@ class HealthFormsRepository : IHealthFormsRepository {
 
     override suspend fun saveHeart(form: HeartFormDTO): Result<Unit, FormErrorCode> {
         return try {
+            val docId = FirebaseFirestore.getInstance().collection("heart").document().id
             val data = hashMapOf(
                 "uid" to form.uid,
                 "age" to form.age,
@@ -76,8 +81,9 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "peakSTSegment" to form.peakSTSegment,
                 "majorVessels" to form.majorVessels,
                 "thalassemia" to form.thalassemia,
+                "id" to docId
             )
-            FirebaseFirestore.getInstance().collection("heart").add(data).await()
+            FirebaseFirestore.getInstance().collection("heart").document(docId).set(data).await()
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
