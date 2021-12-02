@@ -150,5 +150,22 @@
         android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsuranceCompanyPickerFragment"
         android:label="fragment_insurance_picker"
         tools:layout="@layout/fragment_insurance_picker" />
+    <fragment
+        android:id="@+id/predictionsPageFragment"
+        android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionsPageFragment"
+        android:label="PredictionsPageFragment" >
+        <action
+            android:id="@+id/predictionAction"
+            app:destination="@id/predictionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/predictionFragment"
+        android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionFragment"
+        android:label="fragment_prediction"
+        tools:layout="@layout/fragment_prediction" >
+        <argument
+            android:name="predictionType"
+            app:argType="com.bartoszdrozd.mediapp.predictions.models.PredictionType" />
+    </fragment>
 
 </navigation>

@@ -10,4 +10,9 @@ interface IHealthFormsRepository {
     suspend fun saveDiabetes(form: DiabetesFormDTO): Result<Unit, FormErrorCode>
     suspend fun saveAlzheimers(form: AlzheimersFormDTO): Result<Unit, FormErrorCode>
     suspend fun saveHeart(form: HeartFormDTO): Result<Unit, FormErrorCode>
+
+    // Latest heart data for the user with the given uid
+    suspend fun getLatestHeartForm(uid: String): Result<HeartFormDTO?, Unit>
+    suspend fun getLatestDiabetes(uid: String): Result<DiabetesFormDTO?, Unit>
+    suspend fun getLatestAlzheimers(uid: String): Result<AlzheimersFormDTO?, Unit>
 }

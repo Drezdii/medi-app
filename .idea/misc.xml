@@ -4,21 +4,31 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable-anydpi/default_gp_photo.xml" value="0.5615384615384615" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/ic_diabetes_icon.xml" value="0.5661458333333333" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/ic_head_icon.xml" value="0.5661458333333333" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/ic_heart_icon.xml" value="0.5661458333333333" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/ic_heart_logo.xml" value="0.5574358974358974" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/ic_heart_v2.xml" value="0.42291666666666666" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/step_blob.xml" value="0.346875" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/form_stepper.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_alzheimers_form.xml" value="0.5541666666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_alzheimers_prediction.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_diabetes_form.xml" value="0.5541666666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_diabetes_prediction.xml" value="0.3494791666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_gp_picker.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_health_forms.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_health_forms_framgnet.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_form.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_form_page_one.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_form_page_two.xml" value="0.5" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_prediction.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_insurance_picker.xml" value="0.35520833333333335" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_landing_page.xml" value="0.3307291666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_prediction.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_predictions.xml" value="0.3265625" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_predictions_page.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_register.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_register_form_page_one.xml" value="0.25" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_register_form_page_two.xml" value="0.33" />
@@ -31,6 +41,8 @@
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/insurance_item.xml" value="0.35520833333333335" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/list_item.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/multi_stepper.xml" value="0.33" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/prediction_button.xml" value="0.3494791666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/prediction_item.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/register_form_page_1.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/register_form_page_2.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/single_choice_picker.xml" value="0.35520833333333335" />

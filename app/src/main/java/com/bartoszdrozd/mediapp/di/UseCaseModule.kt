@@ -14,6 +14,8 @@ import com.bartoszdrozd.mediapp.insurancepicker.usecases.ChooseInsuranceCompanyU
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
+import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
+import com.bartoszdrozd.mediapp.predictions.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -79,4 +81,38 @@ class UseCaseModule {
     @Singleton
     fun providesChooseInsuranceCompanyUseCase(repo: IUsersRepository): IChooseInsuranceCompanyUseCase =
         ChooseInsuranceCompanyUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun providesGetHeartDiseasePredictionUseCase(
+        modelRepo: IPredictionModelsRepository
+    ): IGetHeartDiseasePredictionUseCase =
+        GetHeartDiseasePredictionUseCase(modelRepo)
+
+    @Provides
+    @Singleton
+    fun providesDiabetesPredictionUseCase(modelRepo: IPredictionModelsRepository): IGetDiabetesPredictionUseCase =
+        GetDiabetesPredictionUseCase(modelRepo)
+
+    @Provides
+    @Singleton
+    fun providesAlzheimersPredictionUseCase(modelRepo: IPredictionModelsRepository): IGetAlzheimersPredictionUseCase =
+        GetAlzheimersPredictionUseCase(modelRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetPredictionUseCase(
+        userRepo: IUsersRepository,
+        healthFormsRepo: IHealthFormsRepository,
+        heartPredictionUseCase: IGetHeartDiseasePredictionUseCase,
+        diabetesPredictionUseCase: IGetDiabetesPredictionUseCase,
+        alzheimersPredictionUseCase: IGetAlzheimersPredictionUseCase
+    ): IGetPredictionUseCase =
+        GetPredictionUseCase(
+            userRepo,
+            healthFormsRepo,
+            heartPredictionUseCase,
+            diabetesPredictionUseCase,
+            alzheimersPredictionUseCase
+        )
 }
