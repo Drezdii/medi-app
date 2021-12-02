@@ -26,6 +26,8 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 
 class UsersRepository : IUsersRepository {
+    private var userDetails: UserDetails? = null
+
     override suspend fun signIn(
         email: String,
         password: String
@@ -85,6 +87,9 @@ class UsersRepository : IUsersRepository {
     }
 
     private suspend fun getUserDetails(uid: String): UserDetails? {
+        if (userDetails != null) {
+            return userDetails
+        }
         try {
             val document =
                 FirebaseFirestore.getInstance().collection("users").document(uid).get().await()
@@ -97,6 +102,8 @@ class UsersRepository : IUsersRepository {
                     ).toLocalDate(),
                     LocalDate.now()
                 ).toInt()
+                
+                userDetails = details
 
                 return details
             }
