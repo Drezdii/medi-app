@@ -77,7 +77,7 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.bartoszdrozd.mediapp.dashboard.ui.DashboardFragment"
-        android:label="fragment_dashboard"
+        android:label="@string/dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboard_to_landingPage"
@@ -96,25 +96,28 @@
     <fragment
         android:id="@+id/gpPickerFragment"
         android:name="com.bartoszdrozd.mediapp.gppicker.ui.GpPickerFragment"
-        android:label="fragment_gp_picker"
+        android:label="@string/select_gp"
         tools:layout="@layout/fragment_gp_picker" />
-    <action android:id="@+id/action_global_dashboardFragment" app:destination="@id/dashboardFragment" />
-    <navigation android:id="@+id/nav_graph_healthforms"
+    <action
+        android:id="@+id/action_global_dashboardFragment"
+        app:destination="@id/dashboardFragment" />
+    <navigation
+        android:id="@+id/nav_graph_healthforms"
         app:startDestination="@id/healthFormsFragment">
         <fragment
             android:id="@+id/alzheimersFormFragment"
             android:name="com.bartoszdrozd.mediapp.healthforms.ui.AlzheimersFormFragment"
-            android:label="fragment_alzheimers_form"
+            android:label="@string/alzheimers"
             tools:layout="@layout/fragment_alzheimers_form" />
         <fragment
             android:id="@+id/diabetesFormFragment"
             android:name="com.bartoszdrozd.mediapp.healthforms.ui.DiabetesFormFragment"
-            android:label="fragment_diabetes_form"
+            android:label="@string/diabetes"
             tools:layout="@layout/fragment_diabetes_form" />
         <fragment
             android:id="@+id/healthFormsFragment"
             android:name="com.bartoszdrozd.mediapp.healthforms.ui.HealthFormsFragment"
-            android:label="fragment_health_forms"
+            android:label="@string/health_forms"
             tools:layout="@layout/fragment_health_forms">
             <action
                 android:id="@+id/action_healthFormsFragment_to_diabetesFormFragment"
@@ -132,7 +135,7 @@
             <fragment
                 android:id="@+id/heartFormPageOneFragment"
                 android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageOneFragment"
-                android:label="fragment_heart_form_page_one"
+                android:label="@string/heart"
                 tools:layout="@layout/fragment_heart_form_page_one">
                 <action
                     android:id="@+id/action_heartFormPageOneFragment_to_heartFormPageTwoFragment"
@@ -141,19 +144,19 @@
             <fragment
                 android:id="@+id/heartFormPageTwoFragment"
                 android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageTwoFragment"
-                android:label="fragment_heart_form_page_two"
+                android:label="@string/heart_cont"
                 tools:layout="@layout/fragment_heart_form_page_two" />
         </navigation>
     </navigation>
     <fragment
         android:id="@+id/insurancePickerFragment"
         android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsuranceCompanyPickerFragment"
-        android:label="fragment_insurance_picker"
+        android:label="@string/select_insurance_company"
         tools:layout="@layout/fragment_insurance_picker" />
     <fragment
         android:id="@+id/predictionsPageFragment"
         android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionsPageFragment"
-        android:label="PredictionsPageFragment" >
+        android:label="@string/predictions">
         <action
             android:id="@+id/predictionAction"
             app:destination="@id/predictionFragment" />
@@ -161,8 +164,8 @@
     <fragment
         android:id="@+id/predictionFragment"
         android:name="com.bartoszdrozd.mediapp.predictions.ui.PredictionFragment"
-        android:label="fragment_prediction"
-        tools:layout="@layout/fragment_prediction" >
+        android:label="// TODO"
+        tools:layout="@layout/fragment_prediction">
         <argument
             android:name="predictionType"
             app:argType="com.bartoszdrozd.mediapp.predictions.models.PredictionType" />

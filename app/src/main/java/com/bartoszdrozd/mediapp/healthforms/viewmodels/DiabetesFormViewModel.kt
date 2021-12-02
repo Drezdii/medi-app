@@ -1,5 +1,6 @@
 package com.bartoszdrozd.mediapp.healthforms.viewmodels
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,7 +32,7 @@ class DiabetesFormViewModel @Inject constructor(
 
     private val isFormValid: Boolean
         get() {
-            return _pregnanciesError.value == null || _glucoseError.value == null &&
+            return _pregnanciesError.value == null && _glucoseError.value == null &&
                     insulinError.value == null && _bloodPressureError.value == null &&
                     _skinThicknessError.value == null && _bmiError.value == null
         }
@@ -53,6 +54,7 @@ class DiabetesFormViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     fun saveForm(form: DiabetesFormDTO) {
         validatePregnancies(form.pregnancies)
         validateGlucose(form.glucoseLevel)
