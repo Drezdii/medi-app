@@ -8,6 +8,7 @@ import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
 import com.bartoszdrozd.mediapp.gppicker.usecases.IChooseGPUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.ILoadGPsUseCase
 import com.bartoszdrozd.mediapp.utils.Success
+import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -45,7 +46,7 @@ class GpPickerViewModel @Inject constructor(
     fun saveSelection() {
         viewModelScope.launch {
             val res = _selectedGP.value?.let { chooseGPUseCase.execute(it) }
-            if (res is Success) {
+            if (res?.succeeded == true) {
                 successChannel.trySend(1)
             } else {
                 successChannel.trySend(0)

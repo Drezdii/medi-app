@@ -10,7 +10,7 @@ import com.bartoszdrozd.mediapp.healthforms.dtos.DiabetesFormDTO
 import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
 import com.bartoszdrozd.mediapp.healthforms.usecases.ISaveDiabetesFormUseCase
 import com.bartoszdrozd.mediapp.utils.Error
-import com.bartoszdrozd.mediapp.utils.Success
+import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -66,7 +66,7 @@ class DiabetesFormViewModel @Inject constructor(
         if (isFormValid) {
             viewModelScope.launch {
                 val res = saveFormUseCase.execute(form)
-                if (res is Success) {
+                if (res.succeeded) {
                     // Navigate
                 } else {
                     _generalError.value = (res as Error).reason

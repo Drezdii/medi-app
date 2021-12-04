@@ -8,7 +8,7 @@ import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
 import com.bartoszdrozd.mediapp.auth.usecases.IRegisterUserUseCase
 import com.bartoszdrozd.mediapp.utils.Error
-import com.bartoszdrozd.mediapp.utils.Success
+import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -77,7 +77,7 @@ class RegisterViewModel @Inject constructor(private val registerUserUseCase: IRe
     fun registerUser() {
         viewModelScope.launch {
             val res = registerUserUseCase.execute(userDetails)
-            if (res is Success) {
+            if (res.succeeded) {
                 successChannel.send(1)
             } else if (res is Error) {
                 if (res.reason == AuthErrorCode.EMAIL_IN_USE || res.reason == AuthErrorCode.INVALID_EMAIL) {

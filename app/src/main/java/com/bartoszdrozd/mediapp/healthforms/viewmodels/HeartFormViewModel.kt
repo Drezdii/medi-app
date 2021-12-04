@@ -8,7 +8,7 @@ import com.bartoszdrozd.mediapp.healthforms.dtos.HeartFormDTO
 import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
 import com.bartoszdrozd.mediapp.healthforms.usecases.ISaveHeartFormUseCase
 import com.bartoszdrozd.mediapp.utils.Error
-import com.bartoszdrozd.mediapp.utils.Success
+import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -46,7 +46,7 @@ class HeartFormViewModel @Inject constructor(private val saveFormUseCase: ISaveH
 
         viewModelScope.launch {
             val res = saveFormUseCase.execute(_formState)
-            if (res is Success) {
+            if (res.succeeded) {
                 // Navigate
             } else {
                 _generalError.value = (res as Error).reason
