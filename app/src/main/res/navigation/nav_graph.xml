@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_dashboard_to_insurancePicker"
             app:destination="@id/insurancePickerFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_predictionsHistory"
+            app:destination="@id/predictionsHistoryFragment" />
     </fragment>
 
     <action
@@ -170,5 +173,10 @@
             android:name="predictionType"
             app:argType="com.bartoszdrozd.mediapp.predictions.models.PredictionType" />
     </fragment>
+    <fragment
+        android:id="@+id/predictionsHistoryFragment"
+        android:name="com.bartoszdrozd.mediapp.medicalhistory.ui.PredictionsHistoryFragment"
+        android:label="@string/prediction_history"
+        tools:layout="@layout/fragment_predictions_history" />
 
 </navigation>

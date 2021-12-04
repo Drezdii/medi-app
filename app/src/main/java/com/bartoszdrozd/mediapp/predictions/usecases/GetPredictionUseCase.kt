@@ -20,10 +20,10 @@ class GetPredictionUseCase @Inject constructor(
     private val savePredictionUseCase: ISavePredictionUseCase
 ) :
     IGetPredictionUseCase {
-    override suspend fun execute(type: PredictionType): Result<Prediction, Unit> {
+    override suspend fun execute(predictionType: PredictionType): Result<Prediction, Unit> {
         val uuid = userRepo.getCurrentUser()?.uuid ?: return Error(Unit)
 
-        when (type) {
+        when (predictionType) {
             HEART -> {
                 // Get the latest heart disease form for this user
                 val res = healthFormRepo.getLatestHeartForm(uuid)
@@ -42,7 +42,7 @@ class GetPredictionUseCase @Inject constructor(
                     }
 
                     val prediction = predictionResult as Success
-                    val dto = PredictionDTO(prediction.value.value, form.id)
+                    val dto = PredictionDTO(predictionType, prediction.value.value, form.id)
                     savePredictionUseCase.execute(uuid, dto)
                     predictionResult
                 } else {
@@ -68,7 +68,7 @@ class GetPredictionUseCase @Inject constructor(
                     }
 
                     val prediction = predictionResult as Success
-                    val dto = PredictionDTO(prediction.value.value, form.id)
+                    val dto = PredictionDTO(predictionType, prediction.value.value, form.id)
                     savePredictionUseCase.execute(uuid, dto)
                     predictionResult
                 } else {
@@ -94,7 +94,7 @@ class GetPredictionUseCase @Inject constructor(
                     }
 
                     val prediction = predictionResult as Success
-                    val dto = PredictionDTO(prediction.value.value, form.id)
+                    val dto = PredictionDTO(predictionType, prediction.value.value, form.id)
                     savePredictionUseCase.execute(uuid, dto)
                     predictionResult
                 } else {

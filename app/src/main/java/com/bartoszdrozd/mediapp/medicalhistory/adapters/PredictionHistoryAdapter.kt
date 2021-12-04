@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.predictions.adapters
+package com.bartoszdrozd.mediapp.medicalhistory.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.PredictionItemBinding
-import com.bartoszdrozd.mediapp.predictions.models.Prediction
+import com.bartoszdrozd.mediapp.predictions.dtos.PredictionDTO
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
-class PredictionHistoryAdapter : ListAdapter<Prediction, PredictionHistoryAdapter.ViewHolder>(PredictionDiffCallback) {
+class PredictionHistoryAdapter :
+    ListAdapter<PredictionDTO, PredictionHistoryAdapter.ViewHolder>(PredictionDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = PredictionItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -21,13 +26,13 @@ class PredictionHistoryAdapter : ListAdapter<Prediction, PredictionHistoryAdapte
     }
 
     inner class ViewHolder(val binding: PredictionItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(prediction: Prediction) {
-//            binding.date.text =
-//                Instant
-//                    .ofEpochSecond(prediction.date)
-//                    .atZone(ZoneId.systemDefault())
-//                    .toLocalDateTime()
-//                    .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withZone(ZoneId.systemDefault()))
+        fun bind(prediction: PredictionDTO) {
+            binding.date.text =
+                Instant
+                    .ofEpochSecond(prediction.date)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
+                    .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withZone(ZoneId.systemDefault()))
 
             val predictionText: Int
             val color: Int
@@ -49,10 +54,9 @@ class PredictionHistoryAdapter : ListAdapter<Prediction, PredictionHistoryAdapte
     }
 }
 
-object PredictionDiffCallback : DiffUtil.ItemCallback<Prediction>() {
-    override fun areItemsTheSame(oldItem: Prediction, newItem: Prediction): Boolean = oldItem == newItem
+object PredictionDiffCallback : DiffUtil.ItemCallback<PredictionDTO>() {
+    override fun areItemsTheSame(oldItem: PredictionDTO, newItem: PredictionDTO): Boolean = oldItem == newItem
 
-    override fun areContentsTheSame(oldItem: Prediction, newItem: Prediction): Boolean =
-        // FIX THIS
-        oldItem.value == newItem.value
+    override fun areContentsTheSame(oldItem: PredictionDTO, newItem: PredictionDTO): Boolean =
+        oldItem.id == newItem.id
 }

@@ -5,5 +5,5 @@ import com.bartoszdrozd.mediapp.predictions.models.PredictionType
 import com.bartoszdrozd.mediapp.utils.Result
 
 interface IGetPredictionUseCase {
-    suspend fun execute(type: PredictionType): Result<Prediction, Unit>
+    suspend fun execute(predictionType: PredictionType): Result<Prediction, Unit>
 }
