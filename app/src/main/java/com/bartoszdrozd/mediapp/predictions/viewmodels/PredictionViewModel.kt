@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.predictions.models.Prediction
-import com.bartoszdrozd.mediapp.predictions.models.PredictionType
+import com.bartoszdrozd.mediapp.utils.DiseaseType
 import com.bartoszdrozd.mediapp.predictions.usecases.IGetPredictionUseCase
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Success
@@ -26,7 +26,7 @@ class PredictionViewModel @Inject constructor(
     val prediction: LiveData<Prediction> = _prediction
 
     @SuppressLint("NullSafeMutableLiveData")
-    fun predict(type: PredictionType) {
+    fun predict(type: DiseaseType) {
         viewModelScope.launch {
             val res = getPredictionUseCase.execute(type)
 

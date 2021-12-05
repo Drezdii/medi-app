@@ -7,29 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bartoszdrozd.mediapp.databinding.FragmentPredictionListBinding
-import com.bartoszdrozd.mediapp.medicalhistory.adapters.PredictionHistoryAdapter
-import com.bartoszdrozd.mediapp.medicalhistory.viewmodels.PredictionsHistoryViewModel
-import com.bartoszdrozd.mediapp.predictions.models.PredictionType
+import com.bartoszdrozd.mediapp.databinding.FragmentHealthFormsListBinding
+import com.bartoszdrozd.mediapp.medicalhistory.adapters.HealthFormsHistoryAdapter
+import com.bartoszdrozd.mediapp.medicalhistory.viewmodels.HealthFormsHistoryViewModel
+import com.bartoszdrozd.mediapp.utils.DiseaseType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class PredictionListFragment : Fragment() {
-    @ExperimentalCoroutinesApi
-    private val viewModel: PredictionsHistoryViewModel by viewModels(ownerProducer = { requireParentFragment() })
-    private var _binding: FragmentPredictionListBinding? = null
+class HealthFormsListFragment : Fragment() {
+    private val viewModel: HealthFormsHistoryViewModel by viewModels(ownerProducer = { requireParentFragment() })
+    private var _binding: FragmentHealthFormsListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var predictionType: PredictionType
+    private lateinit var diseaseType: DiseaseType
     
     companion object {
-        fun newInstance(type: PredictionType): PredictionListFragment {
+        fun newInstance(type: DiseaseType): HealthFormsListFragment {
             val args = Bundle().apply {
                 putSerializable("type", type)
             }
 
-            val fragment = PredictionListFragment()
+            val fragment = HealthFormsListFragment()
             fragment.arguments = args
             return fragment
         }
@@ -37,7 +36,7 @@ class PredictionListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        predictionType = arguments?.getSerializable("type") as PredictionType
+        diseaseType = arguments?.getSerializable("type") as DiseaseType
     }
 
     override fun onCreateView(
@@ -45,19 +44,19 @@ class PredictionListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentPredictionListBinding.inflate(inflater, container, false)
+        _binding = FragmentHealthFormsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PredictionHistoryAdapter()
+        val adapter = HealthFormsHistoryAdapter()
 
         binding.recyclerView.adapter = adapter
 
-        viewModel.predictions.observe(viewLifecycleOwner, { predictionList ->
-            adapter.submitList(predictionList.filter { it.predictionType == predictionType })
+        viewModel.forms.observe(viewLifecycleOwner, { formsList ->
+            adapter.submitList(formsList.filter { it.diseaseType == diseaseType })
         })
     }
 

@@ -55,6 +55,10 @@ class DashboardFragment : Fragment() {
             predictionsButton.setOnClickListener {
                 navController.navigate(R.id.action_dashboard_to_predictionsHistory)
             }
+
+            healthFormsButton.setOnClickListener {
+                navController.navigate(R.id.action_dashboard_to_healthFormsHistory)
+            }
         }
 
         viewModel.name.observe(viewLifecycleOwner, { name ->

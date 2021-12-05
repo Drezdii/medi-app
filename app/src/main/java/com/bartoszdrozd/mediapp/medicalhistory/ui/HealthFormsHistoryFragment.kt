@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bartoszdrozd.mediapp.R
-import com.bartoszdrozd.mediapp.databinding.FragmentPredictionsHistoryBinding
+import com.bartoszdrozd.mediapp.databinding.FragmentHealthFormsHistoryBinding
 import com.bartoszdrozd.mediapp.utils.DiseaseType
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class PredictionsHistoryFragment : Fragment() {
-    private var _binding: FragmentPredictionsHistoryBinding? = null
+class HealthFormsHistoryFragment : Fragment() {
+    private var _binding: FragmentHealthFormsHistoryBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class PredictionsHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentPredictionsHistoryBinding.inflate(inflater, container, false)
+        _binding = FragmentHealthFormsHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,8 +30,8 @@ class PredictionsHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val tabLayout = binding.tabLayout
         val viewPager = binding.pager
-        viewPager.adapter = PredictionAdapter(this)
-
+        viewPager.adapter = HealthFormsAdapter(this)
+        
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             val res = requireContext().resources
             tab.text = when (position) {
@@ -50,7 +50,7 @@ class PredictionsHistoryFragment : Fragment() {
 }
 
 @ExperimentalCoroutinesApi
-class PredictionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class HealthFormsAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {
@@ -60,6 +60,6 @@ class PredictionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
             2 -> DiseaseType.DIABETES
             else -> DiseaseType.HEART
         }
-        return PredictionsListFragment.newInstance(predictionType)
+        return HealthFormsListFragment.newInstance(predictionType)
     }
 }

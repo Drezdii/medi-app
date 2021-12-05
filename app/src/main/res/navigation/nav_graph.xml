@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_dashboard_to_predictionsHistory"
             app:destination="@id/predictionsHistoryFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_healthFormsHistory"
+            app:destination="@id/healthFormsHistoryFragment" />
     </fragment>
 
     <action
@@ -171,12 +174,17 @@
         tools:layout="@layout/fragment_prediction">
         <argument
             android:name="predictionType"
-            app:argType="com.bartoszdrozd.mediapp.predictions.models.PredictionType" />
+            app:argType="com.bartoszdrozd.mediapp.utils.DiseaseType" />
     </fragment>
     <fragment
         android:id="@+id/predictionsHistoryFragment"
         android:name="com.bartoszdrozd.mediapp.medicalhistory.ui.PredictionsHistoryFragment"
         android:label="@string/prediction_history"
         tools:layout="@layout/fragment_predictions_history" />
+    <fragment
+        android:id="@+id/healthFormsHistoryFragment"
+        android:name="com.bartoszdrozd.mediapp.medicalhistory.ui.HealthFormsHistoryFragment"
+        android:label="fragment_health_forms_history"
+        tools:layout="@layout/fragment_health_forms_history" />
 
 </navigation>

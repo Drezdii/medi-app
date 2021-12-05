@@ -4,8 +4,8 @@ import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.predictions.dtos.PredictionDTO
 import com.bartoszdrozd.mediapp.predictions.models.Prediction
-import com.bartoszdrozd.mediapp.predictions.models.PredictionType
-import com.bartoszdrozd.mediapp.predictions.models.PredictionType.*
+import com.bartoszdrozd.mediapp.utils.DiseaseType
+import com.bartoszdrozd.mediapp.utils.DiseaseType.*
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
@@ -20,7 +20,7 @@ class GetPredictionUseCase @Inject constructor(
     private val savePredictionUseCase: ISavePredictionUseCase
 ) :
     IGetPredictionUseCase {
-    override suspend fun execute(predictionType: PredictionType): Result<Prediction, Unit> {
+    override suspend fun execute(predictionType: DiseaseType): Result<Prediction, Unit> {
         val uuid = userRepo.getCurrentUser()?.uuid ?: return Error(Unit)
 
         when (predictionType) {

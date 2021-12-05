@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
 import com.bartoszdrozd.mediapp.gppicker.usecases.IChooseGPUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.ILoadGPsUseCase
-import com.bartoszdrozd.mediapp.utils.Success
 import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,10 +24,10 @@ class GpPickerViewModel @Inject constructor(
 ) : ViewModel() {
     private val successChannel = Channel<Int>(Channel.BUFFERED)
     private val _gps: MutableLiveData<List<GeneralPractitioner>> = MutableLiveData()
-    private val _selectedGP: MutableLiveData<GeneralPractitioner> = MutableLiveData()
+    private val _selectedGP: MutableLiveData<GeneralPractitioner?> = MutableLiveData()
 
     val generalPractitioners: LiveData<List<GeneralPractitioner>> = _gps
-    val selectedGP: LiveData<GeneralPractitioner> = _selectedGP
+    val selectedGP: LiveData<GeneralPractitioner?> = _selectedGP
     val savingCompletedEvent = successChannel.receiveAsFlow()
 
     init {
