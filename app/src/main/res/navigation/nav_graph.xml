@@ -184,7 +184,7 @@
     <fragment
         android:id="@+id/healthFormsHistoryFragment"
         android:name="com.bartoszdrozd.mediapp.medicalhistory.ui.HealthFormsHistoryFragment"
-        android:label="fragment_health_forms_history"
+        android:label="@string/medical_history"
         tools:layout="@layout/fragment_health_forms_history" />
 
 </navigation>

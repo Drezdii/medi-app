@@ -16,10 +16,10 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class PredictionsRepository : IPredictionsRepository {
-    override suspend fun save(uuid: String, prediction: PredictionDTO): Result<Unit, Unit> {
+    override suspend fun save(uid: String, prediction: PredictionDTO): Result<Unit, Unit> {
         return try {
             val docId =
-                FirebaseFirestore.getInstance().collection("predictions").document(uuid).collection("history")
+                FirebaseFirestore.getInstance().collection("predictions").document(uid).collection("history")
                     .document().id
 
             val data = hashMapOf(
@@ -31,7 +31,7 @@ class PredictionsRepository : IPredictionsRepository {
             )
 
             FirebaseFirestore.getInstance()
-                .collection("predictions").document(uuid)
+                .collection("predictions").document(uid)
                 .collection("history").document(docId).set(data).await()
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
@@ -41,8 +41,8 @@ class PredictionsRepository : IPredictionsRepository {
     }
 
     @ExperimentalCoroutinesApi
-    override suspend fun getAll(uuid: String): Flow<List<PredictionDTO>> = callbackFlow {
-        val collection = FirebaseFirestore.getInstance().collection("predictions").document(uuid).collection("history")
+    override suspend fun getAll(uid: String): Flow<List<PredictionDTO>> = callbackFlow {
+        val collection = FirebaseFirestore.getInstance().collection("predictions").document(uid).collection("history")
             .orderBy("date", Query.Direction.DESCENDING)
 
         val listener = collection.addSnapshotListener { snapshot, ex ->
