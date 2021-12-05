@@ -106,12 +106,13 @@
     <string name="prediction_healthy">Healthy</string>
     <string name="prediction_warning">Warning</string>
     <string name="prediction_serious">Serious problem</string>
-    <string name="prediction_history">Predictions history</string>
+    <string name="prediction_history">Predictions History</string>
     <string name="prediction_last_form_info">Predicting using your latest health data</string>
     <string name="select_insurance_company">Select an insurance company</string>
     <string name="select_gp">Select a GP</string>
     <string name="health_forms">Medical Forms</string>
     <string name="heart_cont">Heart Cont.</string>
+    <string name="medical_history">Medical History</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

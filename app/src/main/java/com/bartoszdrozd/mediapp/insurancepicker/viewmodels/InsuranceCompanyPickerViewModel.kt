@@ -8,6 +8,7 @@ import com.bartoszdrozd.mediapp.insurancepicker.models.InsuranceCompany
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.utils.Success
+import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
@@ -51,7 +52,7 @@ class InsuranceCompanyPickerViewModel @Inject constructor(
     fun saveSelection() {
         viewModelScope.launch {
             val res = _selectedCompany.value?.let { saveSelectionUseCase.execute(it) }
-            if (res is Success) {
+            if (res?.succeeded == true) {
                 _isDirty.value = false
                 successChannel.trySend(1)
             } else {

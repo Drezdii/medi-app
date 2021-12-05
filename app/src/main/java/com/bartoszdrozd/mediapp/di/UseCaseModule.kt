@@ -14,6 +14,8 @@ import com.bartoszdrozd.mediapp.insurancepicker.usecases.ChooseInsuranceCompanyU
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
+import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetPredictionsHistoryUseCase
+import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetPredictionsHistoryUseCase
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
@@ -123,4 +125,11 @@ class UseCaseModule {
             alzheimersPredictionUseCase,
             savePredictionUseCase
         )
+
+    @Provides
+    @Singleton
+    fun providesGetPredictionsHistoryUseCase(
+        usersRepo: IUsersRepository,
+        predictionsRepo: IPredictionsRepository
+    ): IGetPredictionsHistoryUseCase = GetPredictionsHistoryUseCase(usersRepo, predictionsRepo)
 }

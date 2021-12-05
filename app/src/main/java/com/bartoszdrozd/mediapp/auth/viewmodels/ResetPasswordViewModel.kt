@@ -8,6 +8,7 @@ import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
 import com.bartoszdrozd.mediapp.auth.usecases.IResetPasswordUseCase
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Success
+import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class ResetPasswordViewModel @Inject constructor(private val resetPassword: IRes
         viewModelScope.launch {
             val res = resetPassword.execute(email)
 
-            if (res is Success) {
+            if (res.succeeded) {
                 // Navigate
             } else {
                 _error.value = (res as Error).reason

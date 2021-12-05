@@ -6,8 +6,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 
 interface IPredictionsRepository {
-    suspend fun save(uuid: String, prediction: PredictionDTO): Result<Unit, Unit>
+    suspend fun save(uid: String, prediction: PredictionDTO): Result<Unit, Unit>
 
     @ExperimentalCoroutinesApi
-    suspend fun getAll(uuid: String): Flow<List<PredictionDTO>>
+    suspend fun getAll(uid: String): Flow<List<PredictionDTO>>
 }

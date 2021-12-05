@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".dashboard.ui.DashboardFragment">
 
     <TextView
@@ -40,6 +42,26 @@
         app:layout_constraintTop_toBottomOf="@id/page_title" />
 
     <Button
+        android:id="@+id/predictions_button"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Predictions"
+        app:layout_constraintBottom_toTopOf="@id/gp_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/insurance_button" />
+
+    <Button
+        android:id="@+id/health_forms_button"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Health Forms History"
+        app:layout_constraintBottom_toTopOf="@id/gp_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/insurance_button" />
+
+    <Button
         android:id="@+id/logout_button"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
@@ -49,4 +71,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gp_button" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

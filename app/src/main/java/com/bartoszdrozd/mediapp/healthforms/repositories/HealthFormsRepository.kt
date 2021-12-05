@@ -5,6 +5,8 @@ import com.bartoszdrozd.mediapp.healthforms.dtos.AlzheimersFormDTO
 import com.bartoszdrozd.mediapp.healthforms.dtos.DiabetesFormDTO
 import com.bartoszdrozd.mediapp.healthforms.dtos.HeartFormDTO
 import com.bartoszdrozd.mediapp.healthforms.models.FormErrorCode
+import com.bartoszdrozd.mediapp.medicalhistory.dtos.HealthFormEntryDTO
+import com.bartoszdrozd.mediapp.utils.DiseaseType
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
@@ -12,13 +14,30 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class HealthFormsRepository : IHealthFormsRepository {
+    private suspend fun saveData(uid: String, data: HashMap<String, Any?>) {
+        val docId =
+            FirebaseFirestore.getInstance().collection("healthforms").document(uid)
+                .collection("forms")
+                .document().id
+
+        val finalData = data.plus("id" to docId)
+
+        FirebaseFirestore.getInstance().collection("healthforms").document(uid)
+            .collection("forms")
+            .document(docId)
+            .set(data).await()
+    }
+
     override suspend fun saveDiabetes(form: DiabetesFormDTO): Result<Unit, FormErrorCode> {
         return try {
-            val docId = FirebaseFirestore.getInstance().collection("diabetes").document().id
-            val diabetesData = hashMapOf(
+            val data = hashMapOf<String, Any?>(
                 "uid" to form.uid,
                 "age" to form.age,
                 "date" to form.date,
@@ -28,10 +47,10 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "bloodPressureLevel" to form.bloodPressureLevel,
                 "skinThickness" to form.skinThickness,
                 "bmi" to form.bmi,
-                "id" to docId
+                "diseaseType" to DiseaseType.DIABETES
             )
 
-            FirebaseFirestore.getInstance().collection("diabetes").document(docId).set(diabetesData).await()
+            saveData(form.uid, data)
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
@@ -40,8 +59,7 @@ class HealthFormsRepository : IHealthFormsRepository {
 
     override suspend fun saveAlzheimers(form: AlzheimersFormDTO): Result<Unit, FormErrorCode> {
         return try {
-            val docId = FirebaseFirestore.getInstance().collection("alzheimers").document().id
-            val data = hashMapOf(
+            val data = hashMapOf<String, Any?>(
                 "uid" to form.uid,
                 "age" to form.age,
                 "date" to form.date,
@@ -52,10 +70,10 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "socioEconomicStatus" to form.socioEconomicStatus,
                 "estTotalIntracranial" to form.estTotalIntracranial,
                 "normalizeWholeBrain" to form.normalizeWholeBrain,
-                "id" to docId
+                "diseaseType" to DiseaseType.ALZHEIMERS
             )
 
-            FirebaseFirestore.getInstance().collection("alzheimers").document(docId).set(data).await()
+            saveData(form.uid, data)
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
@@ -64,8 +82,7 @@ class HealthFormsRepository : IHealthFormsRepository {
 
     override suspend fun saveHeart(form: HeartFormDTO): Result<Unit, FormErrorCode> {
         return try {
-            val docId = FirebaseFirestore.getInstance().collection("heart").document().id
-            val data = hashMapOf(
+            val data = hashMapOf<String, Any?>(
                 "uid" to form.uid,
                 "age" to form.age,
                 "date" to form.date,
@@ -81,9 +98,10 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "peakSTSegment" to form.peakSTSegment,
                 "majorVessels" to form.majorVessels,
                 "thalassemia" to form.thalassemia,
-                "id" to docId
+                "diseaseType" to DiseaseType.HEART
             )
-            FirebaseFirestore.getInstance().collection("heart").document(docId).set(data).await()
+
+            saveData(form.uid, data)
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(FormErrorCode.GENERIC_ERROR)
@@ -93,10 +111,13 @@ class HealthFormsRepository : IHealthFormsRepository {
     override suspend fun getLatestHeartForm(uid: String): Result<HeartFormDTO?, Unit> {
         return try {
             val document =
-                FirebaseFirestore.getInstance().collection("heart")
+                FirebaseFirestore.getInstance().collection("healthforms")
+                    .document(uid)
+                    .collection("forms")
                     .orderBy("date", Query.Direction.DESCENDING)
                     .limit(1)
-                    .whereEqualTo("uid", uid).get()
+                    .whereEqualTo("diseaseType", DiseaseType.HEART)
+                    .get()
                     .await()
 
             val result = if (document.isEmpty) {
@@ -114,10 +135,13 @@ class HealthFormsRepository : IHealthFormsRepository {
     override suspend fun getLatestAlzheimers(uid: String): Result<AlzheimersFormDTO?, Unit> {
         return try {
             val document =
-                FirebaseFirestore.getInstance().collection("alzheimers")
+                FirebaseFirestore.getInstance().collection("healthforms")
+                    .document(uid)
+                    .collection("forms")
                     .orderBy("date", Query.Direction.DESCENDING)
                     .limit(1)
-                    .whereEqualTo("uid", uid).get()
+                    .whereEqualTo("diseaseType", DiseaseType.ALZHEIMERS)
+                    .get()
                     .await()
 
             val result = if (document.isEmpty) {
@@ -135,10 +159,13 @@ class HealthFormsRepository : IHealthFormsRepository {
     override suspend fun getLatestDiabetes(uid: String): Result<DiabetesFormDTO?, Unit> {
         return try {
             val document =
-                FirebaseFirestore.getInstance().collection("diabetes")
+                FirebaseFirestore.getInstance().collection("healthforms")
+                    .document(uid)
+                    .collection("forms")
                     .orderBy("date", Query.Direction.DESCENDING)
                     .limit(1)
-                    .whereEqualTo("uid", uid).get()
+                    .whereEqualTo("diseaseType", DiseaseType.DIABETES)
+                    .get()
                     .await()
 
             val result = if (document.isEmpty) {
@@ -150,6 +177,30 @@ class HealthFormsRepository : IHealthFormsRepository {
         } catch (e: FirebaseFirestoreException) {
             Log.d("TEST", e.toString())
             Error(Unit)
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    override suspend fun getAllEntries(uid: String): Flow<List<HealthFormEntryDTO>> = callbackFlow {
+        val collection = FirebaseFirestore.getInstance().collection("healthforms").document(uid).collection("forms")
+            .orderBy("date", Query.Direction.DESCENDING)
+
+        val listener = collection.addSnapshotListener { snapshot, ex ->
+            if (ex != null) {
+                throw ex
+            }
+
+            val allPredictions = mutableListOf<HealthFormEntryDTO>()
+
+            for (document in snapshot!!.documents) {
+                allPredictions.add(document.toObject<HealthFormEntryDTO>()!!)
+            }
+
+            trySend(allPredictions)
+        }
+
+        awaitClose {
+            listener.remove()
         }
     }
 }

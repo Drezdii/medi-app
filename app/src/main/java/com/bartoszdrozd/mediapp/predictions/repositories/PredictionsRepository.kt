@@ -7,6 +7,7 @@ import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -15,23 +16,22 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class PredictionsRepository : IPredictionsRepository {
-    override suspend fun save(uuid: String, prediction: PredictionDTO): Result<Unit, Unit> {
+    override suspend fun save(uid: String, prediction: PredictionDTO): Result<Unit, Unit> {
         return try {
-            Log.d("TEST", "XDD!!!! ")
             val docId =
-                FirebaseFirestore.getInstance().collection("predictions").document(uuid).collection("history")
+                FirebaseFirestore.getInstance().collection("predictions").document(uid).collection("history")
                     .document().id
 
-            Log.d("TEST", "XDD!!!! $docId")
             val data = hashMapOf(
                 "value" to prediction.value,
                 "date" to prediction.date,
                 "formId" to prediction.formId,
+                "predictionType" to prediction.predictionType,
                 "id" to docId
             )
 
             FirebaseFirestore.getInstance()
-                .collection("predictions").document(uuid)
+                .collection("predictions").document(uid)
                 .collection("history").document(docId).set(data).await()
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
@@ -41,8 +41,9 @@ class PredictionsRepository : IPredictionsRepository {
     }
 
     @ExperimentalCoroutinesApi
-    override suspend fun getAll(uuid: String): Flow<List<PredictionDTO>> = callbackFlow {
-        val collection = FirebaseFirestore.getInstance().collection("predictions").document(uuid).collection("history")
+    override suspend fun getAll(uid: String): Flow<List<PredictionDTO>> = callbackFlow {
+        val collection = FirebaseFirestore.getInstance().collection("predictions").document(uid).collection("history")
+            .orderBy("date", Query.Direction.DESCENDING)
 
         val listener = collection.addSnapshotListener { snapshot, ex ->
             if (ex != null) {

@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentPredictionBinding
-import com.bartoszdrozd.mediapp.predictions.models.PredictionType.*
 import com.bartoszdrozd.mediapp.predictions.viewmodels.PredictionViewModel
+import com.bartoszdrozd.mediapp.utils.DiseaseType.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
