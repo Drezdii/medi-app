@@ -1,6 +1,8 @@
 package com.bartoszdrozd.mediapp
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.lifecycleScope
@@ -47,6 +49,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         NavigationUI.setupActionBarWithNavController(this, navController)
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.landingPageFragment,
+                R.id.signInFragment,
+                R.id.registerFormPageOneFragment,
+                R.id.registerFormPageTwoFragment,
+                R.id.resetPasswordFragment -> {
+                    appbar.visibility = GONE
+                    bottomNavView.visibility = GONE
+                }
+                else -> {
+                    appbar.visibility = VISIBLE
+                    bottomNavView.visibility = VISIBLE
+                }
+            }
+        }
     }
 
     override fun onResume() {
