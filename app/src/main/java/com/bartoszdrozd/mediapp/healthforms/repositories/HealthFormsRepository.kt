@@ -32,7 +32,7 @@ class HealthFormsRepository : IHealthFormsRepository {
         FirebaseFirestore.getInstance().collection("healthforms").document(uid)
             .collection("forms")
             .document(docId)
-            .set(data).await()
+            .set(finalData).await()
     }
 
     override suspend fun saveDiabetes(form: DiabetesFormDTO): Result<Unit, FormErrorCode> {
@@ -156,6 +156,30 @@ class HealthFormsRepository : IHealthFormsRepository {
         }
     }
 
+    @ExperimentalCoroutinesApi
+    override suspend fun getLatestEntry(uid: String): Flow<HealthFormEntryDTO?> = callbackFlow {
+        val document = FirebaseFirestore.getInstance().collection("healthforms").document(uid)
+            .collection("forms")
+            .orderBy("date", Query.Direction.DESCENDING)
+            .limit(1)
+
+        val listener = document.addSnapshotListener { snapshot, ex ->
+            if (ex != null) {
+                throw ex
+            }
+
+            if (snapshot!!.documents.isNotEmpty()) {
+                val form = snapshot.documents[0].toObject<HealthFormEntryDTO>()
+                trySend(form)
+            } else {
+                trySend(null)
+            }
+        }
+        awaitClose {
+            listener.remove()
+        }
+    }
+
     override suspend fun getLatestDiabetes(uid: String): Result<DiabetesFormDTO?, Unit> {
         return try {
             val document =
@@ -182,7 +206,8 @@ class HealthFormsRepository : IHealthFormsRepository {
 
     @ExperimentalCoroutinesApi
     override suspend fun getAllEntries(uid: String): Flow<List<HealthFormEntryDTO>> = callbackFlow {
-        val collection = FirebaseFirestore.getInstance().collection("healthforms").document(uid).collection("forms")
+        val collection = FirebaseFirestore.getInstance().collection("healthforms").document(uid)
+            .collection("forms")
             .orderBy("date", Query.Direction.DESCENDING)
 
         val listener = collection.addSnapshotListener { snapshot, ex ->

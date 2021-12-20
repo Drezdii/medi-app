@@ -14,11 +14,14 @@ import com.bartoszdrozd.mediapp.insurancepicker.usecases.ChooseInsuranceCompanyU
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
+import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetHealthFormsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetPredictionsHistoryUseCase
+import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetHealthFormsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetPredictionsHistoryUseCase
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
+import com.bartoszdrozd.mediapp.userprofile.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -128,8 +131,51 @@ class UseCaseModule {
 
     @Provides
     @Singleton
+    fun providesGetHealthFormsHistoryUseCase(
+        repo: IHealthFormsRepository,
+        usersRepo: IUsersRepository
+    ): IGetHealthFormsHistoryUseCase = GetHealthFormsHistoryUseCase(repo, usersRepo)
+
+    @Provides
+    @Singleton
     fun providesGetPredictionsHistoryUseCase(
         usersRepo: IUsersRepository,
         predictionsRepo: IPredictionsRepository
     ): IGetPredictionsHistoryUseCase = GetPredictionsHistoryUseCase(usersRepo, predictionsRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetOverallHealthScoreUseCase(
+        repo: IPredictionsRepository,
+        usersRepo: IUsersRepository
+    ): IGetOverallHealthScoreUseCase = GetOverallHealthScoreUseCase(repo, usersRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetUserDetailsUseCase(
+        repo: IUsersRepository
+    ): IGetUserDetailsUseCase = GetUserDetailsUseCase(repo)
+
+    @Provides
+    @Singleton
+    fun providesGetUsersGPUseCase(
+        usersRepo: IUsersRepository,
+        gpRepo: IGPRepository
+    ): IGetUsersGPUseCase = GetUsersGPUseCase(usersRepo, gpRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetUsersInsuranceCompanyUseCase(
+        usersRepo: IUsersRepository,
+        insuranceCompaniesRepo: IInsuranceCompaniesRepository
+    ): IGetUsersInsuranceCompanyUseCase =
+        GetUsersInsuranceCompanyUseCase(usersRepo, insuranceCompaniesRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetUsersLatestPredictionUseCase(
+        usersRepo: IUsersRepository,
+        predictionsRepo: IPredictionsRepository
+    ): IGetUsersLatestPredictionUseCase =
+        GetUsersLatestPredictionUseCase(usersRepo, predictionsRepo)
 }

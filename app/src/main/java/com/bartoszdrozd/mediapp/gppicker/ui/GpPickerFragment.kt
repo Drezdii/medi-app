@@ -76,8 +76,8 @@ class GpPickerFragment : Fragment() {
                 val text = resources.getText(R.string.saved_success)
                 val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
                 toast.show()
-
-                navController.navigate(R.id.action_global_dashboardFragment)
+                
+                navController.popBackStack()
             } else {
                 val text = resources.getText(R.string.generic_error)
                 val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)

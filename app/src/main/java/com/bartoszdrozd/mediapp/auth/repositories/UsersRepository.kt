@@ -102,7 +102,7 @@ class UsersRepository : IUsersRepository {
                     ).toLocalDate(),
                     LocalDate.now()
                 ).toInt()
-                
+
                 userDetails = details
 
                 return details
@@ -138,6 +138,37 @@ class UsersRepository : IUsersRepository {
         }
     }
 
+    @ExperimentalCoroutinesApi
+    override suspend fun getCurrentUserFlow(): Flow<User?> = callbackFlow {
+        val user = FirebaseAuth.getInstance().currentUser ?: throw Exception()
+
+        val document = FirebaseFirestore.getInstance().collection("users").document(user.uid)
+        val listener = document.addSnapshotListener { snapshot, ex ->
+            if (ex != null) {
+                throw ex
+            }
+
+            if (snapshot!!.exists()) {
+                val details = snapshot.toObject<UserDetails>()!!
+
+                details.age = ChronoUnit.YEARS.between(
+                    Instant.ofEpochSecond(details.dateOfBirth).atZone(
+                        ZoneId.systemDefault()
+                    ).toLocalDate(),
+                    LocalDate.now()
+                ).toInt()
+
+                userDetails = details
+
+                trySend(User(user.uid, user.email!!, userDetails!!))
+            }
+        }
+
+        awaitClose {
+            listener.remove()
+        }
+    }
+
     override suspend fun setGeneralPractitioner(gp: GeneralPractitioner?): Result<Unit, Unit> {
         val uid = getCurrentUser()?.uuid
         return if (uid != null) {
@@ -145,9 +176,8 @@ class UsersRepository : IUsersRepository {
                 val db = FirebaseFirestore.getInstance()
 
                 val userRef = db.collection("users").document(uid)
-                val gpRef = gp?.let { db.collection("professionals").document(it.uid) }
 
-                userRef.update("gp", gpRef).await()
+                userRef.update("gpId", gp?.uid).await()
                 Success(Unit)
             } catch (e: FirebaseFirestoreException) {
                 Error(Unit)

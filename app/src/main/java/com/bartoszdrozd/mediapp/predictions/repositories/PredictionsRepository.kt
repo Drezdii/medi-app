@@ -2,6 +2,7 @@ package com.bartoszdrozd.mediapp.predictions.repositories
 
 import android.util.Log
 import com.bartoszdrozd.mediapp.predictions.dtos.PredictionDTO
+import com.bartoszdrozd.mediapp.utils.DiseaseType
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
@@ -19,8 +20,11 @@ class PredictionsRepository : IPredictionsRepository {
     override suspend fun save(uid: String, prediction: PredictionDTO): Result<Unit, Unit> {
         return try {
             val docId =
-                FirebaseFirestore.getInstance().collection("predictions").document(uid).collection("history")
+                FirebaseFirestore.getInstance().collection("predictions").document(uid)
+                    .collection("history")
                     .document().id
+
+            Log.d("TEST", prediction.toString())
 
             val data = hashMapOf(
                 "value" to prediction.value,
@@ -41,8 +45,9 @@ class PredictionsRepository : IPredictionsRepository {
     }
 
     @ExperimentalCoroutinesApi
-    override suspend fun getAll(uid: String): Flow<List<PredictionDTO>> = callbackFlow {
-        val collection = FirebaseFirestore.getInstance().collection("predictions").document(uid).collection("history")
+    override suspend fun getAllByUserId(uid: String): Flow<List<PredictionDTO>> = callbackFlow {
+        val collection = FirebaseFirestore.getInstance().collection("predictions").document(uid)
+            .collection("history")
             .orderBy("date", Query.Direction.DESCENDING)
 
         val listener = collection.addSnapshotListener { snapshot, ex ->
@@ -63,4 +68,60 @@ class PredictionsRepository : IPredictionsRepository {
             listener.remove()
         }
     }
+
+    @ExperimentalCoroutinesApi
+    override suspend fun getLatestPrediction(
+        uid: String,
+        predictionType: DiseaseType
+    ): Flow<PredictionDTO?> =
+        callbackFlow {
+            val document = FirebaseFirestore.getInstance().collection("predictions").document(uid)
+                .collection("history")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+                .whereEqualTo("predictionType", predictionType)
+
+            val listener = document.addSnapshotListener { snapshot, ex ->
+                if (ex != null) {
+                    throw ex
+                }
+
+                if (snapshot!!.documents.isNotEmpty()) {
+                    val prediction = snapshot.documents[0].toObject<PredictionDTO>()!!
+                    trySend(prediction)
+                } else {
+                    trySend(null)
+                }
+            }
+
+            awaitClose {
+                listener.remove()
+            }
+        }
+
+    @ExperimentalCoroutinesApi
+    override suspend fun getLatestPrediction(uid: String): Flow<PredictionDTO?> =
+        callbackFlow {
+            val document = FirebaseFirestore.getInstance().collection("predictions").document(uid)
+                .collection("history")
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
+
+            val listener = document.addSnapshotListener { snapshot, ex ->
+                if (ex != null) {
+                    throw ex
+                }
+
+                if (snapshot!!.documents.isNotEmpty()) {
+                    val prediction = snapshot.documents[0].toObject<PredictionDTO>()
+                    trySend(prediction)
+                } else {
+                    trySend(null)
+                }
+            }
+
+            awaitClose {
+                listener.remove()
+            }
+        }
 }

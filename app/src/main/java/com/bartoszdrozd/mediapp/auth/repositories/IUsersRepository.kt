@@ -17,6 +17,9 @@ interface IUsersRepository {
     @ExperimentalCoroutinesApi
     suspend fun isLogged(): Flow<Boolean>
     suspend fun getCurrentUser(): User?
+
+    @ExperimentalCoroutinesApi
+    suspend fun getCurrentUserFlow(): Flow<User?>
     suspend fun setGeneralPractitioner(gp: GeneralPractitioner?): Result<Unit, Unit>
     suspend fun setInsuranceCompany(company: InsuranceCompany?): Result<Unit, Unit>
 }

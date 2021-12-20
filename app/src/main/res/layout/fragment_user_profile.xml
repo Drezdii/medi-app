@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".userprofile.ui.UserProfileFragment">
+
+    <LinearLayout
+        android:id="@+id/arc_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/global_padding"
+        app:layout_constraintBottom_toTopOf="@id/user_card">
+
+        <TextView
+            android:id="@+id/health_score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="@dimen/global_padding"
+            android:paddingBottom="@dimen/global_padding"
+            android:text="@string/overall_health_score"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/arc"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.bartoszdrozd.mediapp.views.GradientArcView
+            android:id="@+id/arc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintTop_toBottomOf="@id/health_score_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_bottom_navigation_shadow_color"
+        android:orientation="vertical"
+        android:padding="@dimen/global_padding"
+        app:layout_constraintTop_toBottomOf="@id/arc_container">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/global_padding"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/date_of_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_baseline_calendar_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_padding"
+        android:orientation="vertical"
+        android:padding="@dimen/global_padding"
+        app:layout_constraintTop_toBottomOf="@id/user_card">
+
+        <Button
+            android:id="@+id/topup_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_funds"
+            android:textAlignment="textStart" />
+
+        <Button
+            android:id="@+id/change_password_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password"
+            android:textAlignment="textStart" />
+
+        <Button
+            android:id="@+id/feedback_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/feedback"
+            android:textAlignment="textStart" />
+
+        <Button
+            android:id="@+id/change_gp_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_gp"
+            android:textAlignment="textStart" />
+
+        <Button
+            android:id="@+id/logout_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:textAlignment="textStart" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

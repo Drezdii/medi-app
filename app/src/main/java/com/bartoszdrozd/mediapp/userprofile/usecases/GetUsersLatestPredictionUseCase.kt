@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.medicalhistory.usecases
+package com.bartoszdrozd.mediapp.userprofile.usecases
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.predictions.dtos.PredictionDTO
@@ -7,15 +7,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetPredictionsHistoryUseCase @Inject constructor(
+class GetUsersLatestPredictionUseCase @Inject constructor(
     private val usersRepo: IUsersRepository,
     private val repo: IPredictionsRepository
 ) :
-    IGetPredictionsHistoryUseCase {
+    IGetUsersLatestPredictionUseCase {
     @ExperimentalCoroutinesApi
-    override suspend fun execute(): Flow<List<PredictionDTO>> {
-        val uuid = usersRepo.getCurrentUser()?.uuid ?: throw Exception()
+    override suspend fun invoke(): Flow<PredictionDTO?> {
+        val uid = usersRepo.getCurrentUser()?.uuid ?: throw Exception()
 
-        return repo.getAllByUserId(uuid)
+        return repo.getLatestPrediction(uid)
     }
 }

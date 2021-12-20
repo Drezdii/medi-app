@@ -12,4 +12,12 @@
     <color name="warning">#eb6d00</color>
     <color name="error">#ff5555</color>
 
+<!--        <color name="prediction_good">#00e676</color>-->
+<!--        <color name="prediction_warning">#eb6d00</color>-->
+        <color name="prediction_serious">#ff0000</color>
+
+    <color name="prediction_good">#33FFA9</color>
+    <color name="prediction_warning">#FFA033</color>
+<!--    <color name="prediction_serious">#FF8888</color>-->
+
 </resources>

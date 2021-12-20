@@ -113,6 +113,22 @@
     <string name="health_forms">Medical Forms</string>
     <string name="heart_cont">Heart Cont.</string>
     <string name="medical_history">Medical History</string>
+    <string name="overall_health_good">Good</string>
+    <string name="overall_health_very_good">Very good</string>
+    <string name="overall_health_bad">Worrying</string>
+    <string name="overall_health_very_bad">Serious problems</string>
+    <string name="overall_health_no_score">Could not calculate your health score</string>
+    <string name="your_profile">Profile</string>
+    <string name="overall_health_score">Your health score</string>
+    <string name="feedback">Give us feedback</string>
+    <string name="add_funds">Top Up Medi-Coin</string>
+    <string name="change_password">Change password</string>
+    <string name="name_string">%s %s</string>
+    <string name="call">Call</string>
+    <string name="message">Message</string>
+    <string name="change_gp">Change your GP</string>
+    <string name="insurance_company_desc">Insurance Company Logo</string>
+    <string name="latest_prediction">Latest prediction:</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

@@ -58,11 +58,11 @@ class PredictionFragment : Fragment() {
 
         viewModel.prediction.observe(viewLifecycleOwner, { prediction ->
             val color = if (prediction.value < 0.5) {
-                R.color.success
+                R.color.prediction_good
             } else if (prediction.value >= 0.5 && prediction.value < 0.75) {
-                R.color.warning
+                R.color.prediction_warning
             } else {
-                R.color.error
+                R.color.prediction_serious
             }
 
             DrawableCompat.setTint(

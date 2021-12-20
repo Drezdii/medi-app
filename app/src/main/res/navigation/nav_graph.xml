@@ -83,12 +83,6 @@
             android:id="@+id/action_dashboard_to_landingPage"
             app:destination="@id/landingPageFragment" />
         <action
-            android:id="@+id/action_dashboard_to_gpPicker"
-            app:destination="@id/gpPickerFragment" />
-        <action
-            android:id="@+id/action_dashboard_to_insurancePicker"
-            app:destination="@id/insurancePickerFragment" />
-        <action
             android:id="@+id/action_dashboard_to_predictionsHistory"
             app:destination="@id/predictionsHistoryFragment" />
         <action
@@ -186,5 +180,14 @@
         android:name="com.bartoszdrozd.mediapp.medicalhistory.ui.HealthFormsHistoryFragment"
         android:label="@string/medical_history"
         tools:layout="@layout/fragment_health_forms_history" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.bartoszdrozd.mediapp.userprofile.ui.UserProfileFragment"
+        android:label="@string/your_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfile_to_gpPicker"
+            app:destination="@id/gpPickerFragment" />
+    </fragment>
 
 </navigation>

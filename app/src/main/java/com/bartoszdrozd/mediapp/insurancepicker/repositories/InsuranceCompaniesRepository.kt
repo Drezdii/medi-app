@@ -1,12 +1,17 @@
 package com.bartoszdrozd.mediapp.insurancepicker.repositories
 
 import com.bartoszdrozd.mediapp.insurancepicker.models.InsuranceCompany
+import com.bartoszdrozd.mediapp.utils.Error
+import com.bartoszdrozd.mediapp.utils.Result
+import com.bartoszdrozd.mediapp.utils.Success
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.tasks.await
 
 class InsuranceCompaniesRepository : IInsuranceCompaniesRepository {
     @ExperimentalCoroutinesApi
@@ -32,7 +37,20 @@ class InsuranceCompaniesRepository : IInsuranceCompaniesRepository {
         }
     }
 
-    override suspend fun get(uid: String): InsuranceCompany? {
-        TODO("Not yet implemented")
+    override suspend fun get(uid: String): Result<InsuranceCompany?, Unit> {
+        return try {
+            val document =
+                FirebaseFirestore.getInstance().collection("insurance_companies").document(uid)
+                    .get()
+                    .await()
+            if (document.exists()) {
+                Success(document.toObject<InsuranceCompany>()!!)
+            } else {
+                Success(null)
+            }
+        } catch (e: FirebaseFirestoreException) {
+            // Handle the exception
+            Error(Unit)
+        }
     }
 }

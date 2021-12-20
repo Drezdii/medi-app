@@ -14,10 +14,13 @@ interface IHealthFormsRepository {
     suspend fun saveAlzheimers(form: AlzheimersFormDTO): Result<Unit, FormErrorCode>
     suspend fun saveHeart(form: HeartFormDTO): Result<Unit, FormErrorCode>
 
-    // Latest heart data for the user with the given uid
+    // Latest forms for a user with a given uid
     suspend fun getLatestHeartForm(uid: String): Result<HeartFormDTO?, Unit>
     suspend fun getLatestDiabetes(uid: String): Result<DiabetesFormDTO?, Unit>
     suspend fun getLatestAlzheimers(uid: String): Result<AlzheimersFormDTO?, Unit>
+
+    @ExperimentalCoroutinesApi
+    suspend fun getLatestEntry(uid: String): Flow<HealthFormEntryDTO?>
 
     @ExperimentalCoroutinesApi
     suspend fun getAllEntries(uid: String): Flow<List<HealthFormEntryDTO>>

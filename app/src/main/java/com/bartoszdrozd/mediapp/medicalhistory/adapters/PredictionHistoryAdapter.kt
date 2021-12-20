@@ -38,13 +38,13 @@ class PredictionHistoryAdapter :
             val color: Int
 
             if (prediction.value < 0.5) {
-                color = R.color.success
+                color = R.color.prediction_good
                 predictionText = R.string.prediction_healthy
             } else if (prediction.value >= 0.5 && prediction.value < 0.75) {
-                color = R.color.warning
+                color = R.color.prediction_warning
                 predictionText = R.string.prediction_warning
             } else {
-                color = R.color.error
+                color = R.color.prediction_serious
                 predictionText = R.string.prediction_serious
             }
 

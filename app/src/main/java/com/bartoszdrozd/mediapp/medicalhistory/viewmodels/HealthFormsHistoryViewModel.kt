@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.medicalhistory.dtos.HealthFormEntryDTO
+import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetHealthFormsHistoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
@@ -16,13 +16,14 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @HiltViewModel
-class HealthFormsHistoryViewModel @Inject constructor(private val repo: IHealthFormsRepository) : ViewModel() {
+class HealthFormsHistoryViewModel @Inject constructor(private val getHealthFormsHistoryUseCase: IGetHealthFormsHistoryUseCase) :
+    ViewModel() {
     private val _forms: MutableLiveData<List<HealthFormEntryDTO>> = MutableLiveData()
     val forms: LiveData<List<HealthFormEntryDTO>> get() = _forms
 
     init {
         viewModelScope.launch {
-            repo.getAllEntries("fGOuo045iAVpfnNPSTYAF3zEHX03")
+            getHealthFormsHistoryUseCase.execute()
                 .catch { ex -> Log.d("TEST", ex.toString()) }
                 .collect {
                     _forms.value = it
