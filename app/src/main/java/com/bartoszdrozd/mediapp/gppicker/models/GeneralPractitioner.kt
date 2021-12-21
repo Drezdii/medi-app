@@ -6,6 +6,7 @@ data class GeneralPractitioner(
     val dateOfBirth: Long? = 0,
     val email: String = "",
     val medicalCenter: String = "",
+    val phoneNumber: String = "",
     // Medical council number
     val mcn: Int = 0,
     val picture: String? = "",

@@ -129,6 +129,12 @@
     <string name="change_gp">Change your GP</string>
     <string name="insurance_company_desc">Insurance Company Logo</string>
     <string name="latest_prediction">Latest prediction:</string>
+    <string name="latest_form_entry">Latest form entry: </string>
+    <string name="confirm_action">Confirm action</string>
+    <string name="proceed_question">Do you want to proceed?</string>
+    <string name="continue_text">Continue</string>
+    <string name="your_gp">Your General Pracitioner</string>
+    <string name="your_insurance_company">Your insurance company</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

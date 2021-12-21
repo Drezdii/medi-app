@@ -20,6 +20,7 @@
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_diabetes_form.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_diabetes_prediction.xml" value="0.3494791666666667" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_gp_card.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_gp_picker.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_health_forms.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_health_forms_framgnet.xml" value="0.5541666666666667" />
@@ -29,6 +30,7 @@
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_form_page_one.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_form_page_two.xml" value="0.5" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_heart_prediction.xml" value="0.55" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_insurance_company_card.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_insurance_picker.xml" value="0.35520833333333335" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_landing_page.xml" value="0.3307291666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_prediction.xml" value="0.33" />
@@ -56,6 +58,7 @@
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/register_form_page_1.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/register_form_page_2.xml" value="0.33" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/single_choice_picker.xml" value="0.35520833333333335" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/titled_card.xml" value="0.365625" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/menu/top_app_bar.xml" value="0.33125" />
       </map>

@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.userprofile.usecases
+package com.bartoszdrozd.mediapp.dashboard.usecases
 
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
 import kotlinx.coroutines.ExperimentalCoroutinesApi

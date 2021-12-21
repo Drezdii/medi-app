@@ -2,6 +2,7 @@ package com.bartoszdrozd.mediapp.di
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.auth.usecases.*
+import com.bartoszdrozd.mediapp.dashboard.usecases.*
 import com.bartoszdrozd.mediapp.gppicker.repositories.IGPRepository
 import com.bartoszdrozd.mediapp.gppicker.usecases.ChooseGPUseCase
 import com.bartoszdrozd.mediapp.gppicker.usecases.IChooseGPUseCase
@@ -21,7 +22,10 @@ import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetPredictionsHistoryUs
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
-import com.bartoszdrozd.mediapp.userprofile.usecases.*
+import com.bartoszdrozd.mediapp.userprofile.usecases.GetOverallHealthScoreUseCase
+import com.bartoszdrozd.mediapp.userprofile.usecases.GetUserDetailsUseCase
+import com.bartoszdrozd.mediapp.userprofile.usecases.IGetOverallHealthScoreUseCase
+import com.bartoszdrozd.mediapp.userprofile.usecases.IGetUserDetailsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -178,4 +182,11 @@ class UseCaseModule {
         predictionsRepo: IPredictionsRepository
     ): IGetUsersLatestPredictionUseCase =
         GetUsersLatestPredictionUseCase(usersRepo, predictionsRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetUsersLatestFormEntryUseCase(
+        usersRepo: IUsersRepository,
+        healthFormsRepo: IHealthFormsRepository
+    ): IGetUsersLatestFormEntryUseCase = GetUsersLatestFormEntryUseCase(usersRepo, healthFormsRepo)
 }

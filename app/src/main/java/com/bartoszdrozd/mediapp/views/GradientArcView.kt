@@ -107,19 +107,6 @@ class GradientArcView(context: Context, attrs: AttributeSet) : View(context, att
             gradientMatrix.preRotate(90f, w / 2f, h / 2f)
             setLocalMatrix(gradientMatrix)
         }
-
-//        val test = intArrayOf(
-//            Color.parseColor("#FFEEEE"),
-//            Color.parseColor("#FFFF99"),
-//            Color.parseColor("#66FFDC")
-//        )
-//
-//        paint.shader = SweepGradient(w / 2f, h / 2f, test, positions).apply {
-//            val gradientMatrix = Matrix()
-//            gradientMatrix.preRotate(90f, w / 2f, h / 2f)
-//            setLocalMatrix(gradientMatrix)
-//        }
-
         bounds.set(left, top, right, bottom)
     }
 
@@ -145,7 +132,6 @@ class GradientArcView(context: Context, attrs: AttributeSet) : View(context, att
             )
             layout.draw(canvas)
             canvas.restore()
-//            drawRect(bounds, rectPaint)
         }
     }
 }

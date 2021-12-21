@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.userprofile.usecases
+package com.bartoszdrozd.mediapp.dashboard.usecases
 
 import com.bartoszdrozd.mediapp.auth.repositories.IUsersRepository
 import com.bartoszdrozd.mediapp.predictions.dtos.PredictionDTO
