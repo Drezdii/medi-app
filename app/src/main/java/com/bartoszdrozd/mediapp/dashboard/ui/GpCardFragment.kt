@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.dashboard.viewmodels.GpCardViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentGpCardBinding
+import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
+import com.bartoszdrozd.mediapp.messaging.ui.MessageGpDialog
 import com.bartoszdrozd.mediapp.utils.doAfterConfirmation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -56,6 +58,16 @@ class GpCardFragment : Fragment() {
         binding.callGpButton.setOnClickListener {
             doAfterConfirmation { dialGPNumber() }
         }
+
+        binding.messageGpButton.setOnClickListener {
+            val fragManager = parentFragmentManager
+            val newFragment = MessageGpDialog()
+            newFragment.show(fragManager, "dialog")
+        }
+    }
+
+    fun getGp(): GeneralPractitioner? {
+        return viewModel.gp.value
     }
 
     private fun dialGPNumber() {

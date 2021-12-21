@@ -18,7 +18,7 @@ fun Fragment.doAfterConfirmation(callback: () -> Unit) {
         .setTitle(resources.getString(R.string.confirm_action))
         .setMessage(resources.getString(R.string.proceed_question))
         .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
-            dialog.dismiss()
+            dialog.cancel()
         }
         .setPositiveButton(resources.getString(R.string.continue_text)) { _, _ ->
             callback()

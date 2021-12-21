@@ -135,6 +135,10 @@
     <string name="continue_text">Continue</string>
     <string name="your_gp">Your General Pracitioner</string>
     <string name="your_insurance_company">Your insurance company</string>
+    <string name="your_message_hint">Your message</string>
+    <string name="message_your_gp">Message your GP</string>
+    <string name="send_message">Send message</string>
+    <string name="message_empty">Message cannot be empty</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

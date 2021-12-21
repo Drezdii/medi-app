@@ -8,6 +8,8 @@ import com.bartoszdrozd.mediapp.healthforms.repositories.HealthFormsRepository
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.insurancepicker.repositories.IInsuranceCompaniesRepository
 import com.bartoszdrozd.mediapp.insurancepicker.repositories.InsuranceCompaniesRepository
+import com.bartoszdrozd.mediapp.messaging.repositories.IMessagesRepository
+import com.bartoszdrozd.mediapp.messaging.repositories.MessagesRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.PredictionModelsRepository
@@ -36,13 +38,19 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun providesInsuranceCompaniesRepository(): IInsuranceCompaniesRepository = InsuranceCompaniesRepository()
+    fun providesInsuranceCompaniesRepository(): IInsuranceCompaniesRepository =
+        InsuranceCompaniesRepository()
 
     @Provides
     @Singleton
-    fun providesPredictionModelsRepository(): IPredictionModelsRepository = PredictionModelsRepository()
+    fun providesPredictionModelsRepository(): IPredictionModelsRepository =
+        PredictionModelsRepository()
 
     @Provides
     @Singleton
     fun providesPredictionsRepository(): IPredictionsRepository = PredictionsRepository()
+
+    @Provides
+    @Singleton
+    fun providesMessagesRepository(): IMessagesRepository = MessagesRepository()
 }

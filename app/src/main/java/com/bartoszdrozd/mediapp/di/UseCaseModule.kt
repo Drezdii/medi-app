@@ -19,6 +19,9 @@ import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetHealthFormsHistoryUse
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetPredictionsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetHealthFormsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetPredictionsHistoryUseCase
+import com.bartoszdrozd.mediapp.messaging.repositories.IMessagesRepository
+import com.bartoszdrozd.mediapp.messaging.usecases.IMessageGpUseCase
+import com.bartoszdrozd.mediapp.messaging.usecases.MessageGpUseCase
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
@@ -189,4 +192,11 @@ class UseCaseModule {
         usersRepo: IUsersRepository,
         healthFormsRepo: IHealthFormsRepository
     ): IGetUsersLatestFormEntryUseCase = GetUsersLatestFormEntryUseCase(usersRepo, healthFormsRepo)
+
+    @Provides
+    @Singleton
+    fun providesMessageGpUseCase(
+        usersRepo: IUsersRepository,
+        messagesRepo: IMessagesRepository
+    ): IMessageGpUseCase = MessageGpUseCase(usersRepo, messagesRepo)
 }

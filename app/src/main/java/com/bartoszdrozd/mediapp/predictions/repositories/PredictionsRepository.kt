@@ -23,9 +23,7 @@ class PredictionsRepository : IPredictionsRepository {
                 FirebaseFirestore.getInstance().collection("predictions").document(uid)
                     .collection("history")
                     .document().id
-
-            Log.d("TEST", prediction.toString())
-
+            
             val data = hashMapOf(
                 "value" to prediction.value,
                 "date" to prediction.date,
