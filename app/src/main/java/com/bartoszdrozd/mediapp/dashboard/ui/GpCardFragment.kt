@@ -1,14 +1,14 @@
 package com.bartoszdrozd.mediapp.dashboard.ui
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,6 +28,8 @@ class GpCardFragment : Fragment() {
     private var _binding: FragmentGpCardBinding? = null
     private val binding get() = _binding!!
 
+    private var showContactButtons: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,12 +39,26 @@ class GpCardFragment : Fragment() {
         return binding.root
     }
 
+    override fun onInflate(context: Context, attrs: AttributeSet, savedInstanceState: Bundle?) {
+        super.onInflate(context, attrs, savedInstanceState)
+        val argsArray =
+            context.obtainStyledAttributes(attrs, R.styleable.InsuranceCompanyCard_MembersInjector)
+        if (argsArray.hasValue(R.styleable.InsuranceCompanyCard_MembersInjector_showContactButtons)) {
+            showContactButtons =
+                argsArray.getBoolean(
+                    R.styleable.InsuranceCompanyCard_MembersInjector_showContactButtons, false
+                )
+        }
+        argsArray.recycle()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.contactButtonsContainer.visibility = if (showContactButtons) VISIBLE else GONE
+
         viewModel.gp.observe(viewLifecycleOwner, { gp ->
             if (gp != null) {
-                Log.d("TEST", gp.firstName)
                 binding.gpCardContent.visibility = VISIBLE
                 binding.noGpCard.visibility = INVISIBLE
                 binding.name.text =
@@ -54,7 +70,6 @@ class GpCardFragment : Fragment() {
                     binding.avatarImage.setImageBitmap(decodedImage)
                 }
             } else {
-                Log.d("TEST", "NO CONTENT")
                 binding.gpCardContent.visibility = INVISIBLE
                 binding.noGpCard.visibility = VISIBLE
             }

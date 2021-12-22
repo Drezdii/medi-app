@@ -133,14 +133,20 @@
     <string name="confirm_action">Confirm action</string>
     <string name="proceed_question">Do you want to proceed?</string>
     <string name="continue_text">Continue</string>
-    <string name="your_gp">Your General Pracitioner</string>
+    <string name="your_gp">Your General Practitioner</string>
     <string name="your_insurance_company">Your insurance company</string>
     <string name="your_message_hint">Your message</string>
+    <string name="your_feedback_optional">Your feedback (optional)</string>
     <string name="message_your_gp">Message your GP</string>
     <string name="send_message">Send message</string>
     <string name="message_empty">Message cannot be empty</string>
     <string name="message_your_insurance_company">Message your insurance company</string>
     <string name="pick_gp">You have not chosen your GP yet</string>
+    <string name="pick_insurance_company">You have not chosen your insurance company yet</string>
+    <string name="message_sent">Message sent!</string>
+    <string name="send">Send</string>
+    <string name="rating">Rating</string>
+    <string name="thanks_for_feedback">Thank you for your feedback!</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

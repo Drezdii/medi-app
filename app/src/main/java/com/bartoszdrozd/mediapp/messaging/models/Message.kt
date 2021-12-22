@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.messaging
+package com.bartoszdrozd.mediapp.messaging.models
 
 import java.time.LocalDateTime
 import java.time.ZoneOffset

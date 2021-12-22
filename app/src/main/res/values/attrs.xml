@@ -3,4 +3,9 @@
     <declare-styleable name="GradientArcView">
         <attr name="arcValue" format="float" />
     </declare-styleable>
+
+    <attr name="showContactButtons" format="boolean" />
+    <declare-styleable name="InsuranceCompanyCard_MembersInjector">
+        <attr name="showContactButtons" />
+    </declare-styleable>
 </resources>

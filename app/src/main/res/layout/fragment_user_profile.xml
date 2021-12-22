@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".userprofile.ui.UserProfileFragment">
 
         <LinearLayout
@@ -85,6 +83,15 @@
                 android:textAlignment="textStart" />
 
             <Button
+                android:id="@+id/change_gp_button"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_gp"
+                android:textAlignment="textStart" />
+
+
+            <Button
                 android:id="@+id/change_password_button"
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="match_parent"
@@ -98,14 +105,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/feedback"
-                android:textAlignment="textStart" />
-
-            <Button
-                android:id="@+id/change_gp_button"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/change_gp"
                 android:textAlignment="textStart" />
 
             <Button

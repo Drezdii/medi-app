@@ -64,11 +64,16 @@ class MessageInsuranceCompanyDialog : DialogFragment() {
                 sendMessage()
             }
 
+        dialog?.window?.setDimAmount(0.90f)
+
         (dialog as androidx.appcompat.app.AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
 
         viewModel.sendSuccessInsurance.onEach {
-            // Navigate if sending succeeded
+            // Dismiss if sending succeeded
             if (it == 1) {
+                val text = resources.getText(R.string.message_sent)
+                val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
+                toast.show()
                 dialog?.dismiss()
             } else {
                 val text = resources.getText(R.string.generic_error)

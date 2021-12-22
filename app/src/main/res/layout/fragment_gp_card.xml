@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/global_padding"
-        android:visibility="gone">
+        android:paddingBottom="@dimen/global_padding"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/gp_title"
@@ -91,6 +92,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/contactButtonsContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

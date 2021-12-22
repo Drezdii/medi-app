@@ -51,6 +51,8 @@ class InsuranceCompaniesRepository : IInsuranceCompaniesRepository {
         } catch (e: FirebaseFirestoreException) {
             // Handle the exception
             Error(Unit)
+        } catch (e: IllegalArgumentException) {
+            Success(null)
         }
     }
 }

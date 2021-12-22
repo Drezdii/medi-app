@@ -26,7 +26,7 @@ class InsuranceCompanyCardViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             getInsuranceCompanyUseCase.execute()
-                .catch { Log.d("TEST", "Exception") }
+                .catch { Log.d("TEST", it.toString()) }
                 .collect {
                     _insuranceCompany.value = it
                 }

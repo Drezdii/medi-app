@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentUserProfileBinding
+import com.bartoszdrozd.mediapp.messaging.ui.ReviewAppDialog
 import com.bartoszdrozd.mediapp.userprofile.viewmodels.UserProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -60,6 +61,12 @@ class UserProfileFragment : Fragment() {
 
         binding.changeGpButton.setOnClickListener {
             navController.navigate(R.id.action_userProfile_to_gpPicker)
+        }
+
+        binding.feedbackButton.setOnClickListener {
+            val fragManager = parentFragmentManager
+            val newFragment = ReviewAppDialog()
+            newFragment.show(fragManager, "reviewAppDialog")
         }
 
         viewModel.userDetails.observe(viewLifecycleOwner, { details ->

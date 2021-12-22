@@ -6,12 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:id="@+id/no_insurance_company_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/pick_insurance_company" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/insurance_company_card_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/global_padding">
+        android:paddingHorizontal="@dimen/global_padding"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/insurance_company_title"
@@ -32,7 +44,6 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/company_name_container"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/insurance_company_title">
@@ -46,31 +57,30 @@
                 android:src="@drawable/default_gp_photo" />
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/company_name_container"
-            android:layout_width="200dp"
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/global_padding"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/logo_container"
-            app:layout_constraintTop_toBottomOf="@id/insurance_company_title">
+            android:autoSizeMinTextSize="11sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:breakStrategy="balanced"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@id/logo_container"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/insurance_company_title"
+            tools:text="Lewis Hamilton Hamilton Hamilton Hamilton" />
 
-            <TextView
-                android:id="@+id/company_name"
-                tools:text="Lewis Hamilton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@id/logo_container"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/contact_buttons_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/company_name">
 
             <Button
                 android:id="@+id/call_insurance_button"

@@ -20,10 +20,7 @@ import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetPredictionsHistoryUse
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetHealthFormsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetPredictionsHistoryUseCase
 import com.bartoszdrozd.mediapp.messaging.repositories.IMessagesRepository
-import com.bartoszdrozd.mediapp.messaging.usecases.IMessageGpUseCase
-import com.bartoszdrozd.mediapp.messaging.usecases.IMessageInsuranceCompanyUseCase
-import com.bartoszdrozd.mediapp.messaging.usecases.MessageGpUseCase
-import com.bartoszdrozd.mediapp.messaging.usecases.MessageInsuranceCompanyUseCase
+import com.bartoszdrozd.mediapp.messaging.usecases.*
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
@@ -208,4 +205,11 @@ class UseCaseModule {
         usersRepo: IUsersRepository,
         messagesRepo: IMessagesRepository
     ): IMessageInsuranceCompanyUseCase = MessageInsuranceCompanyUseCase(usersRepo, messagesRepo)
+
+    @Provides
+    @Singleton
+    fun providesSendFeedbackUseCase(
+        usersRepo: IUsersRepository,
+        messagesRepo: IMessagesRepository
+    ): ISendFeedbackUseCase = SendFeedbackUseCase(usersRepo, messagesRepo)
 }

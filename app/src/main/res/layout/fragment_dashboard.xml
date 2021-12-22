@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/medical_history_card"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:showContactButtons="true" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/medical_history_card"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/global_padding"
         android:layout_marginEnd="@dimen/global_padding"
         app:layout_constraintBottom_toTopOf="@id/insurance_company_card"
@@ -77,7 +78,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/predictions_history_card"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/global_padding"
         app:layout_constraintLeft_toRightOf="@id/medical_history_card"
         app:layout_constraintRight_toRightOf="parent"
@@ -138,5 +139,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/global_padding"
-        app:layout_constraintTop_toBottomOf="@id/medical_history_card" />
+        app:layout_constraintTop_toBottomOf="@id/medical_history_card"
+        app:showContactButtons="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>
