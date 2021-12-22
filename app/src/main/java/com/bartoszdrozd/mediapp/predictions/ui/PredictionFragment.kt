@@ -45,7 +45,7 @@ class PredictionFragment : Fragment() {
             ContextCompat.getDrawable(requireContext(), icon)
         )
 
-        // ImageView was saving the tint as restoring it when navigating back to this destination
+        // ImageView was saving the tint and was restoring it when navigating back to this destination
         // So we reset the tint here
         DrawableCompat.setTint(
             binding.predictButton.drawable,
@@ -66,7 +66,7 @@ class PredictionFragment : Fragment() {
             }
 
             DrawableCompat.setTint(
-                binding.predictButton.drawable,
+                binding.predictButton.drawable.mutate(),
                 ContextCompat.getColor(requireContext(), color)
             )
         })

@@ -1,290 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/global_padding"
-    tools:context=".healthforms.ui.HeartFormPageTwoFragment">
+    android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/page_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="@string/heart"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/chest_pain_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/chest_pain_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/chest_pain_hint"
-        app:layout_constraintBottom_toTopOf="@id/chest_pain"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/page_title" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/chest_pain"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_padding"
-        app:checkedButton="@id/chest_pain_typical"
-        app:layout_constraintBottom_toTopOf="@id/exercise_angina_label"
-        app:layout_constraintTop_toBottomOf="@id/chest_pain_label"
-        app:selectionRequired="true"
-        app:singleSelection="true">
+        android:paddingHorizontal="@dimen/global_padding"
+        tools:context=".healthforms.ui.HeartFormPageTwoFragment">
+
+
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="@string/heart"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/chest_pain_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/chest_pain_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/chest_pain_hint"
+            app:layout_constraintBottom_toTopOf="@id/chest_pain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/page_title" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/chest_pain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/global_padding"
+            app:checkedButton="@id/chest_pain_typical"
+            app:layout_constraintBottom_toTopOf="@id/exercise_angina_label"
+            app:layout_constraintTop_toBottomOf="@id/chest_pain_label"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/chest_pain_typical"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="@string/chest_pain_typical_hint" />
+
+            <Button
+                android:id="@+id/chest_pain_atypical"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="@string/chest_pain_atypical_hint" />
+
+            <Button
+                android:id="@+id/chest_pain_asymptotic"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/chest_pain_asymptotic_hint" />
+
+            <Button
+                android:id="@+id/chest_pain_nonanginal"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="@string/chest_pain_nonanginal" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/exercise_angina_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/exercise_angina_hint"
+            app:layout_constraintBottom_toTopOf="@id/exercise_angina"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chest_pain" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/exercise_angina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/global_padding"
+            app:checkedButton="@id/no_button"
+            app:layout_constraintBottom_toTopOf="@id/peak_st_segment_label"
+            app:layout_constraintTop_toBottomOf="@id/exercise_angina_label"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/no_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/no_hint" />
+
+            <Button
+                android:id="@+id/yes_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/yes_hint" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/peak_st_segment_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/peak_st_segment_hint"
+            app:layout_constraintBottom_toTopOf="@id/peak_st_segment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exercise_angina" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/peak_st_segment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/global_padding"
+            app:checkedButton="@id/upsloping_st_button"
+            app:layout_constraintBottom_toTopOf="@id/major_vessels_label"
+            app:layout_constraintTop_toBottomOf="@id/peak_st_segment_label"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/upsloping_st_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/upsloping_st_hint" />
+
+            <Button
+                android:id="@+id/flat_st_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/flat_st_hint" />
+
+            <Button
+                android:id="@+id/downsloping_st_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/downsloping_st_hint" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/major_vessels_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/major_vessels_hint"
+            app:layout_constraintBottom_toTopOf="@id/major_vessels"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/peak_st_segment" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/major_vessels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/global_padding"
+            app:checkedButton="@id/major_vessels_zero_button"
+            app:layout_constraintBottom_toTopOf="@id/thalassemia_label"
+            app:layout_constraintTop_toBottomOf="@id/major_vessels_label"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/major_vessels_zero_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/major_vessels_one_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/major_vessels_two_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/major_vessels_three_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/thalassemia_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/thalassemia_hint"
+            app:layout_constraintBottom_toTopOf="@id/thalassemia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/major_vessels" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/thalassemia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/global_padding"
+            app:checkedButton="@id/thalassemia_normal_button"
+            app:layout_constraintBottom_toTopOf="@id/error_box"
+            app:layout_constraintTop_toBottomOf="@id/thalassemia_label"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/thalassemia_normal_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/thalassemia_normal_hint" />
+
+            <Button
+                android:id="@+id/thalassemia_fixed_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/thalassemia_fixed_hint" />
+
+            <Button
+                android:id="@+id/thalassemia_reversible_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/thalassemia_reversible_hint" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <TextView
+            android:id="@+id/error_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/global_padding"
+            app:layout_constraintBottom_toTopOf="@id/button_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thalassemia" />
 
         <Button
-            android:id="@+id/chest_pain_typical"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:text="@string/chest_pain_typical_hint" />
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_box" />
 
-        <Button
-            android:id="@+id/chest_pain_atypical"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:text="@string/chest_pain_atypical_hint" />
-
-        <Button
-            android:id="@+id/chest_pain_asymptotic"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/chest_pain_asymptotic_hint" />
-
-        <Button
-            android:id="@+id/chest_pain_nonanginal"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:text="@string/chest_pain_nonanginal" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <TextView
-        android:id="@+id/exercise_angina_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/exercise_angina_hint"
-        app:layout_constraintBottom_toTopOf="@id/exercise_angina"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chest_pain" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/exercise_angina"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_padding"
-        app:checkedButton="@id/no_button"
-        app:layout_constraintBottom_toTopOf="@id/peak_st_segment_label"
-        app:layout_constraintTop_toBottomOf="@id/exercise_angina_label"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <Button
-            android:id="@+id/no_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/no_hint" />
-
-        <Button
-            android:id="@+id/yes_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/yes_hint" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <TextView
-        android:id="@+id/peak_st_segment_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/peak_st_segment_hint"
-        app:layout_constraintBottom_toTopOf="@id/peak_st_segment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exercise_angina" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/peak_st_segment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_padding"
-        app:checkedButton="@id/upsloping_st_button"
-        app:layout_constraintBottom_toTopOf="@id/major_vessels_label"
-        app:layout_constraintTop_toBottomOf="@id/peak_st_segment_label"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <Button
-            android:id="@+id/upsloping_st_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/upsloping_st_hint" />
-
-        <Button
-            android:id="@+id/flat_st_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/flat_st_hint" />
-
-        <Button
-            android:id="@+id/downsloping_st_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/downsloping_st_hint" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <TextView
-        android:id="@+id/major_vessels_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/major_vessels_hint"
-        app:layout_constraintBottom_toTopOf="@id/major_vessels"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/peak_st_segment" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/major_vessels"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_padding"
-        app:checkedButton="@id/major_vessels_zero_button"
-        app:layout_constraintBottom_toTopOf="@id/thalassemia_label"
-        app:layout_constraintTop_toBottomOf="@id/major_vessels_label"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <Button
-            android:id="@+id/major_vessels_zero_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/major_vessels_one_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/major_vessels_two_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:id="@+id/major_vessels_three_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3"
-            tools:ignore="HardcodedText" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <TextView
-        android:id="@+id/thalassemia_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/thalassemia_hint"
-        app:layout_constraintBottom_toTopOf="@id/thalassemia"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/major_vessels" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/thalassemia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_padding"
-        app:checkedButton="@id/thalassemia_normal_button"
-        app:layout_constraintBottom_toTopOf="@id/error_box"
-        app:layout_constraintTop_toBottomOf="@id/thalassemia_label"
-        app:selectionRequired="true"
-        app:singleSelection="true">
-
-        <Button
-            android:id="@+id/thalassemia_normal_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/thalassemia_normal_hint" />
-
-        <Button
-            android:id="@+id/thalassemia_fixed_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/thalassemia_fixed_hint" />
-
-        <Button
-            android:id="@+id/thalassemia_reversible_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/thalassemia_reversible_hint" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <TextView
-        android:id="@+id/error_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/global_padding"
-        app:layout_constraintBottom_toTopOf="@id/button_save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/thalassemia" />
-
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/error_box" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

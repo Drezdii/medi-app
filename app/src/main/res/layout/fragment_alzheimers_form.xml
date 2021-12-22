@@ -1,199 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/global_padding"
-    tools:context=".healthforms.ui.AlzheimersFormFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/page_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:text="@string/alzheimers"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/education"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/education"
-        style="?attr/textInputOutlinedExposedDropdownMenuStyle"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/education_level_hint"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/dominant_hand_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/page_title">
+        android:paddingHorizontal="@dimen/global_padding"
+        tools:context=".healthforms.ui.AlzheimersFormFragment">
 
-        <AutoCompleteTextView
-            android:id="@+id/education_dropdown"
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:text="@string/alzheimers"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@id/education"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/education"
+            style="?attr/textInputOutlinedExposedDropdownMenuStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
-            tools:ignore="LabelFor" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/education_level_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/dominant_hand_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/page_title">
 
-    <TextView
-        android:id="@+id/dominant_hand_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/dominant_hand_hint"
-        app:layout_constraintBottom_toTopOf="@id/dominant_hand"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/education" />
+            <AutoCompleteTextView
+                android:id="@+id/education_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/dominant_hand_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/dominant_hand_hint"
+            app:layout_constraintBottom_toTopOf="@id/dominant_hand"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/education" />
 
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/dominant_hand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:checkedButton="@id/right_hand_button"
-        app:layout_constraintBottom_toTopOf="@id/mini_mental"
-        app:layout_constraintTop_toBottomOf="@id/dominant_hand_label"
-        app:selectionRequired="true"
-        app:singleSelection="true">
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/dominant_hand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:checkedButton="@id/right_hand_button"
+            app:layout_constraintBottom_toTopOf="@id/mini_mental"
+            app:layout_constraintTop_toBottomOf="@id/dominant_hand_label"
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
-        <Button
-            android:id="@+id/left_hand_button"
-            style="?attr/materialButtonOutlinedStyle"
+            <Button
+                android:id="@+id/left_hand_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/left_hand_hint" />
+
+            <Button
+                android:id="@+id/right_hand_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/right_hand_hint" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mini_mental"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/left_hand_hint" />
+            android:layout_marginTop="8dp"
+            android:hint="@string/mini_mental_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/socioeconomic"
+            app:layout_constraintEnd_toStartOf="@id/clinical_dementia"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dominant_hand">
 
-        <Button
-            android:id="@+id/right_hand_button"
-            style="?attr/materialButtonOutlinedStyle"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mini_mental_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/clinical_dementia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/right_hand_hint" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/dementia_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/socioeconomic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mini_mental"
+            app:layout_constraintTop_toBottomOf="@id/dominant_hand">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mini_mental"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/mini_mental_hint"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/socioeconomic"
-        app:layout_constraintEnd_toStartOf="@id/clinical_dementia"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dominant_hand">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/clinical_dementia_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/mini_mental_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/clinical_dementia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/dementia_hint"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/socioeconomic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mini_mental"
-        app:layout_constraintTop_toBottomOf="@id/dominant_hand">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/clinical_dementia_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/socioeconomic"
-        style="?attr/textInputOutlinedExposedDropdownMenuStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/socio_status_hint"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/est_total_intra_value"
-        app:layout_constraintTop_toBottomOf="@id/mini_mental">
-
-        <AutoCompleteTextView
-            android:id="@+id/socio_dropdown"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/socioeconomic"
+            style="?attr/textInputOutlinedExposedDropdownMenuStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
-            tools:ignore="LabelFor" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/socio_status_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/est_total_intra_value"
+            app:layout_constraintTop_toBottomOf="@id/mini_mental">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/est_total_intra_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/est_total_intra_volume_hint"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/error_box"
-        app:layout_constraintEnd_toStartOf="@id/normalize_whole_brain"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/socioeconomic">
+            <AutoCompleteTextView
+                android:id="@+id/socio_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:ignore="LabelFor" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/est_total_intra_value_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/est_total_intra_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/est_total_intra_volume_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/error_box"
+            app:layout_constraintEnd_toStartOf="@id/normalize_whole_brain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/socioeconomic">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/est_total_intra_value_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/normalize_whole_brain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:hint="@string/normalize_whole_brain_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/error_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/est_total_intra_value"
+            app:layout_constraintTop_toBottomOf="@id/socioeconomic">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/normalize_whole_brain_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/error_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/button_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/est_total_intra_value" />
+
+        <Button
+            android:id="@+id/button_save"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/normalize_whole_brain"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:hint="@string/normalize_whole_brain_hint"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/error_box"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/est_total_intra_value"
-        app:layout_constraintTop_toBottomOf="@id/socioeconomic">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/normalize_whole_brain_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/error_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/est_total_intra_value" />
-
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/error_box" />
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_box" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
