@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bartoszdrozd.mediapp.R
-import com.bartoszdrozd.mediapp.databinding.DialogMessageGpBinding
+import com.bartoszdrozd.mediapp.databinding.DialogMessageInsuranceCompanyBinding
 import com.bartoszdrozd.mediapp.messaging.viewmodels.MessagingViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,16 +19,16 @@ import kotlinx.coroutines.flow.onEach
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class MessageGpDialog : DialogFragment() {
+class MessageInsuranceCompanyDialog : DialogFragment() {
     private val viewModel: MessagingViewModel by viewModels()
-    private var _binding: DialogMessageGpBinding? = null
+    private var _binding: DialogMessageInsuranceCompanyBinding? = null
     val binding get() = _binding!!
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        _binding = DialogMessageGpBinding.inflate(layoutInflater)
+        _binding = DialogMessageInsuranceCompanyBinding.inflate(layoutInflater)
 
         val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(resources.getString(R.string.message_your_gp))
+            .setTitle(resources.getString(R.string.message_your_insurance_company))
             .setView(binding.root)
             .setNegativeButton(resources.getString(android.R.string.cancel)) { dialog, _ ->
                 dialog.cancel()
@@ -47,7 +47,7 @@ class MessageGpDialog : DialogFragment() {
             return
         }
 
-        viewModel.sendMessageToGp(message)
+        viewModel.sendMessageToInsuranceCompany(message)
     }
 
     override fun onStart() {
@@ -66,7 +66,7 @@ class MessageGpDialog : DialogFragment() {
 
         (dialog as androidx.appcompat.app.AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
 
-        viewModel.sendSuccessGp.onEach {
+        viewModel.sendSuccessInsurance.onEach {
             // Navigate if sending succeeded
             if (it == 1) {
                 dialog?.dismiss()

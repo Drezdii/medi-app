@@ -4,16 +4,17 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.dashboard.viewmodels.GpCardViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentGpCardBinding
-import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
 import com.bartoszdrozd.mediapp.messaging.ui.MessageGpDialog
 import com.bartoszdrozd.mediapp.utils.doAfterConfirmation
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,9 @@ class GpCardFragment : Fragment() {
 
         viewModel.gp.observe(viewLifecycleOwner, { gp ->
             if (gp != null) {
-                binding.gpCardContent.visibility = View.VISIBLE
+                Log.d("TEST", gp.firstName)
+                binding.gpCardContent.visibility = VISIBLE
+                binding.noGpCard.visibility = INVISIBLE
                 binding.name.text =
                     resources.getString(R.string.name_string, gp.firstName, gp.lastName)
 
@@ -51,7 +54,9 @@ class GpCardFragment : Fragment() {
                     binding.avatarImage.setImageBitmap(decodedImage)
                 }
             } else {
+                Log.d("TEST", "NO CONTENT")
                 binding.gpCardContent.visibility = INVISIBLE
+                binding.noGpCard.visibility = VISIBLE
             }
         })
 
@@ -62,12 +67,8 @@ class GpCardFragment : Fragment() {
         binding.messageGpButton.setOnClickListener {
             val fragManager = parentFragmentManager
             val newFragment = MessageGpDialog()
-            newFragment.show(fragManager, "dialog")
+            newFragment.show(fragManager, "gpDialog")
         }
-    }
-
-    fun getGp(): GeneralPractitioner? {
-        return viewModel.gp.value
     }
 
     private fun dialGPNumber() {

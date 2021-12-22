@@ -12,17 +12,18 @@ class MessagesRepository : IMessagesRepository {
     override suspend fun messageGp(message: Message): Result<Unit, Unit> {
         return try {
             val docId =
-                FirebaseFirestore.getInstance().collection("messages").document().id
+                FirebaseFirestore.getInstance().collection("messages_gp").document().id
 
             val data = hashMapOf(
                 "id" to docId,
                 "from" to message.from,
+                "date" to message.date,
                 "to" to message.to,
                 "message" to message.message
             )
 
             FirebaseFirestore.getInstance()
-                .collection("messages").document(docId).set(data).await()
+                .collection("messages_gp").document(docId).set(data).await()
             Success(Unit)
         } catch (e: FirebaseFirestoreException) {
             Error(Unit)
@@ -30,6 +31,23 @@ class MessagesRepository : IMessagesRepository {
     }
 
     override suspend fun messageInsuranceCompany(message: Message): Result<Unit, Unit> {
-        TODO("Not yet implemented")
+        return try {
+            val docId =
+                FirebaseFirestore.getInstance().collection("messages_insurance").document().id
+
+            val data = hashMapOf(
+                "id" to docId,
+                "from" to message.from,
+                "date" to message.date,
+                "to" to message.to,
+                "message" to message.message
+            )
+
+            FirebaseFirestore.getInstance()
+                .collection("messages_insurance").document(docId).set(data).await()
+            Success(Unit)
+        } catch (e: FirebaseFirestoreException) {
+            Error(Unit)
+        }
     }
 }

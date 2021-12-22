@@ -14,6 +14,8 @@
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/overall_health_gradient.xml" value="0.365625" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/drawable/step_blob.xml" value="0.346875" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/dialog_message_gp.xml" value="0.55" />
+        <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/dialog_message_insurance_company.xml" value="0.55" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/form_stepper.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_alzheimers_form.xml" value="0.5541666666666667" />
         <entry key="..\:/Drozdii/CIT/Year3/MediApp/app/src/main/res/layout/fragment_alzheimers_prediction.xml" value="0.55" />

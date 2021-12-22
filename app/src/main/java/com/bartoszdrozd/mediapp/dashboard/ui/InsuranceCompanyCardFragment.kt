@@ -10,7 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bartoszdrozd.mediapp.R
+import com.bartoszdrozd.mediapp.dashboard.viewmodels.InsuranceCompanyCardViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentInsuranceCompanyCardBinding
+import com.bartoszdrozd.mediapp.messaging.ui.MessageInsuranceCompanyDialog
 import com.bartoszdrozd.mediapp.utils.doAfterConfirmation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -51,6 +53,12 @@ class InsuranceCompanyCardFragment : Fragment() {
 
         binding.callInsuranceButton.setOnClickListener {
             doAfterConfirmation { dialInsuranceCompany() }
+        }
+
+        binding.messageInsuranceButton.setOnClickListener {
+            val fragManager = parentFragmentManager
+            val newFragment = MessageInsuranceCompanyDialog()
+            newFragment.show(fragManager, "insuranceDialog")
         }
     }
 

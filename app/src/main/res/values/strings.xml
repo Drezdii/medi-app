@@ -139,6 +139,8 @@
     <string name="message_your_gp">Message your GP</string>
     <string name="send_message">Send message</string>
     <string name="message_empty">Message cannot be empty</string>
+    <string name="message_your_insurance_company">Message your insurance company</string>
+    <string name="pick_gp">You have not chosen your GP yet</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

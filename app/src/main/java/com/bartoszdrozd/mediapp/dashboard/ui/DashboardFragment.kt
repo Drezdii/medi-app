@@ -74,10 +74,7 @@ class DashboardFragment : Fragment() {
                     )
                 }
             })
-
-//            binding.callInsuranceButton.setOnClickListener {
-//                doAfterConfirmation { dialInsuranceCompany() }
-//            }
+            
 
             binding.medicalHistoryCard.setOnClickListener {
                 navController.navigate(R.id.action_dashboard_to_healthFormsHistory)

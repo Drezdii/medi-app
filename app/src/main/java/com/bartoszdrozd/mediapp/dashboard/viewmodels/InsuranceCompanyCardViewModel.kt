@@ -1,4 +1,4 @@
-package com.bartoszdrozd.mediapp.dashboard.ui
+package com.bartoszdrozd.mediapp.dashboard.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
