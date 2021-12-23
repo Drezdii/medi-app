@@ -9,13 +9,16 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bartoszdrozd.mediapp.MainActivity
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentPredictionBinding
 import com.bartoszdrozd.mediapp.predictions.viewmodels.PredictionViewModel
 import com.bartoszdrozd.mediapp.utils.DiseaseType.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class PredictionFragment : Fragment() {
     private val viewModel: PredictionViewModel by viewModels()
     private var _binding: FragmentPredictionBinding? = null
@@ -34,11 +37,24 @@ class PredictionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val icon = when (args.predictionType) {
-            HEART -> R.drawable.ic_heart_icon
-            ALZHEIMERS -> R.drawable.ic_head_icon
-            DIABETES -> R.drawable.ic_hand_blood_icon
+        val icon: Int
+        val fragmentTitle: Int
+        when (args.predictionType) {
+            HEART -> {
+                icon = R.drawable.ic_heart_icon
+                fragmentTitle = R.string.predict_heart_disease
+            }
+            ALZHEIMERS -> {
+                icon = R.drawable.ic_head_icon
+                fragmentTitle = R.string.predict_alzheimers
+            }
+            DIABETES -> {
+                icon = R.drawable.ic_hand_blood_icon
+                fragmentTitle = R.string.predict_diabetes
+            }
         }
+
+        (activity as MainActivity).supportActionBar?.title = resources.getString(fragmentTitle)
 
         // Set the drawable for the prediction button
         binding.predictButton.setImageDrawable(

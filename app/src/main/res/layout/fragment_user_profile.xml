@@ -90,6 +90,13 @@
                 android:text="@string/change_gp"
                 android:textAlignment="textStart" />
 
+            <Button
+                android:id="@+id/change_insurance_company"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_insurance_company"
+                android:textAlignment="textStart" />
 
             <Button
                 android:id="@+id/change_password_button"

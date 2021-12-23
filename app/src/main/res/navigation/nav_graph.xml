@@ -13,14 +13,15 @@
         <action
             android:id="@+id/landingPage_to_signin"
             app:destination="@id/nav_graph_signin"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/landingPage_to_register"
             app:destination="@id/nav_graph_register"
             app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/action_landingPageFragment_to_dashboardFragment2"
-            app:destination="@id/dashboardFragment" />
     </fragment>
     <navigation
         android:id="@+id/nav_graph_signin"
@@ -28,23 +29,37 @@
         <fragment
             android:id="@+id/signInFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.SignInFragment"
-            android:label="fragment_sign_in"
+            android:label="@string/sign_in"
             tools:layout="@layout/fragment_sign_in">
             <action
                 android:id="@+id/action_signin_to_resetPassword"
-                app:destination="@id/resetPasswordFragment" />
+                app:destination="@id/resetPasswordFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
         </fragment>
         <action
             android:id="@+id/action_nav_graph_register"
             app:destination="@id/nav_graph_register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/landingPageFragment" />
         <action
             android:id="@+id/action_signin_to_dashboard"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <fragment
             android:id="@+id/resetPasswordFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.ResetPasswordFragment"
-            android:label="fragment_reset_password"
+            android:label="@string/reset_password"
             tools:layout="@layout/fragment_reset_password" />
     </navigation>
     <navigation
@@ -53,11 +68,15 @@
         <action
             android:id="@+id/action_global_nav_graph_signin"
             app:destination="@id/nav_graph_signin"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/landingPageFragment" />
         <fragment
             android:id="@+id/registerFormPageOneFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFormPageOneFragment"
-            android:label="RegisterFormPageOneFragment">
+            android:label="@string/sign_up">
             <action
                 android:id="@+id/action_registerPageOneToPageTwo"
                 app:destination="@id/registerFormPageTwoFragment"
@@ -69,7 +88,7 @@
         <fragment
             android:id="@+id/registerFormPageTwoFragment"
             android:name="com.bartoszdrozd.mediapp.auth.ui.RegisterFormPageTwoFragment"
-            android:label="RegisterFormPageTwoFragment" />
+            android:label="@string/register_form_page2_title" />
         <action
             android:id="@+id/action_global_register_to_dashboard"
             app:destination="@id/dashboardFragment" />
@@ -84,15 +103,26 @@
             app:destination="@id/landingPageFragment" />
         <action
             android:id="@+id/action_dashboard_to_predictionsHistory"
-            app:destination="@id/predictionsHistoryFragment" />
+            app:destination="@id/predictionsHistoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_dashboard_to_healthFormsHistory"
-            app:destination="@id/healthFormsHistoryFragment" />
+            app:destination="@id/healthFormsHistoryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <action
         android:id="@+id/action_to_landingPage"
-        app:destination="@id/landingPageFragment" />
+        app:destination="@id/landingPageFragment"
+        app:launchSingleTop="false"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/gpPickerFragment"
         android:name="com.bartoszdrozd.mediapp.gppicker.ui.GpPickerFragment"
@@ -100,7 +130,12 @@
         tools:layout="@layout/fragment_gp_picker" />
     <action
         android:id="@+id/action_global_dashboardFragment"
-        app:destination="@id/dashboardFragment" />
+        app:destination="@id/dashboardFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpToInclusive="true" />
     <navigation
         android:id="@+id/nav_graph_healthforms"
         app:startDestination="@id/healthFormsFragment">
@@ -121,13 +156,25 @@
             tools:layout="@layout/fragment_health_forms">
             <action
                 android:id="@+id/action_healthFormsFragment_to_diabetesFormFragment"
-                app:destination="@id/diabetesFormFragment" />
+                app:destination="@id/diabetesFormFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_healthFormsFragment_to_alzheimersFormFragment"
-                app:destination="@id/alzheimersFormFragment" />
+                app:destination="@id/alzheimersFormFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
             <action
                 android:id="@+id/action_healthFormsFragment_to_nav_graph_heart_form"
-                app:destination="@id/nav_graph_heart_form" />
+                app:destination="@id/nav_graph_heart_form"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </fragment>
         <navigation
             android:id="@+id/nav_graph_heart_form"
@@ -139,7 +186,11 @@
                 tools:layout="@layout/fragment_heart_form_page_one">
                 <action
                     android:id="@+id/action_heartFormPageOneFragment_to_heartFormPageTwoFragment"
-                    app:destination="@id/heartFormPageTwoFragment" />
+                    app:destination="@id/heartFormPageTwoFragment"
+                    app:enterAnim="@anim/slide_in_right"
+                    app:exitAnim="@anim/slide_out_left"
+                    app:popEnterAnim="@anim/slide_in_left"
+                    app:popExitAnim="@anim/slide_out_right" />
             </fragment>
             <fragment
                 android:id="@+id/heartFormPageTwoFragment"
@@ -159,7 +210,11 @@
         android:label="@string/predictions">
         <action
             android:id="@+id/predictionAction"
-            app:destination="@id/predictionFragment" />
+            app:destination="@id/predictionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/predictionFragment"
@@ -187,7 +242,18 @@
         tools:layout="@layout/fragment_user_profile" >
         <action
             android:id="@+id/action_userProfile_to_gpPicker"
-            app:destination="@id/gpPickerFragment" />
+            app:destination="@id/gpPickerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_userProfile_to_insurancePicker"
+            app:destination="@id/insurancePickerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
 </navigation>

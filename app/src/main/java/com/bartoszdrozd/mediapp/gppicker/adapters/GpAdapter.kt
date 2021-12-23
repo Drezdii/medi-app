@@ -45,6 +45,14 @@ class GpAdapter :
                     val imageBytes = Base64.getDecoder().decode(gp.picture)
                     val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
                     avatarImage.setImageBitmap(decodedImage)
+                } else {
+                    avatarImage.setImageDrawable(
+                        ResourcesCompat.getDrawable(
+                            root.resources,
+                            R.drawable.default_gp_photo,
+                            null
+                        )
+                    )
                 }
 
                 gpCard.isChecked = selectedGP?.mcn == gp.mcn

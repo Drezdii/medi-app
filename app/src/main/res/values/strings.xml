@@ -108,8 +108,8 @@
     <string name="prediction_serious">Serious problem</string>
     <string name="prediction_history">Predictions History</string>
     <string name="prediction_last_form_info">Predicting using your latest health data</string>
-    <string name="select_insurance_company">Select an insurance company</string>
-    <string name="select_gp">Select a GP</string>
+    <string name="select_insurance_company">Switch your insurer</string>
+    <string name="select_gp">Switch your GP</string>
     <string name="health_forms">Medical Forms</string>
     <string name="heart_cont">Heart Cont.</string>
     <string name="medical_history">Medical History</string>
@@ -126,7 +126,7 @@
     <string name="name_string">%s %s</string>
     <string name="call">Call</string>
     <string name="message">Message</string>
-    <string name="change_gp">Change your GP</string>
+    <string name="change_gp">Switch General Practitioner</string>
     <string name="insurance_company_desc">Insurance Company Logo</string>
     <string name="latest_prediction">Latest prediction:</string>
     <string name="latest_form_entry">Latest form entry: </string>
@@ -147,6 +147,8 @@
     <string name="send">Send</string>
     <string name="rating">Rating</string>
     <string name="thanks_for_feedback">Thank you for your feedback!</string>
+    <string name="sign_in_instead">Sign in instead</string>
+    <string name="change_insurance_company">Switch insurance company</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

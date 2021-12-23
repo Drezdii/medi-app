@@ -137,6 +137,10 @@ class RegisterFormPageTwoFragment : Fragment() {
                 viewModel.validateLastName(lastName.toString().trim())
             }
 
+            signInInsteadButton.setOnClickListener {
+                navController.navigate(R.id.action_global_nav_graph_signin)
+            }
+
             // Listen to sex dropdown changes
             var selectedSex = -1
             sexDropdown.setOnItemClickListener { _, _, index, _ ->

@@ -2,11 +2,7 @@ package com.bartoszdrozd.mediapp.gppicker.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,6 +25,7 @@ class GpPickerFragment : Fragment() {
     private var _binding: FragmentGpPickerBinding? = null
     private val binding get() = _binding!!
     private lateinit var navController: NavController
+    private var isDirty = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +34,39 @@ class GpPickerFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentGpPickerBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.save_cancel_menu, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+        val cancelItem = menu.findItem(R.id.action_cancel)
+        val saveItem = menu.findItem(R.id.action_save)
+
+        cancelItem.isVisible = isDirty
+        saveItem.isVisible = isDirty
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_save -> {
+                viewModel.saveSelection()
+                true
+            }
+            R.id.action_cancel -> {
+                viewModel.selectGP(null)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -53,7 +83,9 @@ class GpPickerFragment : Fragment() {
             gpAdapter.selectedGP = it
             gpAdapter.notifyDataSetChanged()
 
-            binding.saveCancelContainer.visibility = if (it == null) GONE else VISIBLE
+            isDirty = it != null
+            // Refresh the menu
+            requireActivity().invalidateOptionsMenu()
         })
 
         binding.recyclerView.adapter = gpAdapter
@@ -62,21 +94,13 @@ class GpPickerFragment : Fragment() {
             gpAdapter.submitList(gps)
         })
 
-        binding.cancelButton.setOnClickListener {
-            viewModel.selectGP(null)
-        }
-
-        binding.saveButton.setOnClickListener {
-            viewModel.saveSelection()
-        }
-
         viewModel.savingCompletedEvent.onEach {
             // Navigate if saving succeeded
             if (it == 1) {
                 val text = resources.getText(R.string.saved_success)
                 val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
                 toast.show()
-                
+
                 navController.popBackStack()
             } else {
                 val text = resources.getText(R.string.generic_error)

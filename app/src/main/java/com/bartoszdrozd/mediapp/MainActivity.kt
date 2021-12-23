@@ -53,11 +53,14 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.landingPageFragment,
                 R.id.signInFragment,
                 R.id.registerFormPageOneFragment,
                 R.id.registerFormPageTwoFragment,
                 R.id.resetPasswordFragment -> {
+                    appbar.visibility = VISIBLE
+                    bottomNavView.visibility = GONE
+                }
+                R.id.landingPageFragment -> {
                     appbar.visibility = GONE
                     bottomNavView.visibility = GONE
                 }

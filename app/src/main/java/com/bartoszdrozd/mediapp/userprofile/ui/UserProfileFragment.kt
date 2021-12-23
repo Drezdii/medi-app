@@ -63,6 +63,10 @@ class UserProfileFragment : Fragment() {
             navController.navigate(R.id.action_userProfile_to_gpPicker)
         }
 
+        binding.changeInsuranceCompany.setOnClickListener {
+            navController.navigate(R.id.action_userProfile_to_insurancePicker)
+        }
+
         binding.feedbackButton.setOnClickListener {
             val fragManager = parentFragmentManager
             val newFragment = ReviewAppDialog()

@@ -2,11 +2,7 @@ package com.bartoszdrozd.mediapp.insurancepicker.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,6 +23,7 @@ class InsuranceCompanyPickerFragment : Fragment() {
     private lateinit var navController: NavController
     private var _binding: FragmentInsurancePickerBinding? = null
     private val binding get() = _binding!!
+    private var isDirty = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +32,39 @@ class InsuranceCompanyPickerFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentInsurancePickerBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.save_cancel_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_save -> {
+                viewModel.saveSelection()
+                true
+            }
+            R.id.action_cancel -> {
+                viewModel.selectCompany(null)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+        val cancelItem = menu.findItem(R.id.action_cancel)
+        val saveItem = menu.findItem(R.id.action_save)
+
+        cancelItem.isVisible = isDirty
+        saveItem.isVisible = isDirty
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -66,8 +96,10 @@ class InsuranceCompanyPickerFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
 
-        viewModel.isDirty.observe(viewLifecycleOwner, { isDirty ->
-            binding.saveCancelContainer.visibility = if (isDirty) VISIBLE else GONE
+        viewModel.isDirty.observe(viewLifecycleOwner, { dirtyStatus ->
+            isDirty = dirtyStatus
+            // Refresh the menu
+            requireActivity().invalidateOptionsMenu()
         })
 
         viewModel.savingCompletedEvent.onEach {
@@ -75,6 +107,7 @@ class InsuranceCompanyPickerFragment : Fragment() {
                 val text = resources.getText(R.string.saved_success)
                 val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
                 toast.show()
+                navController.popBackStack()
             } else {
                 val text = resources.getText(R.string.generic_error)
                 val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)

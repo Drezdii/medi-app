@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
@@ -76,6 +75,10 @@ class RegisterFormPageOneFragment : Fragment() {
                     )
                     navController.navigate(R.id.action_registerPageOneToPageTwo)
                 }
+            }
+
+            signInInsteadButton.setOnClickListener {
+                navController.navigate(R.id.action_global_nav_graph_signin)
             }
 
             emailText.doAfterTextChanged {
