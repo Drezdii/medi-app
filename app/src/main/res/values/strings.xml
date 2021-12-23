@@ -149,6 +149,7 @@
     <string name="thanks_for_feedback">Thank you for your feedback!</string>
     <string name="sign_in_instead">Sign in instead</string>
     <string name="change_insurance_company">Switch insurance company</string>
+    <string name="unlink_gp">Unlink your GP</string>
 
     <string-array name="sexes">
         <item>@string/male</item>

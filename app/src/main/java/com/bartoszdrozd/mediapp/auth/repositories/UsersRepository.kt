@@ -194,10 +194,8 @@ class UsersRepository : IUsersRepository {
                 val db = FirebaseFirestore.getInstance()
 
                 val userRef = db.collection("users").document(uid)
-                val companyRef =
-                    company?.let { db.collection("insurance_companies").document(it.uid) }
 
-                userRef.update("insurance_company", companyRef).await()
+                userRef.update("insuranceCompanyId", company?.uid).await()
                 Success(Unit)
             } catch (e: FirebaseFirestoreException) {
                 Error(Unit)

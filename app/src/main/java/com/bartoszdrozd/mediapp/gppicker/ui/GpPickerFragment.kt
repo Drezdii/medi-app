@@ -42,16 +42,13 @@ class GpPickerFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.save_cancel_menu, menu)
+        inflater.inflate(R.menu.save_menu, menu)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
-        val cancelItem = menu.findItem(R.id.action_cancel)
         val saveItem = menu.findItem(R.id.action_save)
-
-        cancelItem.isVisible = isDirty
         saveItem.isVisible = isDirty
     }
 
@@ -59,10 +56,6 @@ class GpPickerFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_save -> {
                 viewModel.saveSelection()
-                true
-            }
-            R.id.action_cancel -> {
-                viewModel.selectGP(null)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -82,9 +75,10 @@ class GpPickerFragment : Fragment() {
         viewModel.selectedGP.observe(viewLifecycleOwner, {
             gpAdapter.selectedGP = it
             gpAdapter.notifyDataSetChanged()
+        })
 
-            isDirty = it != null
-            // Refresh the menu
+        viewModel.isDirty.observe(viewLifecycleOwner, {
+            isDirty = it
             requireActivity().invalidateOptionsMenu()
         })
 

@@ -40,17 +40,13 @@ class InsuranceCompanyPickerFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.save_cancel_menu, menu)
+        inflater.inflate(R.menu.save_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_save -> {
                 viewModel.saveSelection()
-                true
-            }
-            R.id.action_cancel -> {
-                viewModel.selectCompany(null)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -60,10 +56,7 @@ class InsuranceCompanyPickerFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
-        val cancelItem = menu.findItem(R.id.action_cancel)
         val saveItem = menu.findItem(R.id.action_save)
-
-        cancelItem.isVisible = isDirty
         saveItem.isVisible = isDirty
     }
 
@@ -71,8 +64,7 @@ class InsuranceCompanyPickerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
-
-
+        
         val adapter = InsuranceCompanyAdapter()
 
         adapter.setOnItemClickListener {

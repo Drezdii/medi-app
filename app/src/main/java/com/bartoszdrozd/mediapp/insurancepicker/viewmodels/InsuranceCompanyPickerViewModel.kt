@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.insurancepicker.models.InsuranceCompany
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
-import com.bartoszdrozd.mediapp.utils.Success
 import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -22,12 +21,12 @@ class InsuranceCompanyPickerViewModel @Inject constructor(
     private val saveSelectionUseCase: IChooseInsuranceCompanyUseCase
 ) :
     ViewModel() {
-    private var _selectedCompany: MutableLiveData<InsuranceCompany> = MutableLiveData()
+    private var _selectedCompany: MutableLiveData<InsuranceCompany?> = MutableLiveData()
     private val _companies: MutableLiveData<List<InsuranceCompany>> = MutableLiveData()
     private val successChannel = Channel<Int>(Channel.BUFFERED)
     private var _isDirty: MutableLiveData<Boolean> = MutableLiveData()
 
-    val selectedCompany: LiveData<InsuranceCompany> = _selectedCompany
+    val selectedCompany: LiveData<InsuranceCompany?> = _selectedCompany
     val companies: LiveData<List<InsuranceCompany>> = _companies
     val savingCompletedEvent = successChannel.receiveAsFlow()
     val isDirty: LiveData<Boolean> = _isDirty
@@ -53,7 +52,6 @@ class InsuranceCompanyPickerViewModel @Inject constructor(
         viewModelScope.launch {
             val res = _selectedCompany.value?.let { saveSelectionUseCase.execute(it) }
             if (res?.succeeded == true) {
-                _isDirty.value = false
                 successChannel.trySend(1)
             } else {
                 successChannel.trySend(0)
