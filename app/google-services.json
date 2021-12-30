@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "770555527219",
+    "firebase_url": "https://medi-app-9d37a-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "medi-app-9d37a",
     "storage_bucket": "medi-app-9d37a.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "770555527219-udur10cqs3oliq8vg6pqugodj21soaub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bartoszdrozd.mediapp",
+            "certificate_hash": "7fa12097fb2f11c491bfaf41de2dee946a6255a0"
+          }
+        },
         {
           "client_id": "770555527219-ae025vpurmkfmdsd77ppmjq0o5p5oct9.apps.googleusercontent.com",
           "client_type": 3

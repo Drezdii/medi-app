@@ -11,36 +11,24 @@
         android:paddingHorizontal="@dimen/global_padding"
         tools:context=".healthforms.ui.DiabetesFormFragment">
 
-        <TextView
-            android:id="@+id/page_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:text="@string/diabetes"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@id/pregnancies"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pregnancies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_padding"
             android:hint="@string/pregnancies_hint"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/insulin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/page_title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pregnancies_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:digits="0123456789"
-                android:inputType="number"
+                android:inputType="numberSigned"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +39,7 @@
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:hint="@string/glucose_hint"
+            android:inputType="numberSigned"
             app:errorEnabled="true"
             app:layout_constraintEnd_toStartOf="@id/insulin"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +49,8 @@
                 android:id="@+id/glucose_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:inputType="numberSigned"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,7 +70,8 @@
                 android:id="@+id/insulin_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:inputType="numberSigned"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +91,8 @@
                 android:id="@+id/blood_pressure_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:inputType="numberSigned"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +104,7 @@
             android:layout_weight="1"
             android:hint="@string/skin_thickness_hint"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toTopOf="@id/button_save"
+            app:layout_constraintBottom_toTopOf="@id/pedigree_func"
             app:layout_constraintEnd_toStartOf="@id/bmi"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/blood_pressure">
@@ -121,7 +113,8 @@
                 android:id="@+id/skin_thickness_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="numberDecimal"
+                android:digits="0123456789"
+                android:inputType="numberSigned"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -144,6 +137,26 @@
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pedigree_func"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/pedigree_func_hint"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/error_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bmi">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pedigree_func_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/error_box"
             android:layout_width="wrap_content"
@@ -152,7 +165,7 @@
             app:layout_constraintBottom_toTopOf="@id/button_save"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/skin_thickness" />
+            app:layout_constraintTop_toBottomOf="@id/pedigree_func" />
 
         <Button
             android:id="@+id/button_save"

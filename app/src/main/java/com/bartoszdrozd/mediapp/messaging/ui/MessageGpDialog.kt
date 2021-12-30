@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -34,23 +33,23 @@ class MessageGpDialog : DialogFragment() {
                 dialog.cancel()
             }
             .setPositiveButton(resources.getString(R.string.send_message), null)
-            .setPositiveButtonIcon(
-                ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.ic_heart_icon,
-                    null
-                )
-            )
+//            .setPositiveButtonIcon(
+//                ResourcesCompat.getDrawable(
+//                    resources,
+//                    R.drawable.ic_heart_icon,
+//                    null
+//                )
+//            )
             .create()
 
         return dialog
     }
 
     private fun sendMessage() {
-        val message = binding.messageText.text.toString()
+        val message = binding.messageText.text.toString().trim()
 
         if (message.isBlank()) {
-            binding.message.error = resources.getString(R.string.message_empty)
+            binding.messageText.error = resources.getString(R.string.message_empty)
             return
         }
 

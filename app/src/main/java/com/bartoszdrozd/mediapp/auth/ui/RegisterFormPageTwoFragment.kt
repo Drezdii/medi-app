@@ -107,6 +107,11 @@ class RegisterFormPageTwoFragment : Fragment() {
         }
 
         with(viewModel) {
+            emailError.observe(viewLifecycleOwner, {
+                if(it == AuthErrorCode.EMAIL_IN_USE || it == AuthErrorCode.INVALID_EMAIL) {
+                    navController.popBackStack()
+                }
+            })
             firstNameError.observe(viewLifecycleOwner, { error ->
                 binding.firstName.error = getErrorString(error)
             })

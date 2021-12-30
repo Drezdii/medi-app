@@ -39,7 +39,6 @@
     <string name="heart">Heart</string>
     <string name="alzheimers">Alzheimer\'s</string>
     <string name="logout">Logout</string>
-    <string name="welcome_message">Welcome, %s</string>
     <string name="pregnancies_hint">Number of pregnancies</string>
     <string name="glucose_hint">Glucose levels</string>
     <string name="blood_pressure_hint">Blood pressure levels</string>
@@ -109,7 +108,9 @@
     <string name="prediction_history">Predictions History</string>
     <string name="prediction_last_form_info">Predicting using your latest health data</string>
     <string name="select_insurance_company">Switch your insurer</string>
+    <string name="select_insurance_company_if_not_chosen">Choose your insurer</string>
     <string name="select_gp">Switch your GP</string>
+    <string name="select_gp_if_not_chosen">Choose your GP</string>
     <string name="health_forms">Medical Forms</string>
     <string name="heart_cont">Heart Cont.</string>
     <string name="medical_history">Medical History</string>
@@ -150,10 +151,34 @@
     <string name="sign_in_instead">Sign in instead</string>
     <string name="change_insurance_company">Switch insurance company</string>
     <string name="unlink_gp">Unlink your GP</string>
+    <string name="unlink_insurance_company">Unlink your insurance company</string>
+    <string name="reset_email_sent">Email containing password reset link has been sent!</string>
+    <string name="pedigree_func_hint">Diabetes pedigree function</string>
+    <string name="signed_in_as">Signed in as:</string>
+    <string name="current_password_hint">Current password</string>
+    <string name="new_password_hint">New password</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="coins_balance">Your coins</string>
+    <string name="your_mediapp_wallet">Your Mediapp wallet</string>
+    <string name="get_insurance">Get insurance</string>
+    <string name="buy_with_price">%.2f + Ether fee</string>
+    <string name="buy_policy">Buy a policy</string>
+    <string name="length">"Length: "</string>
+    <string name="buy">Buy</string>
+    <string name="confirm_payment">Confirm payment</string>
+    <string name="confirm_payment_message">Are you sure you want to buy this insurance policy?</string>
+    <string name="processing">Processing…</string>
+    <string name="payment_success">Payment successful</string>
+    <string name="balance_too_low">Your wallet balance is too low</string>
+    <string name="no_wallet">No wallet found</string>
+    <plurals name="months_plural">
+        <item quantity="one">%d month</item>
+        <item quantity="other">%d months</item>
+    </plurals>
 
     <string-array name="sexes">
-        <item>@string/male</item>
         <item>@string/female</item>
+        <item>@string/male</item>
     </string-array>
 
     <string-array name="education_items">

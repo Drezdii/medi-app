@@ -11,23 +11,18 @@ import com.bartoszdrozd.mediapp.gppicker.usecases.LoadGPsUseCase
 import com.bartoszdrozd.mediapp.healthforms.repositories.IHealthFormsRepository
 import com.bartoszdrozd.mediapp.healthforms.usecases.*
 import com.bartoszdrozd.mediapp.insurancepicker.repositories.IInsuranceCompaniesRepository
-import com.bartoszdrozd.mediapp.insurancepicker.usecases.ChooseInsuranceCompanyUseCase
-import com.bartoszdrozd.mediapp.insurancepicker.usecases.IChooseInsuranceCompanyUseCase
-import com.bartoszdrozd.mediapp.insurancepicker.usecases.ILoadInsuranceCompaniesUseCase
-import com.bartoszdrozd.mediapp.insurancepicker.usecases.LoadInsuranceCompaniesUseCase
+import com.bartoszdrozd.mediapp.insurancepicker.usecases.*
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetHealthFormsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.GetPredictionsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetHealthFormsHistoryUseCase
 import com.bartoszdrozd.mediapp.medicalhistory.usecases.IGetPredictionsHistoryUseCase
 import com.bartoszdrozd.mediapp.messaging.repositories.IMessagesRepository
 import com.bartoszdrozd.mediapp.messaging.usecases.*
+import com.bartoszdrozd.mediapp.payments.repositories.IPaymentsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.usecases.*
-import com.bartoszdrozd.mediapp.userprofile.usecases.GetOverallHealthScoreUseCase
-import com.bartoszdrozd.mediapp.userprofile.usecases.GetUserDetailsUseCase
-import com.bartoszdrozd.mediapp.userprofile.usecases.IGetOverallHealthScoreUseCase
-import com.bartoszdrozd.mediapp.userprofile.usecases.IGetUserDetailsUseCase
+import com.bartoszdrozd.mediapp.userprofile.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -212,4 +207,43 @@ class UseCaseModule {
         usersRepo: IUsersRepository,
         messagesRepo: IMessagesRepository
     ): ISendFeedbackUseCase = SendFeedbackUseCase(usersRepo, messagesRepo)
+
+    @Provides
+    @Singleton
+    fun providesUnlinkGpUseCase(
+        usersRepo: IUsersRepository
+    ): IUnlinkGpUseCase = UnlinkGpUseCase(usersRepo)
+
+    @Provides
+    @Singleton
+    fun providesUnlinkInsuranceCompanyUseCase(
+        usersRepo: IUsersRepository
+    ): IUnlinkInsuranceCompanyUseCase = UnlinkInsuranceCompanyUseCase(usersRepo)
+
+    @Provides
+    @Singleton
+    fun providesChangePasswordUseCase(
+        usersRepo: IUsersRepository
+    ): IChangePasswordUseCase = ChangePasswordUseCase(usersRepo)
+
+    @Provides
+    @Singleton
+    fun providesGetMedicoinBalanceUseCase(
+        usersRepo: IUsersRepository,
+        paymentRepo: IPaymentsRepository
+    ): IGetCoinsBalanceUseCase = GetCoinsBalanceUseCase(usersRepo, paymentRepo)
+
+    @Provides
+    @Singleton
+    fun providesLoadInsurancePoliciesUseCase(
+        usersRepo: IUsersRepository,
+        insuranceRepo: IInsuranceCompaniesRepository
+    ): ILoadInsurancePoliciesUseCase = LoadInsurancePoliciesUseCase(usersRepo, insuranceRepo)
+
+    @Provides
+    @Singleton
+    fun providesBuyInsurancePolicyUseCase(
+        usersRepo: IUsersRepository,
+        paymentRepo: IPaymentsRepository
+    ): IBuyInsurancePolicyUseCase = BuyInsurancePolicyUseCase(usersRepo, paymentRepo)
 }

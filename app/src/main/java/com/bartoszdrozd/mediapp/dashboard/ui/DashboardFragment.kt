@@ -74,7 +74,7 @@ class DashboardFragment : Fragment() {
                     )
                 }
             })
-            
+
 
             binding.medicalHistoryCard.setOnClickListener {
                 navController.navigate(R.id.action_dashboard_to_healthFormsHistory)

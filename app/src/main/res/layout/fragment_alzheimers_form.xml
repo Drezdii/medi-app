@@ -11,31 +11,18 @@
         android:paddingHorizontal="@dimen/global_padding"
         tools:context=".healthforms.ui.AlzheimersFormFragment">
 
-        <TextView
-            android:id="@+id/page_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:text="@string/alzheimers"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@id/education"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/education"
             style="?attr/textInputOutlinedExposedDropdownMenuStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_padding"
             android:hint="@string/education_level_hint"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/dominant_hand_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/page_title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <AutoCompleteTextView
                 android:id="@+id/education_dropdown"

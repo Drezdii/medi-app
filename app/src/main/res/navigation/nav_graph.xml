@@ -21,6 +21,10 @@
         <action
             android:id="@+id/landingPage_to_register"
             app:destination="@id/nav_graph_register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false" />
     </fragment>
     <navigation
@@ -50,7 +54,7 @@
         <action
             android:id="@+id/action_signin_to_dashboard"
             app:destination="@id/dashboardFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
+            app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
@@ -100,7 +104,11 @@
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboard_to_landingPage"
-            app:destination="@id/landingPageFragment" />
+            app:destination="@id/landingPageFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_dashboard_to_predictionsHistory"
             app:destination="@id/predictionsHistoryFragment"
@@ -115,6 +123,19 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_dashboard_to_gpPicker"
+            app:destination="@id/gpPickerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_dashboard_to_insurancePicker"
+            app:destination="@id/insurancePickerFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_insurancePolicyList"
+            app:destination="@id/insurancePolicyListFragment" />
     </fragment>
 
     <action
@@ -126,7 +147,7 @@
     <fragment
         android:id="@+id/gpPickerFragment"
         android:name="com.bartoszdrozd.mediapp.gppicker.ui.GpPickerFragment"
-        android:label="@string/select_gp"
+        android:label="@string/select_gp_if_not_chosen"
         tools:layout="@layout/fragment_gp_picker" />
     <action
         android:id="@+id/action_global_dashboardFragment"
@@ -197,12 +218,19 @@
                 android:name="com.bartoszdrozd.mediapp.healthforms.ui.HeartFormPageTwoFragment"
                 android:label="@string/heart_cont"
                 tools:layout="@layout/fragment_heart_form_page_two" />
+            <action
+                android:id="@+id/action_global_healthFormsFragment2"
+                app:destination="@id/healthFormsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         </navigation>
     </navigation>
     <fragment
         android:id="@+id/insurancePickerFragment"
         android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsuranceCompanyPickerFragment"
-        android:label="@string/select_insurance_company"
+        android:label="@string/select_gp_if_not_chosen"
         tools:layout="@layout/fragment_insurance_picker" />
     <fragment
         android:id="@+id/predictionsPageFragment"
@@ -239,7 +267,7 @@
         android:id="@+id/userProfileFragment"
         android:name="com.bartoszdrozd.mediapp.userprofile.ui.UserProfileFragment"
         android:label="@string/your_profile"
-        tools:layout="@layout/fragment_user_profile" >
+        tools:layout="@layout/fragment_user_profile">
         <action
             android:id="@+id/action_userProfile_to_gpPicker"
             app:destination="@id/gpPickerFragment"
@@ -254,6 +282,24 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_changePassword"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.bartoszdrozd.mediapp.auth.ui.ChangePasswordFragment"
+        android:label="@string/change_password"
+        tools:layout="@layout/fragment_change_password">
+        <argument
+            android:name="signed_in_name"
+            android:defaultValue='""'
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/insurancePolicyListFragment"
+        android:name="com.bartoszdrozd.mediapp.insurancepicker.ui.InsurancePolicyListFragment"
+        android:label="@string/buy_policy"
+        tools:layout="@layout/fragment_insurance_policy_list" />
 
 </navigation>

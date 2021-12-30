@@ -65,12 +65,12 @@ class HeartFormPageOneFragment : FormFragment() {
 
             buttonNext.setOnClickListener {
                 val formData = HeartFormDTO(
-                    serumCholesterol = serumCholesterolText.text.toString().trim().toIntOrNull(),
-                    fastingBloodSugar = fastingBsText.text.toString().trim().toIntOrNull(),
+                    serumCholesterol = serumCholesterolText.text.toString().trim().toFloatOrNull(),
+                    fastingBloodSugar = fastingBsText.text.toString().trim().toFloatOrNull(),
                     restingECG = selectedECG,
-                    restingBloodPressure = restingBpText.text.toString().trim().toIntOrNull(),
-                    maxHR = maxHrText.text.toString().trim().toIntOrNull(),
-                    stDepression = stDepressionText.text.toString().trim().toIntOrNull()
+                    restingBloodPressure = restingBpText.text.toString().trim().toFloatOrNull(),
+                    maxHR = maxHrText.text.toString().trim().toFloatOrNull(),
+                    stDepression = stDepressionText.text.toString().trim().toFloatOrNull()
                 )
                 if (pageViewModel.validateForm(formData)) {
                     formViewModel.saveFirstPage(formData)

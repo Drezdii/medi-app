@@ -11,30 +11,17 @@
         android:paddingHorizontal="@dimen/global_padding"
         tools:context=".healthforms.ui.HeartFormPageTwoFragment">
 
-
-        <TextView
-            android:id="@+id/page_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
-            android:text="@string/heart"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@id/chest_pain_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
         <TextView
             android:id="@+id/chest_pain_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/global_padding"
             android:layout_marginBottom="4dp"
             android:text="@string/chest_pain_hint"
             app:layout_constraintBottom_toTopOf="@id/chest_pain"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/page_title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/chest_pain"

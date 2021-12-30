@@ -1,7 +1,9 @@
 package com.bartoszdrozd.mediapp.auth.repositories
 
+import android.util.Log
 import com.bartoszdrozd.mediapp.auth.dtos.RegisterUserDTO
 import com.bartoszdrozd.mediapp.auth.models.AuthErrorCode
+import com.bartoszdrozd.mediapp.auth.models.ChangePasswordErrorCode
 import com.bartoszdrozd.mediapp.auth.models.User
 import com.bartoszdrozd.mediapp.auth.models.UserDetails
 import com.bartoszdrozd.mediapp.gppicker.models.GeneralPractitioner
@@ -9,8 +11,10 @@ import com.bartoszdrozd.mediapp.insurancepicker.models.InsuranceCompany
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.toObject
@@ -20,6 +24,9 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import org.web3j.crypto.Credentials
+import org.web3j.crypto.Keys
+import org.web3j.crypto.Wallet
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -42,19 +49,26 @@ class UsersRepository : IUsersRepository {
 
     override suspend fun register(userData: RegisterUserDTO): Result<Unit, AuthErrorCode> {
         return try {
-            FirebaseAuth.getInstance()
+            val res = FirebaseAuth.getInstance()
                 .createUserWithEmailAndPassword(userData.email, userData.password).await()
+
+            val userId = res.user!!.uid
+            val keys = Keys.createEcKeyPair()
+
+            val wallet = Wallet.createLight("", keys)
+            val pk = keys.privateKey.toString(16)
 
             val userProfile = hashMapOf(
                 "firstName" to userData.firstName,
                 "lastName" to userData.lastName,
                 "sex" to userData.sex,
                 "dateOfBirth" to userData.dateOfBirth,
-                "phoneNumber" to userData.phoneNumber
+                "phoneNumber" to userData.phoneNumber,
+                "wallet" to "0x" + wallet.address,
+                "walletPK" to pk
             )
 
             try {
-                val userId = FirebaseAuth.getInstance().currentUser!!.uid
                 FirebaseFirestore.getInstance().collection("users").document(userId)
                     .set(userProfile).await()
             } catch (e: FirebaseFirestoreException) {
@@ -69,6 +83,7 @@ class UsersRepository : IUsersRepository {
                 else -> Error(AuthErrorCode.GENERIC_REGISTER_ERROR)
             }
         } catch (e: Exception) {
+            Log.d("TEST EX", e.toString())
             return Error(AuthErrorCode.GENERIC_REGISTER_ERROR)
         }
     }
@@ -83,6 +98,28 @@ class UsersRepository : IUsersRepository {
                 else -> AuthErrorCode.GENERIC_RESET_ERROR
             }
             Error(error)
+        }
+    }
+
+    override suspend fun changePassword(
+        currentPassword: String,
+        newPassword: String
+    ): Result<Unit, ChangePasswordErrorCode> {
+        val user = FirebaseAuth.getInstance().currentUser!!
+        val creds = EmailAuthProvider.getCredential(user.email!!, currentPassword)
+
+        return try {
+            user.reauthenticate(creds).await()
+
+            try {
+                user.updatePassword(newPassword).await()
+                Success(Unit)
+            } catch (e: Exception) {
+                Error(ChangePasswordErrorCode.UPDATE_FAILED)
+            }
+
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            Error(ChangePasswordErrorCode.REAUTHENTICATION_WRONG_CREDENTIALS)
         }
     }
 
@@ -203,6 +240,24 @@ class UsersRepository : IUsersRepository {
 
         } else {
             Error(Unit)
+        }
+    }
+
+
+    override suspend fun getWalletCredentials(): Credentials? {
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val document =
+            FirebaseFirestore.getInstance().collection("users").document(uid).get().await()
+
+        return if (document.exists()) {
+            val privateKey = document.get("walletPK") as String?
+            return if (privateKey != null) {
+                Credentials.create(privateKey)
+            } else {
+                null
+            }
+        } else {
+            null
         }
     }
 }

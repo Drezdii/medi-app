@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.databinding.FragmentAlzheimersFormBinding
 import com.bartoszdrozd.mediapp.healthforms.dtos.AlzheimersFormDTO
@@ -13,6 +16,8 @@ import com.bartoszdrozd.mediapp.healthforms.models.AlzheimersFormField.*
 import com.bartoszdrozd.mediapp.healthforms.viewmodels.AlzheimersFormViewModel
 import com.bartoszdrozd.mediapp.utils.FormFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class AlzheimersFormFragment : FormFragment() {
@@ -58,15 +63,26 @@ class AlzheimersFormFragment : FormFragment() {
                 val formState = AlzheimersFormDTO(
                     educationLevel = selectedEducation,
                     dominantHand = if (dominantHand.checkedButtonId == R.id.right_hand_button) 0 else 1,
-                    miniMentalState = miniMentalText.text.toString().trim().toIntOrNull(),
-                    clinicalDementiaRating = clinicalDementiaText.text.toString().trim().toFloatOrNull(),
+                    miniMentalState = miniMentalText.text.toString().trim().toFloatOrNull(),
+                    clinicalDementiaRating = clinicalDementiaText.text.toString().trim()
+                        .toFloatOrNull(),
                     socioEconomicStatus = selectedSocioStatus,
-                    estTotalIntracranial = estTotalIntraValueText.text.toString().trim().toIntOrNull(),
-                    normalizeWholeBrain = normalizeWholeBrainText.text.toString().trim().toFloatOrNull()
+                    estTotalIntracranial = estTotalIntraValueText.text.toString().trim()
+                        .toFloatOrNull(),
+                    normalizeWholeBrain = normalizeWholeBrainText.text.toString().trim()
+                        .toFloatOrNull()
                 )
 
                 viewModel.saveForm(formState)
             }
+
+            viewModel.saveSuccess.onEach {
+                if (it == 1) {
+                    Toast.makeText(requireContext(), R.string.saved_success, Toast.LENGTH_LONG)
+                        .show()
+                    findNavController().popBackStack()
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
             viewModel.validationErrors.observe(viewLifecycleOwner, { errors ->
                 clearErrors()
@@ -77,8 +93,10 @@ class AlzheimersFormFragment : FormFragment() {
                         MINI_MENTAL_STATE -> miniMental.error = getErrorString(error.second)
                         CLINICAL_RATING -> clinicalDementia.error = getErrorString(error.second)
                         SOCIOECONOMIC_STATUS -> socioeconomic.error = getErrorString(error.second)
-                        EST_TOTAL_INTRACRANIAL -> estTotalIntraValue.error = getErrorString(error.second)
-                        NORMALIZE_WHOLE_BRAIN -> normalizeWholeBrain.error = getErrorString(error.second)
+                        EST_TOTAL_INTRACRANIAL -> estTotalIntraValue.error =
+                            getErrorString(error.second)
+                        NORMALIZE_WHOLE_BRAIN -> normalizeWholeBrain.error =
+                            getErrorString(error.second)
                     }
                 }
             })

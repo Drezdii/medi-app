@@ -1,6 +1,7 @@
 package com.bartoszdrozd.mediapp.insurancepicker.repositories
 
 import com.bartoszdrozd.mediapp.insurancepicker.models.InsuranceCompany
+import com.bartoszdrozd.mediapp.insurancepicker.models.InsurancePolicy
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Result
 import com.bartoszdrozd.mediapp.utils.Success
@@ -23,8 +24,8 @@ class InsuranceCompaniesRepository : IInsuranceCompaniesRepository {
             }
 
             val companiesDocs = snapshot!!.documents
-
             val allCompanies = mutableListOf<InsuranceCompany>()
+
             for (document in companiesDocs) {
                 allCompanies.add(document.toObject<InsuranceCompany>()!!)
             }
@@ -55,4 +56,30 @@ class InsuranceCompaniesRepository : IInsuranceCompaniesRepository {
             Success(null)
         }
     }
+
+    @ExperimentalCoroutinesApi
+    override suspend fun getPolicies(insuranceCompanyId: String): Flow<List<InsurancePolicy>> =
+        callbackFlow {
+            val collection = FirebaseFirestore.getInstance().collection("insurance_companies")
+                .document(insuranceCompanyId).collection("policies")
+
+            val listener = collection.addSnapshotListener { snapshot, ex ->
+                if (ex != null) {
+                    throw ex
+                }
+
+                val policiesDocs = snapshot!!.documents
+                val allPolicies = mutableListOf<InsurancePolicy>()
+
+                for (document in policiesDocs) {
+                    allPolicies.add(document.toObject<InsurancePolicy>()!!)
+                }
+
+                trySend(allPolicies)
+            }
+
+            awaitClose {
+                listener.remove()
+            }
+        }
 }

@@ -24,18 +24,11 @@ class GpPickerViewModel @Inject constructor(
 ) : ViewModel() {
     private val successChannel = Channel<Int>(Channel.BUFFERED)
     private val _gps: MutableLiveData<List<GeneralPractitioner>> = MutableLiveData()
-
-    // Start without a selected GP
-    // If the selected gp is null that means user wants to have no GP linked to the account
-    private val _selectedGP: MutableLiveData<GeneralPractitioner?> = MutableLiveData(
-        GeneralPractitioner()
-    )
-    private var _isDirty: MutableLiveData<Boolean> = MutableLiveData()
+    private val _selectedGP: MutableLiveData<GeneralPractitioner?> = MutableLiveData()
 
     val generalPractitioners: LiveData<List<GeneralPractitioner>> = _gps
     val selectedGP: LiveData<GeneralPractitioner?> = _selectedGP
     val savingCompletedEvent = successChannel.receiveAsFlow()
-    val isDirty: LiveData<Boolean> = _isDirty
 
     init {
         viewModelScope.launch {
@@ -47,7 +40,6 @@ class GpPickerViewModel @Inject constructor(
 
     fun selectGP(gp: GeneralPractitioner?) {
         _selectedGP.value = gp
-        _isDirty.value = true
     }
 
     fun saveSelection() {
@@ -58,6 +50,7 @@ class GpPickerViewModel @Inject constructor(
             } else {
                 successChannel.trySend(0)
             }
+
         }
     }
 }

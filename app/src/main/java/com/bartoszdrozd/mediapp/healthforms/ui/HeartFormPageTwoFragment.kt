@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
@@ -13,6 +15,8 @@ import com.bartoszdrozd.mediapp.healthforms.dtos.HeartFormDTO
 import com.bartoszdrozd.mediapp.healthforms.viewmodels.HeartFormViewModel
 import com.bartoszdrozd.mediapp.utils.FormFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class HeartFormPageTwoFragment : FormFragment() {
@@ -89,6 +93,14 @@ class HeartFormPageTwoFragment : FormFragment() {
                         thalassemia = thalassemia
                     )
                 )
+
+                formViewModel.saveSuccess.onEach {
+                    if (it == 1) {
+                        Toast.makeText(requireContext(), R.string.saved_success, Toast.LENGTH_LONG)
+                            .show()
+                        findNavController().navigate(R.id.action_global_healthFormsFragment2)
+                    }
+                }.launchIn(viewLifecycleOwner.lifecycleScope)
             }
         }
     }

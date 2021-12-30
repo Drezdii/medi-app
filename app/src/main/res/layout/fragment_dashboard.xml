@@ -23,8 +23,8 @@
         android:layout_marginVertical="@dimen/global_padding"
         android:layout_marginEnd="@dimen/global_padding"
         app:layout_constraintBottom_toTopOf="@id/insurance_company_card"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/predictions_history_card"
+        app:layout_constraintEnd_toStartOf="@id/predictions_history_card"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gp_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +49,7 @@
                 android:contentDescription="@string/prediction_history"
                 android:padding="@dimen/global_padding"
                 app:layout_constraintBottom_toTopOf="@id/form_entry_text"
-                app:layout_constraintDimensionRatio="1:0.9"
+                app:layout_constraintDimensionRatio="1:0.7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/forms_title" />
@@ -80,8 +80,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/global_padding"
-        app:layout_constraintLeft_toRightOf="@id/medical_history_card"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/medical_history_card"
         app:layout_constraintTop_toBottomOf="@id/gp_card">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,7 +106,7 @@
                 android:contentDescription="@string/prediction_history"
                 android:padding="@dimen/global_padding"
                 app:layout_constraintBottom_toTopOf="@id/prediction_text"
-                app:layout_constraintDimensionRatio="1:0.9"
+                app:layout_constraintDimensionRatio="1:0.7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/predictions_title" />

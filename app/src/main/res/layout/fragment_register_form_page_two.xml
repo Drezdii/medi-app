@@ -10,30 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/page_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="@string/register_form_page2_title"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@id/first_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:hint="@string/first_name_hint"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/last_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/page_title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/first_name_text"
@@ -46,7 +32,6 @@
             android:id="@+id/last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:hint="@string/last_name_hint"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/sex"
@@ -85,7 +70,6 @@
             android:id="@+id/date_of_birth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:hint="@string/date_of_birth_hint"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/phone_number"
@@ -104,7 +88,6 @@
             android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:hint="@string/phone_number_hint"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/error_box"
@@ -144,7 +127,6 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/sign_in_instead"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

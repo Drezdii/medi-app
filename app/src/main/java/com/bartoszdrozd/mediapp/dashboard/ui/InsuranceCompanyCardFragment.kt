@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -15,6 +14,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.dashboard.viewmodels.InsuranceCompanyCardViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentInsuranceCompanyCardBinding
@@ -60,43 +60,53 @@ class InsuranceCompanyCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.contactButtonsContainer.visibility = if (showContactButtons) VISIBLE else GONE
+        with(binding) {
+            contactButtonsContainer.visibility = if (showContactButtons) VISIBLE else GONE
 
-        viewModel.insuranceCompany.observe(viewLifecycleOwner, { company ->
-            if (company != null) {
-                binding.insuranceCompanyCardContent.visibility = VISIBLE
-                binding.noInsuranceCompanyCard.visibility = GONE
-                binding.companyName.text =
-                    resources.getString(R.string.name_string, company.name, "")
+            viewModel.insuranceCompany.observe(viewLifecycleOwner, { company ->
+                if (company != null) {
+                    insuranceCompanyCardContent.visibility = VISIBLE
+                    noInsuranceCompanyCard.visibility = GONE
+                    companyName.text =
+                        resources.getString(R.string.name_string, company.name, "")
 
-                if (!company.logo.isNullOrBlank()) {
-                    val imageBytes = Base64.getDecoder().decode(company.logo)
-                    val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                    binding.logoImage.setImageBitmap(decodedImage)
-                } else {
-                    binding.logoImage.setImageDrawable(
-                        ResourcesCompat.getDrawable(
-                            resources,
-                            R.drawable.default_gp_photo,
-                            null
+                    if (!company.logo.isNullOrBlank()) {
+                        val imageBytes = Base64.getDecoder().decode(company.logo)
+                        val decodedImage =
+                            BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                        logoImage.setImageBitmap(decodedImage)
+                    } else {
+                        logoImage.setImageDrawable(
+                            ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.default_gp_photo,
+                                null
+                            )
                         )
-                    )
+                    }
+                } else {
+                    insuranceCompanyCardContent.visibility = GONE
+                    noInsuranceCompanyCard.visibility = VISIBLE
                 }
-            } else {
-                Log.d("TEST", "TEEEST")
-                binding.insuranceCompanyCardContent.visibility = GONE
-                binding.noInsuranceCompanyCard.visibility = VISIBLE
+            })
+
+            chooseInsuranceCompanyButton.setOnClickListener {
+                findNavController().navigate(R.id.action_dashboard_to_insurancePicker)
             }
-        })
 
-        binding.callInsuranceButton.setOnClickListener {
-            doAfterConfirmation { dialInsuranceCompany() }
-        }
+            callInsuranceButton.setOnClickListener {
+                doAfterConfirmation { dialInsuranceCompany() }
+            }
 
-        binding.messageInsuranceButton.setOnClickListener {
-            val fragManager = parentFragmentManager
-            val newFragment = MessageInsuranceCompanyDialog()
-            newFragment.show(fragManager, "insuranceDialog")
+            buyInsuranceButton.setOnClickListener {
+                findNavController().navigate(R.id.action_dashboard_to_insurancePolicyList)
+            }
+
+            messageInsuranceButton.setOnClickListener {
+                val fragManager = parentFragmentManager
+                val newFragment = MessageInsuranceCompanyDialog()
+                newFragment.show(fragManager, "insuranceDialog")
+            }
         }
     }
 

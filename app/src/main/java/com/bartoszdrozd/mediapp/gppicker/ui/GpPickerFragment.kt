@@ -75,10 +75,9 @@ class GpPickerFragment : Fragment() {
         viewModel.selectedGP.observe(viewLifecycleOwner, {
             gpAdapter.selectedGP = it
             gpAdapter.notifyDataSetChanged()
-        })
 
-        viewModel.isDirty.observe(viewLifecycleOwner, {
-            isDirty = it
+            isDirty = it != null
+            // Refresh the menu
             requireActivity().invalidateOptionsMenu()
         })
 
@@ -91,9 +90,11 @@ class GpPickerFragment : Fragment() {
         viewModel.savingCompletedEvent.onEach {
             // Navigate if saving succeeded
             if (it == 1) {
-                val text = resources.getText(R.string.saved_success)
-                val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
-                toast.show()
+                Toast.makeText(
+                    context,
+                    resources.getText(R.string.saved_success),
+                    Toast.LENGTH_LONG
+                ).show()
 
                 navController.popBackStack()
             } else {

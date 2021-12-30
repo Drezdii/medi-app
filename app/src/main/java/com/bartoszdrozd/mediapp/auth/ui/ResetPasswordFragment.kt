@@ -1,16 +1,21 @@
 package com.bartoszdrozd.mediapp.auth.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.auth.viewmodels.ResetPasswordViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentResetPasswordBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ResetPasswordFragment : Fragment() {
@@ -28,13 +33,28 @@ class ResetPasswordFragment : Fragment() {
     private fun setListeners() {
         binding.buttonFinish.setOnClickListener {
             val email = binding.emailText.text.toString().trim()
-            viewModel.resetPassword(email)
+
+            if (email.isNotBlank()) {
+                viewModel.resetPassword(email)
+            } else {
+                binding.email.error = resources.getString(R.string.required_field)
+            }
         }
 
         viewModel.resetError.observe(viewLifecycleOwner, { error ->
             binding.email.error = resources.getString(error.messageResId)
         })
 
+        viewModel.resetSuccess.onEach {
+            if (it == 1) {
+                Toast.makeText(
+                    context,
+                    resources.getText(R.string.reset_email_sent),
+                    Toast.LENGTH_LONG
+                ).show()
+                navController.popBackStack()
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     override fun onCreateView(

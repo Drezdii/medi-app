@@ -57,12 +57,72 @@
                 android:layout_marginBottom="@dimen/global_padding"
                 android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/date_of_birth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_baseline_calendar_24" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/balances"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/coins_balance"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/medicoin_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0.000000"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/medicoin_icon"
+                    app:drawableTint="?colorOnBackground"
+                    app:layout_constraintEnd_toStartOf="@id/ether_balance"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/balances"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/ether_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0.000000"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/ethereum"
+                    app:drawableTint="?colorOnBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/medicoin_balance"
+                    app:layout_constraintTop_toBottomOf="@id/balances"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/global_padding"
+                    android:text="@string/your_mediapp_wallet"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toTopOf="@id/wallet_address"
+                    app:layout_constraintTop_toBottomOf="@id/ether_balance" />
+
+                <TextView
+                    android:id="@+id/wallet_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:selectAllOnFocus="true"
+                    android:textIsSelectable="true"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/wallet"
+                    tools:text="0xBc34Ab92d7B87fF76943268e031FE229549bD0c9" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -91,11 +151,27 @@
                 android:textAlignment="textStart" />
 
             <Button
-                android:id="@+id/change_insurance_company"
+                android:id="@+id/unlink_gp_button"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/unlink_gp"
+                android:textAlignment="textStart" />
+
+            <Button
+                android:id="@+id/change_insurance_company_button"
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/change_insurance_company"
+                android:textAlignment="textStart" />
+
+            <Button
+                android:id="@+id/unlink_insurance_company_button"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/unlink_insurance_company"
                 android:textAlignment="textStart" />
 
             <Button

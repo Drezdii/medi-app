@@ -61,8 +61,8 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         app:layout_constraintBottom_toTopOf="@id/sign_in_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password">
 
         <Button

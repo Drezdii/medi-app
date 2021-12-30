@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IPredictionsRepository {
     suspend fun save(uid: String, prediction: PredictionDTO): Result<Unit, Unit>
+    suspend fun saveToBlockchain(uid: String, prediction: PredictionDTO)
 
     @ExperimentalCoroutinesApi
     suspend fun getAllByUserId(uid: String): Flow<List<PredictionDTO>>

@@ -7,6 +7,7 @@ import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.bartoszdrozd.mediapp.R
@@ -22,7 +23,7 @@ class GradientArcView(context: Context, attrs: AttributeSet) : View(context, att
         }
 
     private val bounds = RectF()
-
+    private val typedValue = TypedValue()
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         strokeWidth = stroke
         style = Paint.Style.STROKE
@@ -45,7 +46,8 @@ class GradientArcView(context: Context, attrs: AttributeSet) : View(context, att
     }
 
     private val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.WHITE
+        context.theme.resolveAttribute(R.attr.colorOnBackground, typedValue, true)
+        color = ContextCompat.getColor(context, typedValue.resourceId)
         textSize = 16f * resources.displayMetrics.density
         isAntiAlias = true
     }

@@ -41,10 +41,11 @@ class GetAlzheimersPredictionUseCase @Inject constructor(
         val bufferSize = 1 * java.lang.Float.SIZE / java.lang.Byte.SIZE
 
         val input =
-            ByteBuffer.allocateDirect(8 * java.lang.Float.SIZE / java.lang.Byte.SIZE).order(ByteOrder.nativeOrder())
+            ByteBuffer.allocateDirect(8 * java.lang.Float.SIZE / java.lang.Byte.SIZE)
+                .order(ByteOrder.nativeOrder())
 
-        input.putFloat(data.age.toFloat())
         input.putFloat(data.gender.toFloat())
+        input.putFloat(data.age.toFloat())
         input.putFloat(data.educationLevel!!.toFloat())
         input.putFloat(data.socioEconomicStatus!!.toFloat())
         input.putFloat(data.miniMentalState!!.toFloat())

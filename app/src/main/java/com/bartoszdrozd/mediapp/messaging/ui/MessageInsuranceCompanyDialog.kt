@@ -40,10 +40,10 @@ class MessageInsuranceCompanyDialog : DialogFragment() {
     }
 
     private fun sendMessage() {
-        val message = binding.messageText.text.toString()
+        val message = binding.messageText.text.toString().trim()
 
         if (message.isBlank()) {
-            binding.message.error = resources.getString(R.string.message_empty)
+            binding.messageText.error = resources.getString(R.string.message_empty)
             return
         }
 
@@ -57,7 +57,7 @@ class MessageInsuranceCompanyDialog : DialogFragment() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         dialog?.setCanceledOnTouchOutside(false)
-        binding.message.error = ""
+        binding.messageText.error = null
 
         (dialog as androidx.appcompat.app.AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE)
             .setOnClickListener {
@@ -71,14 +71,16 @@ class MessageInsuranceCompanyDialog : DialogFragment() {
         viewModel.sendSuccessInsurance.onEach {
             // Dismiss if sending succeeded
             if (it == 1) {
-                val text = resources.getText(R.string.message_sent)
-                val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
-                toast.show()
+                Toast.makeText(context, resources.getText(R.string.message_sent), Toast.LENGTH_LONG)
+                    .show()
                 dialog?.dismiss()
             } else {
-                val text = resources.getText(R.string.generic_error)
-                val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
-                toast.show()
+                Toast.makeText(
+                    context,
+                    resources.getText(R.string.generic_error),
+                    Toast.LENGTH_LONG
+                )
+                    .show()
             }
         }.launchIn(this.lifecycleScope)
 

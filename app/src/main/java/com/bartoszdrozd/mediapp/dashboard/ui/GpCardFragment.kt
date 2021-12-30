@@ -12,6 +12,7 @@ import android.view.View.*
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bartoszdrozd.mediapp.R
 import com.bartoszdrozd.mediapp.dashboard.viewmodels.GpCardViewModel
 import com.bartoszdrozd.mediapp.databinding.FragmentGpCardBinding
@@ -55,34 +56,41 @@ class GpCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.contactButtonsContainer.visibility = if (showContactButtons) VISIBLE else GONE
+        with(binding) {
+            contactButtonsContainer.visibility = if (showContactButtons) VISIBLE else GONE
 
-        viewModel.gp.observe(viewLifecycleOwner, { gp ->
-            if (gp != null) {
-                binding.gpCardContent.visibility = VISIBLE
-                binding.noGpCard.visibility = INVISIBLE
-                binding.name.text =
-                    resources.getString(R.string.name_string, gp.firstName, gp.lastName)
+            viewModel.gp.observe(viewLifecycleOwner, { gp ->
+                if (gp != null) {
+                    gpCardContent.visibility = VISIBLE
+                    noGpCard.visibility = INVISIBLE
+                    name.text =
+                        resources.getString(R.string.name_string, gp.firstName, gp.lastName)
 
-                if (!gp.picture.isNullOrBlank()) {
-                    val imageBytes = Base64.getDecoder().decode(gp.picture)
-                    val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                    binding.avatarImage.setImageBitmap(decodedImage)
+                    if (!gp.picture.isNullOrBlank()) {
+                        val imageBytes = Base64.getDecoder().decode(gp.picture)
+                        val decodedImage =
+                            BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                        avatarImage.setImageBitmap(decodedImage)
+                    }
+                } else {
+                    gpCardContent.visibility = INVISIBLE
+                    noGpCard.visibility = VISIBLE
                 }
-            } else {
-                binding.gpCardContent.visibility = INVISIBLE
-                binding.noGpCard.visibility = VISIBLE
+            })
+
+            chooseGpButton.setOnClickListener {
+                findNavController().navigate(R.id.action_dashboard_to_gpPicker)
             }
-        })
 
-        binding.callGpButton.setOnClickListener {
-            doAfterConfirmation { dialGPNumber() }
-        }
+            callGpButton.setOnClickListener {
+                doAfterConfirmation { dialGPNumber() }
+            }
 
-        binding.messageGpButton.setOnClickListener {
-            val fragManager = parentFragmentManager
-            val newFragment = MessageGpDialog()
-            newFragment.show(fragManager, "gpDialog")
+            messageGpButton.setOnClickListener {
+                val fragManager = parentFragmentManager
+                val newFragment = MessageGpDialog()
+                newFragment.show(fragManager, "gpDialog")
+            }
         }
     }
 

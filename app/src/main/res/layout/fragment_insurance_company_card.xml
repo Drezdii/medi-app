@@ -10,12 +10,24 @@
         android:id="@+id/no_insurance_company_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/global_padding"
+        android:visibility="invisible">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/pick_insurance_company" />
+
+        <Button
+            android:id="@+id/choose_insurance_company_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/global_padding"
+            android:gravity="center"
+            android:text="@string/select_insurance_company_if_not_chosen" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,42 +48,41 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:id="@+id/logo_container"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/insurance_company_title">
 
-            <ImageView
-                android:id="@+id/logo_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/insurance_company_desc"
-                android:scaleType="centerCrop"
-                android:src="@drawable/default_gp_photo" />
-        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/insurance_company_title">
 
-        <TextView
-            android:id="@+id/company_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/global_padding"
-            android:autoSizeMinTextSize="11sp"
-            android:autoSizeStepGranularity="1sp"
-            android:autoSizeTextType="uniform"
-            android:breakStrategy="balanced"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toRightOf="@id/logo_container"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/insurance_company_title"
-            tools:text="Lewis Hamilton Hamilton Hamilton Hamilton" />
+                <ImageView
+                    android:id="@+id/logo_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/insurance_company_desc"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/default_gp_photo" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:breakStrategy="balanced"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                tools:text="Lewis Hamilton Hamilton Hamilton Hamilton" />
+        </LinearLayout>
 
 
         <LinearLayout
@@ -80,7 +91,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/company_name">
+            app:layout_constraintTop_toBottomOf="@id/logo_container">
+
+            <Button
+                android:id="@+id/buy_insurance_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/get_insurance" />
 
             <Button
                 android:id="@+id/call_insurance_button"

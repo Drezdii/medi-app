@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.bartoszdrozd.mediapp.messaging.usecases.IMessageGpUseCase
 import com.bartoszdrozd.mediapp.messaging.usecases.IMessageInsuranceCompanyUseCase
 import com.bartoszdrozd.mediapp.messaging.usecases.ISendFeedbackUseCase
-import com.bartoszdrozd.mediapp.payments.IPaymentsRepository
 import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -18,7 +17,6 @@ class MessagingViewModel @Inject constructor(
     private val messageGpUseCase: IMessageGpUseCase,
     private val messageInsuranceCompanyUseCase: IMessageInsuranceCompanyUseCase,
     private val sendFeedbackUseCase: ISendFeedbackUseCase,
-    private val paymentsTest: IPaymentsRepository
 ) : ViewModel() {
     private val successChannelGp = Channel<Int>(Channel.BUFFERED)
     private val successChannelInsurance = Channel<Int>(Channel.BUFFERED)
@@ -44,18 +42,11 @@ class MessagingViewModel @Inject constructor(
             val res = messageInsuranceCompanyUseCase(message)
             if (res.succeeded) {
                 successChannelInsurance.send(1)
-            } else {
-
             }
         }
     }
 
     fun sendFeedback(rating: Int, message: String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            paymentsTest.testPay()
-//        }
-//    }
-
         viewModelScope.launch {
             val res = sendFeedbackUseCase(rating, message)
             if (res.succeeded) {

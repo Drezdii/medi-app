@@ -47,6 +47,7 @@ class HealthFormsRepository : IHealthFormsRepository {
                 "bloodPressureLevel" to form.bloodPressureLevel,
                 "skinThickness" to form.skinThickness,
                 "bmi" to form.bmi,
+                "pedigreeFunc" to form.pedigreeFunc,
                 "diseaseType" to DiseaseType.DIABETES
             )
 

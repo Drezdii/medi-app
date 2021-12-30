@@ -82,7 +82,9 @@ class RegisterFormPageOneFragment : Fragment() {
             }
 
             emailText.doAfterTextChanged {
-                validateEmail()
+                if (emailText.hasFocus()) {
+                    validateEmail()
+                }
             }
 
             confirmEmailText.doAfterTextChanged {

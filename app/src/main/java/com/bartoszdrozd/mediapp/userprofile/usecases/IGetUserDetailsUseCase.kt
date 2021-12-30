@@ -4,5 +4,5 @@ import com.bartoszdrozd.mediapp.auth.models.UserDetails
 import kotlinx.coroutines.flow.Flow
 
 interface IGetUserDetailsUseCase {
-    suspend fun execute(): UserDetails?
+    suspend fun execute(): Flow<UserDetails?>
 }

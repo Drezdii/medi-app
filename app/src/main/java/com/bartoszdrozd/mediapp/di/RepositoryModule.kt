@@ -10,8 +10,8 @@ import com.bartoszdrozd.mediapp.insurancepicker.repositories.IInsuranceCompanies
 import com.bartoszdrozd.mediapp.insurancepicker.repositories.InsuranceCompaniesRepository
 import com.bartoszdrozd.mediapp.messaging.repositories.IMessagesRepository
 import com.bartoszdrozd.mediapp.messaging.repositories.MessagesRepository
-import com.bartoszdrozd.mediapp.payments.IPaymentsRepository
-import com.bartoszdrozd.mediapp.payments.PaymentRepository
+import com.bartoszdrozd.mediapp.payments.repositories.IPaymentsRepository
+import com.bartoszdrozd.mediapp.payments.repositories.PaymentRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionModelsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.IPredictionsRepository
 import com.bartoszdrozd.mediapp.predictions.repositories.PredictionModelsRepository

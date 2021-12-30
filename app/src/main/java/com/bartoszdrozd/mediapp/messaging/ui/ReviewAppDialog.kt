@@ -40,7 +40,7 @@ class ReviewAppDialog : DialogFragment() {
     }
 
     private fun sendMessage() {
-        val message = binding.messageText.text.toString()
+        val message = binding.messageText.text.toString().trim()
         val rating = when (binding.appRating.checkedButtonId) {
             R.id.rating_1 -> 1
             R.id.rating_2 -> 2

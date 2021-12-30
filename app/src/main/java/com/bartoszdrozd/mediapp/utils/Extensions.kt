@@ -25,3 +25,19 @@ fun Fragment.doAfterConfirmation(callback: () -> Unit) {
         }
         .show()
 }
+
+fun Fragment.doAfterConfirmation(
+    config: DialogConfig,
+    callback: () -> Unit
+) {
+    MaterialAlertDialogBuilder(requireContext())
+        .setTitle(config.title)
+        .setMessage(config.message)
+        .setNegativeButton(config.negativeButtonText) { dialog, _ ->
+            dialog.cancel()
+        }
+        .setPositiveButton(config.positiveButtonText) { _, _ ->
+            callback()
+        }
+        .show()
+}

@@ -12,6 +12,8 @@ import com.bartoszdrozd.mediapp.healthforms.usecases.ISaveDiabetesFormUseCase
 import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,7 +30,9 @@ class DiabetesFormViewModel @Inject constructor(
     private val _bloodPressureError = MutableLiveData<FormErrorCode>()
     private val _skinThicknessError = MutableLiveData<FormErrorCode>()
     private val _bmiError = MutableLiveData<FormErrorCode>()
+    private val _pedigreeFuncError: MutableLiveData<FormErrorCode> = MutableLiveData()
     private val _generalError: MutableLiveData<FormErrorCode> = MutableLiveData()
+    private val saveSuccessChannel = Channel<Int>(Channel.BUFFERED)
 
     private val isFormValid: Boolean
         get() {
@@ -44,10 +48,11 @@ class DiabetesFormViewModel @Inject constructor(
     val bloodPressureError: LiveData<FormErrorCode> = _bloodPressureError
     val skinThicknessError: LiveData<FormErrorCode> = _skinThicknessError
     val bmiError: LiveData<FormErrorCode> = _bmiError
+    val pedigreeFuncError: LiveData<FormErrorCode> = _bmiError
     val generalError: LiveData<FormErrorCode> = _generalError
+    val saveSuccess = saveSuccessChannel.receiveAsFlow()
 
     init {
-        // Change to nav args
         viewModelScope.launch {
             val user = repository.getCurrentUser()
             _isPregnanciesFieldVisible.value = user?.details?.sex != 0
@@ -62,12 +67,13 @@ class DiabetesFormViewModel @Inject constructor(
         validateBloodPressure(form.bloodPressureLevel)
         validateSkinThickness(form.skinThickness)
         validateBmi(form.bmi)
+        validatePedigreeFunc(form.pedigreeFunc)
 
         if (isFormValid) {
             viewModelScope.launch {
                 val res = saveFormUseCase.execute(form)
                 if (res.succeeded) {
-                    // Navigate
+                    saveSuccessChannel.send(1)
                 } else {
                     _generalError.value = (res as Error).reason
                 }
@@ -80,23 +86,27 @@ class DiabetesFormViewModel @Inject constructor(
             if (count == null && isPregnanciesFieldVisible.value == true) FormErrorCode.REQUIRED_FIELD else null
     }
 
-    private fun validateGlucose(level: Int?) {
+    private fun validateGlucose(level: Float?) {
         _glucoseError.value = if (level == null) FormErrorCode.REQUIRED_FIELD else null
     }
 
-    private fun validateInsulin(level: Int?) {
+    private fun validateInsulin(level: Float?) {
         _insulinError.value = if (level == null) FormErrorCode.REQUIRED_FIELD else null
     }
 
-    private fun validateBloodPressure(level: Int?) {
+    private fun validateBloodPressure(level: Float?) {
         _bloodPressureError.value = if (level == null) FormErrorCode.REQUIRED_FIELD else null
     }
 
-    private fun validateSkinThickness(measurement: Int?) {
+    private fun validateSkinThickness(measurement: Float?) {
         _skinThicknessError.value = if (measurement == null) FormErrorCode.REQUIRED_FIELD else null
     }
 
-    private fun validateBmi(value: Int?) {
+    private fun validateBmi(value: Float?) {
         _bmiError.value = if (value == null) FormErrorCode.REQUIRED_FIELD else null
+    }
+
+    private fun validatePedigreeFunc(value: Float?) {
+        _pedigreeFuncError.value = if (value == null) FormErrorCode.REQUIRED_FIELD else null
     }
 }

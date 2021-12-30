@@ -42,16 +42,17 @@ class GetDiabetesPredictionUseCase @Inject constructor(
         val bufferSize = 1 * java.lang.Float.SIZE / java.lang.Byte.SIZE
 
         val input =
-            ByteBuffer.allocateDirect(8 * java.lang.Float.SIZE / java.lang.Byte.SIZE).order(ByteOrder.nativeOrder())
+            ByteBuffer.allocateDirect(8 * java.lang.Float.SIZE / java.lang.Byte.SIZE)
+                .order(ByteOrder.nativeOrder())
 
         input.putFloat(data.age.toFloat())
-        input.putFloat(data.bloodPressureLevel!!.toFloat())
-        input.putFloat(data.bmi!!.toFloat())
-        input.putFloat(data.glucoseLevel!!.toFloat())
-        input.putFloat(data.glucoseLevel.toFloat())
-        input.putFloat(data.insulinLevel!!.toFloat())
+        input.putFloat(data.bloodPressureLevel!!)
+        input.putFloat(data.bmi!!)
+        input.putFloat(data.glucoseLevel!!)
+        input.putFloat(data.pedigreeFunc!!)
+        input.putFloat(data.insulinLevel!!)
         input.putFloat(data.pregnancies!!.toFloat())
-        input.putFloat(data.skinThickness!!.toFloat())
+        input.putFloat(data.skinThickness!!)
 
         val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
 

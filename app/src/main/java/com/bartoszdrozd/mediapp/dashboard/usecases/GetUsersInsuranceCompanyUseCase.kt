@@ -16,7 +16,7 @@ class GetUsersInsuranceCompanyUseCase @Inject constructor(
     @ExperimentalCoroutinesApi
     override suspend fun execute(): Flow<InsuranceCompany?> {
         return usersRepo.getCurrentUserFlow().map { user ->
-            val gpId = user?.details?.insuranceCompanyId ?: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            val gpId = user?.details?.insuranceCompanyId ?: ""
 
             val res = insuranceRepo.get(gpId)
             if (res is Success) {

@@ -12,6 +12,8 @@ import com.bartoszdrozd.mediapp.utils.Error
 import com.bartoszdrozd.mediapp.utils.Success
 import com.bartoszdrozd.mediapp.utils.succeeded
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,10 +24,12 @@ class AlzheimersFormViewModel @Inject constructor(
     private val _validationErrors =
         MutableLiveData<List<Pair<AlzheimersFormField, FormErrorCode>>>()
     private val _generalError: MutableLiveData<FormErrorCode> = MutableLiveData()
+    private val saveSuccessChannel = Channel<Int>(Channel.BUFFERED)
 
     val validationErrors: LiveData<List<Pair<AlzheimersFormField, FormErrorCode>>> =
         _validationErrors
     val generalError: LiveData<FormErrorCode> = _generalError
+    val saveSuccess = saveSuccessChannel.receiveAsFlow()
 
     private fun validateForm(form: AlzheimersFormDTO): Boolean {
         val errors = mutableListOf<Pair<AlzheimersFormField, FormErrorCode>>()
@@ -58,7 +62,7 @@ class AlzheimersFormViewModel @Inject constructor(
             viewModelScope.launch {
                 val res = saveFormUseCase.execute(form)
                 if (res.succeeded) {
-                    // Navigate
+                    saveSuccessChannel.send(1)
                 } else {
                     _generalError.value = (res as Error).reason
                 }
